@@ -120,6 +120,23 @@ h1, h2, h3, h4 {
 	transform: scale(1.05);
 }
 
+.lang-toggle {
+	background: transparent;
+	border: 2px solid var(--main-color);
+	color: var(--main-color);
+	font-weight: 700;
+	font-size: 1.2rem;
+	padding: 0.5rem 1rem;
+	border-radius: 2rem;
+	cursor: pointer;
+	transition: 0.3s ease-in-out;
+}
+
+.lang-toggle:hover {
+	background: var(--main-color);
+	color: var(--bg-color);
+}
+
 section {
 	min-height: 100vh;
 	padding: 10rem 8%;

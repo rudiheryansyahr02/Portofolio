@@ -6,6 +6,7 @@ const moreText = document.querySelector('#more');
 const dots = document.querySelector('#dots');
 const contactForm = document.querySelector('#contactForm');
 const statusMessage = document.querySelector('#status');
+const langToggle = document.querySelector('#langToggle');
 
 const closeMenu = () => {
   if (!menuIcon || !navbar) return;
@@ -33,7 +34,9 @@ if (readMoreBtn && moreText && dots) {
     const isExpanded = readMoreBtn.getAttribute('aria-expanded') === 'true';
     moreText.hidden = isExpanded;
     dots.hidden = !isExpanded;
-    readMoreBtn.textContent = isExpanded ? 'Read More' : 'Read Less';
+    readMoreBtn.textContent = isExpanded
+      ? readMoreLabels[currentLang].more
+      : readMoreLabels[currentLang].less;
     readMoreBtn.setAttribute('aria-expanded', String(!isExpanded));
   });
 }
@@ -54,6 +57,50 @@ if ('IntersectionObserver' in window) {
   animateElements.forEach((element) => element.classList.add('active'));
 }
 
+/* ===== Sistem Bahasa (ID / EN) ===== */
+const readMoreLabels = {
+  id: { more: 'Baca Selengkapnya', less: 'Sembunyikan' },
+  en: { more: 'Read More', less: 'Read Less' }
+};
+
+const statusText = {
+  id: {
+    empty: 'Mohon lengkapi nama, email, dan pesan.',
+    redirect: 'Mengarahkan ke WhatsApp...'
+  },
+  en: {
+    empty: 'Please fill in your name, email, and message.',
+    redirect: 'Redirecting to WhatsApp...'
+  }
+};
+
+let currentLang = localStorage.getItem('portfolioLang') || 'id';
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-en]').forEach((el) => {
+    el.textContent = el.getAttribute('data-' + lang);
+  });
+
+  document.querySelectorAll('[data-ph-en]').forEach((el) => {
+    el.setAttribute('placeholder', el.getAttribute('data-ph-' + lang));
+  });
+
+  if (langToggle) langToggle.textContent = lang === 'id' ? 'EN' : 'ID';
+  localStorage.setItem('portfolioLang', lang);
+}
+
+if (langToggle) {
+  langToggle.addEventListener('click', () => {
+    applyLang(currentLang === 'id' ? 'en' : 'id');
+  });
+}
+
+applyLang(currentLang);
+
+/* ===== Form Contact -> WhatsApp ===== */
 if (contactForm && statusMessage) {
   const waNumber = '62895605976398';
 
@@ -68,7 +115,7 @@ if (contactForm && statusMessage) {
     const message = (data.get('message') || '').toString().trim();
 
     if (!name || !email || !message) {
-      statusMessage.textContent = 'Mohon lengkapi nama, email, dan pesan.';
+      statusMessage.textContent = statusText[currentLang].empty;
       statusMessage.className = 'status error';
       return;
     }
@@ -84,7 +131,7 @@ if (contactForm && statusMessage) {
 
     const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
 
-    statusMessage.textContent = 'Mengarahkan ke WhatsApp...';
+    statusMessage.textContent = statusText[currentLang].redirect;
     statusMessage.className = 'status success';
     window.open(waUrl, '_blank', 'noopener');
   });
