@@ -506,6 +506,22 @@ section {
 	transform: translateY(-3px);
 }
 
+.timeline-gallery img {
+	aspect-ratio: 1 / 1;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 0.8rem;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	background-color: var(--second-bg-color);
+	transition: transform 0.3s ease;
+	display: block;
+}
+
+.timeline-gallery img:hover {
+	transform: translateY(-3px);
+}
+
 .project {
   background-color: var(--bg-color);
   padding: 100px 0;
