@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Dokumentasi lengkap skill Fullstack Developer (Frontend &amp; Backend) milik Rudi Heryansyah Rohdiana.">
+	<title>Fullstack Developer — Dokumentasi Skill | Rudi Heryansyah R</title>
+	<link rel="stylesheet" href="../style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+</head>
+<body>
+
+	<header class="header">
+		<a href="../index.html#home" class="logo">Rudi<span> HR</span></a>
+		<nav class="navbar">
+			<a href="../index.html#home">Home</a>
+			<a href="../index.html#about">About</a>
+			<a href="../index.html#services">Services</a>
+			<a href="../index.html#project">Projects</a>
+			<a href="../index.html#contact">Contact</a>
+		</nav>
+		<a href="https://wa.me/62895605976398?text=Halo%20Rudi,%20saya%20tertarik%20dengan%20portofolio%20Anda!" class="gradient-btn" target="_blank" rel="noopener noreferrer">Contact Me</a>
+	</header>
+
+	<section class="doc-page">
+		<a href="../index.html#services" class="back-link"><i class='bx bx-arrow-back'></i> Kembali ke Services</a>
+
+		<div class="doc-hero">
+			<i class='bx bx-code'></i>
+			<h1>Fullstack Developer</h1>
+			<p class="doc-subtitle">Dokumentasi lengkap skill Frontend &amp; Backend (konten dummy)</p>
+		</div>
+
+		<article class="doc-section">
+			<h2>Ringkasan Skill</h2>
+			<p>Saya membangun aplikasi web secara end-to-end — mulai dari antarmuka yang interaktif hingga logika dan database di balik layar. Saya terbiasa menyatukan keduanya agar produk yang dihasilkan utuh, responsif, dan mudah dikembangkan.</p>
+			<ul>
+				<li>Frontend: HTML, CSS, JavaScript, Bootstrap, Tailwind CSS, React.js.</li>
+				<li>Backend: PHP, MySQL, REST API dasar, autentikasi sederhana.</li>
+				<li>Integrasi UI/UX dengan logika server &amp; database.</li>
+			</ul>
+			<div class="doc-tags">
+				<span class="doc-tag">HTML5</span>
+				<span class="doc-tag">CSS3</span>
+				<span class="doc-tag">JavaScript</span>
+				<span class="doc-tag">React</span>
+				<span class="doc-tag">Tailwind</span>
+				<span class="doc-tag">PHP</span>
+				<span class="doc-tag">MySQL</span>
+			</div>
+		</article>
+
+		<article class="doc-section">
+			<h2>Frontend: Contoh Struktur Komponen (Dummy)</h2>
+			<p>Cuplikan struktur komponen kartu produk yang saya gunakan di beberapa proyek web.</p>
+			<div class="doc-card">
+				<h3>ProductCard.jsx (contoh)</h3>
+				<pre><code>function ProductCard({ title, price, image }) {
+  return (
+    &lt;article className="card"&gt;
+      &lt;img src={image} alt={title} /&gt;
+      &lt;h3&gt;{title}&lt;/h3&gt;
+      &lt;span&gt;{price}&lt;/span&gt;
+    &lt;/article&gt;
+  );
+}</code></pre>
+			</div>
+		</article>
+
+		<article class="doc-section">
+			<h2>Backend: Contoh Endpoint (Dummy)</h2>
+			<p>Cuplikan logika endpoint sederhana untuk mengambil daftar produk dari database.</p>
+			<div class="doc-card">
+				<h3>products.php (contoh)</h3>
+				<pre><code>&lt;?php
+require 'db.php';
+header('Content-Type: application/json');
+
+$stmt = $pdo-&gt;query('SELECT id, title, price, image FROM products');
+$products = $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+
+echo json_encode($products);</code></pre>
+			</div>
+		</article>
+
+		<article class="doc-section">
+			<h2>Dokumentasi Proyek: Santap.in &amp; Trendora (Studi Kasus Dummy)</h2>
+			<p>Website restoran interaktif dan toko online fashion dengan katalog responsif. Konten berikut hanya contoh dokumentasi.</p>
+			<div class="doc-card">
+				<h3>Santap.in &amp; Trendora — Studi Kasus</h3>
+				<ul>
+					<li>Grid produk auto-fit untuk mobile &amp; desktop.</li>
+					<li>Filter kategori tanpa reload halaman.</li>
+					<li>Optimasi waktu muat gambar via lazy loading.</li>
+					<li>Endpoint PHP untuk mengambil &amp; memfilter data produk dari MySQL.</li>
+				</ul>
+			</div>
+		</article>
+
+		<div class="doc-cta">
+			<a href="../index.html#contact" class="btn">Diskusikan Proyek Fullstack</a>
+		</div>
+	</section>
+
+	<script src="../script.js"></script>
+</body>
+</html>

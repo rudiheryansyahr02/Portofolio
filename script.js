@@ -74,7 +74,7 @@ const statusText = {
   }
 };
 
-let currentLang = localStorage.getItem('portfolioLang') || 'id';
+let currentLang = localStorage.getItem('portfolioLang') || 'en';
 
 function applyLang(lang) {
   currentLang = lang;
