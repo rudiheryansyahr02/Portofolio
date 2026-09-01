@@ -868,18 +868,86 @@ section {
 @media (max-width: 1099px) {
 	.service-category:first-of-type .services-container {
 		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+		gap: 1.5rem;
 	}
 }
 
 @media (max-width: 899px) {
 	.service-category .services-container {
 		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+		gap: 1rem;
 	}
 }
 
 @media (max-width: 599px) {
 	.service-category .services-container {
 		grid-template-columns: 1fr !important;
+		gap: 1.2rem;
+		padding: 0 0.5rem;
+	}
+
+	/* Hard Skill cards: full width, comfortable touch target */
+	.service-category:first-of-type .service-box {
+		min-height: auto;
+		border-radius: 1.4rem;
+		border-width: 3px;
+	}
+
+	.service-category:first-of-type .service-info {
+		padding: 1.6rem 1.2rem;
+	}
+
+	.service-category:first-of-type .service-info i {
+		font-size: 2.6rem;
+	}
+
+	.service-category:first-of-type .service-info h4 {
+		font-size: 1.25rem;
+		margin: 0.6rem 0 0.4rem;
+	}
+
+	.service-category:first-of-type .service-info p {
+		font-size: 0.88rem;
+		line-height: 1.5;
+	}
+
+	.service-category:first-of-type .skill-doc {
+		margin: 0.6rem 0;
+	}
+
+	.service-category:first-of-type .skill-doc-img {
+		height: 140px;
+	}
+
+	.service-category:first-of-type .doc-btn {
+		font-size: 0.85rem;
+		padding: 0.7rem 1.4rem;
+		width: 100%;
+		text-align: center;
+	}
+
+	.service-category-title {
+		font-size: 1.8rem;
+		margin-bottom: 1.5rem;
+	}
+}
+
+/* Tablet kecil (600-899px) - hard skill tetap 2 kolom tapi lebih compact */
+@media (min-width: 600px) and (max-width: 899px) {
+	.service-category:first-of-type .service-box {
+		min-height: 420px;
+	}
+	.service-category:first-of-type .service-info i {
+		font-size: 2.6rem;
+	}
+	.service-category:first-of-type .service-info h4 {
+		font-size: 1.2rem;
+	}
+	.service-category:first-of-type .service-info p {
+		font-size: 0.85rem;
+	}
+	.service-category:first-of-type .skill-doc-img {
+		height: 130px;
 	}
 }
 
