@@ -872,14 +872,8 @@ section {
 	}
 }
 
-@media (max-width: 899px) {
-	.service-category .services-container {
-		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-		gap: 1rem;
-	}
-}
-
-@media (max-width: 599px) {
+/* Mobile & tablet: Hard Skill jadi 1 card per baris */
+@media (max-width: 767px) {
 	.service-category .services-container {
 		grid-template-columns: 1fr !important;
 		gap: 1.2rem;
@@ -894,21 +888,21 @@ section {
 	}
 
 	.service-category:first-of-type .service-info {
-		padding: 1.6rem 1.2rem;
+		padding: 1.8rem 1.4rem;
 	}
 
 	.service-category:first-of-type .service-info i {
-		font-size: 2.6rem;
+		font-size: 2.8rem;
 	}
 
 	.service-category:first-of-type .service-info h4 {
-		font-size: 1.25rem;
-		margin: 0.6rem 0 0.4rem;
+		font-size: 1.35rem;
+		margin: 0.7rem 0 0.5rem;
 	}
 
 	.service-category:first-of-type .service-info p {
-		font-size: 0.88rem;
-		line-height: 1.5;
+		font-size: 0.95rem;
+		line-height: 1.55;
 	}
 
 	.service-category:first-of-type .skill-doc {
@@ -916,38 +910,77 @@ section {
 	}
 
 	.service-category:first-of-type .skill-doc-img {
-		height: 140px;
+		height: 160px;
 	}
 
 	.service-category:first-of-type .doc-btn {
-		font-size: 0.85rem;
-		padding: 0.7rem 1.4rem;
+		font-size: 0.9rem;
+		padding: 0.75rem 1.4rem;
 		width: 100%;
 		text-align: center;
 	}
 
 	.service-category-title {
-		font-size: 1.8rem;
-		margin-bottom: 1.5rem;
+		font-size: 1.9rem;
+		margin-bottom: 1.6rem;
 	}
 }
 
-/* Tablet kecil (600-899px) - hard skill tetap 2 kolom tapi lebih compact */
-@media (min-width: 600px) and (max-width: 899px) {
-	.service-category:first-of-type .service-box {
-		min-height: 420px;
+/* HP: seluruh Services tampil 1 card per baris */
+@media (max-width: 700px) {
+	.services-container {
+		grid-template-columns: 1fr !important;
+		justify-items: center;
+		padding: 0 0.75rem;
+		gap: 1.6rem;
 	}
-	.service-category:first-of-type .service-info i {
-		font-size: 2.6rem;
+
+	/* Pastikan container dalam kategori services juga 1 kolom */
+	.service-category .services-container,
+	.service-category:first-of-type .services-container,
+	.service-category:not(:first-of-type) .services-container {
+		grid-template-columns: 1fr !important;
+		padding: 0 0.75rem;
+		gap: 1.6rem;
 	}
-	.service-category:first-of-type .service-info h4 {
-		font-size: 1.2rem;
+
+	/* Card full width dengan margin aman, tidak overflow */
+	.service-box {
+		width: 100%;
+		max-width: 420px;
+		min-height: auto !important;
+		margin: 0 auto 0.6rem auto;
 	}
-	.service-category:first-of-type .service-info p {
-		font-size: 0.85rem;
+
+	.service-info {
+		padding: 1.6rem 1.2rem;
 	}
-	.service-category:first-of-type .skill-doc-img {
-		height: 130px;
+
+	.service-info h4 {
+		font-size: 1.3rem;
+	}
+
+	.service-info p {
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+
+	/* Tombol full width agar mudah di-tap */
+	.doc-btn {
+		width: 100%;
+		max-width: 100%;
+		text-align: center;
+		padding: 0.75rem 1.2rem;
+		font-size: 0.9rem;
+	}
+
+	/* Gambar project proporsional */
+	.skill-doc-img {
+		height: 150px;
+	}
+
+	.service-category-title {
+		font-size: 1.8rem;
 	}
 }
 
