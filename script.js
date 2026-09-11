@@ -87,18 +87,31 @@ const projectText = {
 
 let currentLang = localStorage.getItem('portfolioLang') || 'en';
 
+function getLocalizedText(value) {
+  if (typeof value === 'object' && value !== null) {
+    return value[currentLang] || value.id || value.en || '';
+  }
+  return value || '';
+}
+
 function applyLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
 
-  document.querySelectorAll('[data-en]').forEach((el) => {
+  document.querySelectorAll('[data-id]').forEach((el) => {
     const langText = el.getAttribute('data-' + lang);
-    if (langText) el.textContent = langText;
+    if (langText) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.value = langText;
+      } else {
+        el.textContent = langText;
+      }
+    }
     const ariaLang = el.getAttribute('data-aria-' + lang);
     if (ariaLang) el.setAttribute('aria-label', ariaLang);
   });
 
-  document.querySelectorAll('[data-ph-en]').forEach((el) => {
+  document.querySelectorAll('[data-ph-id]').forEach((el) => {
     el.setAttribute('placeholder', el.getAttribute('data-ph-' + lang));
   });
 
@@ -108,6 +121,16 @@ function applyLang(lang) {
 
   if (langToggle) langToggle.textContent = lang === 'id' ? 'EN' : 'ID';
   localStorage.setItem('portfolioLang', lang);
+
+  refreshProjectContent();
+}
+
+function refreshProjectContent() {
+  if (!window.location.pathname.includes('project-detail.html')) {
+    renderProjectCards();
+  } else {
+    loadProjectDetail();
+  }
 }
 
 if (langToggle) {
@@ -115,6 +138,310 @@ if (langToggle) {
     applyLang(currentLang === 'id' ? 'en' : 'id');
   });
 }
+
+/* ===== Project Data ===== */
+const projects = [
+  {
+    id: 'guesthouse',
+    category: {
+      id: 'Fullstack Development',
+      en: 'Fullstack Development'
+    },
+    title: 'Guest House As-Syifa',
+    description: {
+      id: 'Guest House As-Syifa merupakan sistem booking penginapan berbasis web yang dikembangkan untuk mempermudah proses reservasi kamar secara online sekaligus membantu pengelola dalam mengelola operasional guest house. Sistem mencakup informasi kamar, ketersediaan kamar, proses booking, pembayaran melalui transfer bank, upload bukti pembayaran, verifikasi pembayaran, serta pengelolaan data customer.',
+      en: 'Guest House As-Syifa is a web-based accommodation booking system developed to simplify online room reservations while helping administrators manage guest house operations. The system includes room information, room availability, booking management, bank transfer payments, payment proof uploads, payment verification, and customer data management.'
+    },
+    overview: {
+      id: 'Pada sisi admin, sistem menyediakan dashboard untuk mengelola kamar, lokasi, fasilitas, foto kamar, harga periode, menu sarapan, data booking, pembayaran, serta laporan transaksi. Sistem juga dilengkapi dengan fitur monitoring pendapatan dan rekap data booking untuk membantu proses pengelolaan operasional.',
+      en: 'On the administrative side, the system provides a dashboard for managing rooms, locations, facilities, room photos, seasonal pricing, breakfast options, bookings, payments, and transaction reports. The system also includes revenue monitoring and booking summaries to support day-to-day operational management.'
+    },
+    images: [
+      'images/porto1 (1).webp',
+      'images/porto1 (15).webp',
+      'images/porto1 (9).webp',
+      'images/porto1 (16).webp',
+      'images/porto1 (13).webp',
+      'images/porto1 (8).webp',
+      'images/porto1 (7).webp',
+      'images/porto1 (6).webp',
+      'images/porto1 (4).webp',
+      'images/porto1 (3).webp',
+      'images/porto1 (2).webp',
+      'images/porto1 (21).webp',
+      'images/porto1 (10).webp',
+      'images/porto1 (11).webp',
+      'images/porto1 (19).webp',
+      'images/porto1 (20).webp',
+      'images/porto1 (17).webp',
+      'images/porto1 (18).webp',
+    ],
+    tools: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Google OAuth', 'PhpSpreadsheet'],
+    features: {
+      id: [
+        'Booking kamar secara online',
+        'Kalender ketersediaan kamar',
+        'Detail kamar & galeri foto',
+        'Manajemen customer',
+        'Login Google OAuth',
+        'Layanan sarapan/tambahan',
+        'Ringkasan booking',
+        'Pembayaran melalui transfer bank',
+        'Upload bukti pembayaran',
+        'Verifikasi pembayaran',
+        'Manajemen status booking',
+        'Manajemen kamar',
+        'Manajemen fasilitas',
+        'Manajemen sarapan',
+        'Statistik dashboard',
+        'Monitoring pendapatan',
+        'Laporan booking'
+      ],
+      en: [
+        'Online room booking',
+        'Room availability calendar',
+        'Room details & photo gallery',
+        'Customer management',
+        'Google OAuth login',
+        'Breakfast/additional services',
+        'Booking summary',
+        'Bank transfer payment',
+        'Payment proof upload',
+        'Payment verification',
+        'Booking status management',
+        'Room management',
+        'Facility management',
+        'Breakfast management',
+        'Dashboard statistics',
+        'Revenue monitoring',
+        'Booking reports'
+      ]
+    },
+    link: ''
+  },
+  {
+    id: 'santap',
+    category: {
+      id: 'Fullstack Development',
+      en: 'Fullstack Development'
+    },
+    title: 'Santap.in',
+    description: {
+      id: 'Santap.in merupakan website restoran interaktif yang dirancang untuk memberikan pengalaman pengguna yang lebih mudah dalam melihat informasi restoran, menu, kategori makanan, dan detail produk. Website menggunakan desain responsif agar dapat memberikan pengalaman yang nyaman pada berbagai perangkat.',
+      en: 'Santap.in is an interactive restaurant website designed to provide users with an easier way to explore restaurant information, menus, food categories, and product details. The website uses a responsive design to provide a comfortable experience across different devices.'
+    },
+    overview: {
+      id: 'Project ini berfokus pada penyajian informasi restoran secara modern dan terstruktur dengan menggabungkan frontend yang responsif dengan sistem backend yang mendukung pengelolaan data. Antarmuka dirancang agar pengguna dapat menemukan informasi menu dengan cepat dan mudah.',
+      en: 'The project focuses on presenting restaurant information in a modern and structured way by combining a responsive frontend with a backend system that supports data management. The interface is designed to help users discover menu information quickly and easily.'
+    },
+    images: [
+      'images/a2.webp',
+      'images/porto1 (1).webp',
+      'images/porto1 (2).webp'
+    ],
+    tools: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    features: {
+      id: [
+        'Desain website responsif',
+        'Tampilan menu interaktif',
+        'Sistem informasi restoran',
+        'Integrasi database'
+      ],
+      en: [
+        'Responsive website design',
+        'Interactive menu display',
+        'Restaurant information system',
+        'Database integration'
+      ]
+    },
+    link: 'https://github.com/rudiheryansyahr02'
+  },
+  {
+    id: 'brocass',
+    category: {
+      id: 'Internet of Things',
+      en: 'Internet of Things'
+    },
+    title: 'Brocass – Smart IoT Coop',
+    description: {
+      id: 'Brocass – Smart IoT Coop merupakan sistem kandang ayam broiler berbasis Internet of Things yang dirancang untuk membantu melakukan pemantauan dan pengendalian kondisi lingkungan kandang secara real-time. Sistem memanfaatkan sensor dan aktuator untuk memantau parameter lingkungan serta membantu mengotomatisasi proses pengendalian sesuai kondisi yang terdeteksi.',
+      en: 'Brocass – Smart IoT Coop is an Internet of Things-based broiler coop system designed to monitor and control environmental conditions in real time. The system uses sensors and actuators to monitor environmental parameters and support automated control based on detected conditions.'
+    },
+    overview: {
+      id: 'Sistem ini dirancang untuk membantu peternak mengelola kandang dengan lebih efisien melalui pemantauan suhu, kelembaban, dan pencahayaan secara otomatis. Data sensor dikirim ke Firebase untuk monitoring real-time melalui dashboard mobile.',
+      en: 'The system is designed to help farmers manage coops more efficiently through automated monitoring of temperature, humidity, and lighting. Sensor data is sent to Firebase for real-time monitoring via a mobile dashboard.'
+    },
+    images: [
+      'images/a4.svg',
+      'images/porto1 (3).webp',
+      'images/porto1 (4).webp'
+    ],
+    tools: ['ESP32', 'Wemos D1', 'C++', 'Firebase', 'DHT22'],
+    features: {
+      id: [
+        'Pemantauan real-time',
+        'Kontrol lingkungan otomatis',
+        'Pencatatan data sensor',
+        'Dashboard mobile'
+      ],
+      en: [
+        'Real-time monitoring',
+        'Automated environmental control',
+        'Sensor data logging',
+        'Mobile dashboard'
+      ]
+    },
+    link: 'https://github.com/rudiheryansyahr02'
+  },
+  {
+    id: 'pkkmb',
+    category: {
+      id: 'Video Editing',
+      en: 'Video Editing'
+    },
+    title: 'PKKMB 2023 – Video Highlight',
+    description: {
+      id: 'PKKMB 2023 – Video Highlight merupakan proyek editing video yang mengolah dokumentasi kegiatan PKKMB 2023 menjadi sebuah video highlight yang lebih menarik dan komunikatif. Proyek ini berfokus pada penyusunan alur visual, transisi, sinkronisasi audio, serta pengolahan visual untuk menyampaikan suasana dan momen utama kegiatan.',
+      en: 'PKKMB 2023 – Video Highlight is a video editing project that transforms documentation from the 2023 student orientation program into an engaging and communicative highlight video. The project focuses on visual storytelling, transitions, audio synchronization, and visual enhancement to present the atmosphere and key moments of the event.'
+    },
+    overview: {
+      id: 'Video ini menggabungkan momen-momen terbaik acara menjadi satu cerita visual yang menarik dengan editing yang dinamis, mencakup transisi halus, color grading, serta sinkronisasi audio untuk menciptakan suasana yang imersif bagi penonton.',
+      en: 'The video combines the best moments of the event into an engaging visual story with dynamic editing, including smooth transitions, color grading, and audio synchronization to create an immersive atmosphere for viewers.'
+    },
+    images: [
+      'images/a5.svg',
+      'images/3 (1).webp',
+      'images/3 (2).webp'
+    ],
+    tools: ['CapCut', 'Adobe Premiere', 'After Effects'],
+    features: {
+      id: [
+        'Transisi dinamis',
+        'Color grading',
+        'Sinkronisasi audio',
+        'Motion graphics'
+      ],
+      en: [
+        'Dynamic transitions',
+        'Color grading',
+        'Audio synchronization',
+        'Motion graphics'
+      ]
+    },
+    link: ''
+  },
+  {
+    id: 'msib',
+    category: {
+      id: 'Graphic Design',
+      en: 'Graphic Design'
+    },
+    title: 'MSIB Indobot – Digital Design',
+    description: {
+      id: 'MSIB Indobot – Digital Design merupakan kumpulan karya desain digital yang dibuat selama mengikuti program MSIB Indobot. Proyek ini mencakup pembuatan berbagai kebutuhan visual seperti poster, banner, dan konten media sosial dengan memperhatikan komposisi, identitas visual, serta kebutuhan komunikasi digital.',
+      en: 'MSIB Indobot – Digital Design is a collection of digital design works created during the MSIB Indobot program. The project includes various visual assets such as posters, banners, and social media content, focusing on composition, visual identity, and digital communication needs.'
+    },
+    overview: {
+      id: 'Karya-karya desain ini dibuat dengan sentuhan modern dan berkarakter, mencakup desain poster untuk promosi, banner untuk kebutuhan acara, serta konten media sosial yang konsisten dengan brand guidelines program MSIB Indobot.',
+      en: 'The design works feature a modern and distinctive touch, including promotional posters, event banners, and consistent social media content aligned with the MSIB Indobot program brand guidelines.'
+    },
+    images: [
+      'images/a6.svg',
+      'images/porto1 (5).webp',
+      'images/porto1 (6).webp'
+    ],
+    tools: ['Canva', 'Figma', 'Adobe Photoshop'],
+    features: {
+      id: [
+        'Desain poster',
+        'Konten media sosial',
+        'Identitas brand',
+        'Aset siap cetak'
+      ],
+      en: [
+        'Poster design',
+        'Social media content',
+        'Brand identity',
+        'Print-ready assets'
+      ]
+    },
+    link: 'https://github.com/rudiheryansyahr02'
+  },
+  {
+    id: 'caffera',
+    category: {
+      id: 'Web Development',
+      en: 'Web Development'
+    },
+    title: 'Cafféra – Coffee Shop Profile',
+    description: {
+      id: 'Cafféra – Coffee Shop Profile merupakan website profil coffee shop yang dirancang untuk menampilkan informasi bisnis secara modern dan menarik. Website menyediakan informasi menu, galeri, serta informasi kontak dengan layout responsif yang berfokus pada kenyamanan pengguna dan penyajian visual.',
+      en: 'Cafféra – Coffee Shop Profile is a coffee shop profile website designed to present business information in a modern and engaging way. The website provides menu information, a gallery, and contact details through a responsive layout focused on user experience and visual presentation.'
+    },
+    overview: {
+      id: 'Website ini dibangun dengan fokus pada presentasi visual yang elegan dan pengalaman pengguna yang nyaman. Layout responsif memastikan tampilan optimal di berbagai perangkat, mulai dari desktop hingga mobile.',
+      en: 'The website is built with a focus on elegant visual presentation and comfortable user experience. The responsive layout ensures optimal display across various devices, from desktop to mobile.'
+    },
+    images: [
+      'images/a1.webp',
+      'images/porto1 (7).webp',
+      'images/porto1 (8).webp'
+    ],
+    tools: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+    features: {
+      id: [
+        'Layout responsif',
+        'Showcase menu',
+        'Bagian galeri',
+        'Integrasi kontak'
+      ],
+      en: [
+        'Responsive layout',
+        'Menu showcase',
+        'Gallery section',
+        'Contact integration'
+      ]
+    },
+    link: 'https://github.com/rudiheryansyahr02'
+  },
+  {
+    id: 'trendora',
+    category: {
+      id: 'E-Commerce',
+      en: 'E-Commerce'
+    },
+    title: 'Trendora – Fashion Online Store',
+    description: {
+      id: 'Trendora – Fashion Online Store merupakan website e-commerce fashion yang dirancang untuk menampilkan katalog produk secara responsif dan interaktif. Sistem menyediakan fitur seperti katalog produk, pencarian, filter kategori, keranjang belanja, serta dashboard untuk mendukung pengelolaan data toko.',
+      en: 'Trendora – Fashion Online Store is a responsive and interactive fashion e-commerce website designed to showcase product catalogs. The system provides features such as product catalogs, search, category filtering, shopping cart functionality, and an admin dashboard to support store data management.'
+    },
+    overview: {
+      id: 'Toko online ini menyediakan pengalaman belanja yang intuitif dengan fitur pencarian produk, filter kategori, dan keranjang belanja yang mudah digunakan. Dashboard admin memungkinkan pengelolaan produk, pesanan, dan data toko secara terpusat.',
+      en: 'This online store provides an intuitive shopping experience with product search, category filtering, and an easy-to-use shopping cart. The admin dashboard enables centralized management of products, orders, and store data.'
+    },
+    images: [
+      'images/a3.webp',
+      'images/porto1 (9).webp',
+      'images/porto1 (10).webp'
+    ],
+    tools: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    features: {
+      id: [
+        'Katalog produk',
+        'Filter kategori',
+        'Keranjang belanja',
+        'Dashboard admin'
+      ],
+      en: [
+        'Product catalog',
+        'Category filtering',
+        'Shopping cart',
+        'Admin dashboard'
+      ]
+    },
+    link: 'https://github.com/rudiheryansyahr02'
+  }
+];
 
 applyLang(currentLang);
 
@@ -155,173 +482,6 @@ if (contactForm && statusMessage) {
   });
 }
 
-/* ===== Project Data ===== */
-const projects = [
-  {
-    id: 'guesthouse',
-    category: 'Fullstack Development',
-    title: 'Guest House As-Syifa',
-     description: {
-      id: 'Sistem booking Guest House yang terintegrasi untuk mengelola ketersediaan kamar, reservasi, pembayaran, verifikasi transaksi, data customer, hingga manajemen operasional melalui dashboard admin.',
-      en: 'An integrated Guest House booking system designed to manage room availability, reservations, payments, transaction verification, customer data, and operational management through an admin dashboard.'
-    },
-    images: [
-      'images/porto1 (1).webp',
-      'images/porto1 (15).webp',
-      'images/porto1 (9).webp',
-      'images/porto1 (16).webp',
-      'images/porto1 (13).webp',
-      'images/porto1 (8).webp',
-      'images/porto1 (7).webp',
-      'images/porto1 (6).webp',
-      'images/porto1 (4).webp',
-      'images/porto1 (3).webp',
-      'images/porto1 (2).webp',
-      'images/porto1 (21).webp',
-      'images/porto1 (10).webp',
-      'images/porto1 (11).webp',
-      'images/porto1 (19).webp',
-      'images/porto1 (20).webp',
-      'images/porto1 (17).webp',
-      'images/porto1 (18).webp',
-    ],
-    tools: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Google OAuth', 'PhpSpreadsheet'],
-    features: [
-      'Online room booking',
-      'Room availability calendar',
-      'Room detail & photo gallery',
-      'Customer management',
-      'Google OAuth login',
-      'Breakfast/additional service',
-      'Booking summary',
-      'Transfer bank payment',
-      'Payment proof upload',
-      'Payment verification',
-      'Booking status management',
-      'Room management',
-      'Facility management',
-      'Breakfast management',
-      'Dashboard statistics',
-      'Revenue monitoring',
-      'Booking reports'
-    ],
-    link: ''
-  },
-  {
-    id: 'santap',
-    category: 'Fullstack Development',
-    title: 'Santap.in',
-    description: 'Website restoran interaktif yang dirancang untuk memberikan pengalaman pengguna yang lebih mudah dalam melihat menu dan informasi restoran. Proyek ini mengintegrasasikan frontend yang responsif dengan backend yang andal.',
-    images: [
-      'images/a2.webp',
-      'images/porto1 (1).webp',
-      'images/porto1 (2).webp'
-    ],
-    tools: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-    features: [
-      'Responsive website design',
-      'Interactive menu display',
-      'Restaurant information system',
-      'Database integration'
-    ],
-    link: 'https://github.com/rudiheryansyahr02'
-  },
-  {
-    id: 'brocass',
-    category: 'Internet of Things',
-    title: 'Brocass – Smart IoT Coop',
-    description: 'Kandang pintar berbasis IoT yang mengotomatisasi pemeliharaan lingkungan broiler. Proyek ini memanfaatkan sensor dan aktuator untuk memantau serta mengontrol suhu, kelembaban, dan pencahayaan secara real-time.',
-    images: [
-      'images/a4.svg',
-      'images/porto1 (3).webp',
-      'images/porto1 (4).webp'
-    ],
-    tools: ['ESP32', 'Wemos D1', 'C++', 'Firebase', 'DHT22'],
-    features: [
-      'Real-time monitoring',
-      'Automated environmental control',
-      'Sensor data logging',
-      'Mobile dashboard'
-    ],
-    link: 'https://github.com/rudiheryansyahr02'
-  },
-  {
-    id: 'pkkmb',
-    category: 'Video Editing',
-    title: 'PKKMB 2023 – Video Highlight',
-    description: 'Dokumentasi video highlight kegiatan PKKMB 2023. Proyek ini menggabungkan momen-momen terbaik acara menjadi satu cerita visual yang menarik dengan editing yang dinamis.',
-    images: [
-      'images/a5.svg',
-      'images/3 (1).webp',
-      'images/3 (2).webp'
-    ],
-    tools: ['CapCut', 'Adobe Premiere', 'After Effects'],
-    features: [
-      'Dynamic transitions',
-      'Color grading',
-      'Audio synchronization',
-      'Motion graphics'
-    ],
-    link: ''
-  },
-  {
-    id: 'msib',
-    category: 'Graphic Design',
-    title: 'MSIB Indobot – Digital Design',
-    description: 'Karya desain digital yang dihasilkan selama program MSIB Indobot 2024. Proyek ini mencakup desain poster, banner, dan konten media sosial dengan sentuhan modern dan berkarakter.',
-    images: [
-      'images/a6.svg',
-      'images/porto1 (5).webp',
-      'images/porto1 (6).webp'
-    ],
-    tools: ['Canva', 'Figma', 'Adobe Photoshop'],
-    features: [
-      'Poster design',
-      'Social media content',
-      'Brand identity',
-      'Print-ready assets'
-    ],
-    link: 'https://github.com/rudiheryansyahr02'
-  },
-  {
-    id: 'caffera',
-    category: 'Web Development',
-    title: 'Cafféra – Coffee Shop Profile',
-    description: 'Profil digital coffee shop Cafféra yang menampilkan menu, galeri, dan informasi kontak secara elegan. Fokus pada presentasi visual yang menarik dan pengalaman pengguna yang nyaman.',
-    images: [
-      'images/a1.webp',
-      'images/porto1 (7).webp',
-      'images/porto1 (8).webp'
-    ],
-    tools: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
-    features: [
-      'Responsive layout',
-      'Menu showcase',
-      'Gallery section',
-      'Contact integration'
-    ],
-    link: 'https://github.com/rudiheryansyahr02'
-  },
-  {
-    id: 'trendora',
-    category: 'E-Commerce',
-    title: 'Trendora – Fashion Online Store',
-    description: 'Toko online fashion dengan katalog produk yang responsif. Fitur utama meliputi filter kategori, pencarian produk, dan keranjang belanja yang intuitif.',
-    images: [
-      'images/a3.webp',
-      'images/porto1 (9).webp',
-      'images/porto1 (10).webp'
-    ],
-    tools: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-    features: [
-      'Product catalog',
-      'Category filtering',
-      'Shopping cart',
-      'Admin dashboard'
-    ],
-    link: 'https://github.com/rudiheryansyahr02'
-  }
-];
 
 /* ===== Render Project Cards ===== */
 function renderProjectCards() {
@@ -343,6 +503,9 @@ function renderProjectCards() {
       .map((tool) => `<span class="tool-chip">${tool}</span>`)
       .join('');
 
+    const category = getLocalizedText(project.category);
+    const description = getLocalizedText(project.description);
+
     card.innerHTML = `
       <div class="project-slider" data-slider-index="${index}">
         <div class="project-slider-track">${imagesHtml}</div>
@@ -355,9 +518,9 @@ function renderProjectCards() {
         <div class="slider-dots"></div>
       </div>
       <div class="project-content">
-        <span class="project-badge">${project.category}</span>
+        <span class="project-badge">${category}</span>
         <h3 class="project-title">${project.title}</h3>
-        <p class="project-description">${project.description}</p>
+        <p class="project-description">${description}</p>
         <div class="project-tools">${toolsHtml}</div>
         <a href="project-detail.html?project=${project.id}" class="btn project-btn">
           <span data-id="Lihat Project" data-en="View Project">${projectText[currentLang].viewProject}</span> <i class='bx bx-arrow-right'></i>
@@ -484,17 +647,23 @@ function loadProjectDetail() {
   const detailSlider = document.querySelector('.project-detail-slider');
   const detailGallery = document.querySelector('.project-detail-gallery');
   const detailLink = document.querySelector('.project-detail-link');
+  const backProjects = document.querySelector('.back-projects span');
 
   if (detailTitle) detailTitle.textContent = project.title;
-  if (detailCategory) detailCategory.textContent = project.category;
-  if (detailDescription) detailDescription.textContent = project.description;
+  if (detailCategory) detailCategory.textContent = getLocalizedText(project.category);
+  if (detailDescription) detailDescription.textContent = getLocalizedText(project.description);
+
+  if (backProjects) {
+    backProjects.textContent = projectText[currentLang].backToProjects;
+  }
 
   if (detailTools) {
     detailTools.innerHTML = project.tools.map((tool) => `<span class="tool-chip">${tool}</span>`).join('');
   }
 
   if (detailFeatures) {
-    detailFeatures.innerHTML = project.features.map((f) => `<li>${f}</li>`).join('');
+    const features = project.features[currentLang] || [];
+    detailFeatures.innerHTML = features.map((f) => `<li>${f}</li>`).join('');
   }
 
   if (detailSlider) {
@@ -508,9 +677,9 @@ function loadProjectDetail() {
       project.images.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
-          dot.setAttribute('data-aria-id', `Ke slide ${i + 1}`);
-          dot.setAttribute('data-aria-en', `Go to slide ${i + 1}`);
-          dot.setAttribute('aria-label', `${currentLang === 'id' ? 'Ke slide' : 'Go to slide'} ${i + 1}`);
+        dot.setAttribute('data-aria-id', `Ke slide ${i + 1}`);
+        dot.setAttribute('data-aria-en', `Go to slide ${i + 1}`);
+        dot.setAttribute('aria-label', `${currentLang === 'id' ? 'Ke slide' : 'Go to slide'} ${i + 1}`);
         dot.addEventListener('click', () => goToDetailSlide(i));
         dotsContainer.appendChild(dot);
       });
@@ -530,6 +699,19 @@ function loadProjectDetail() {
       detailLink.style.display = 'none';
     }
   }
+
+  // Update section headings
+  const overviewHeading = document.querySelector('.project-detail-section h2[data-id="Ringkasan Project"]');
+  const toolsHeading = document.querySelector('.project-detail-section h2[data-id="Tools & Teknologi"]');
+  const featuresHeading = document.querySelector('.project-detail-section h2[data-id="Fitur Utama"]');
+  const galleryHeading = document.querySelector('.project-detail-section h2[data-id="Galeri Project"]');
+  const visitLink = document.querySelector('.project-detail-link');
+
+  if (overviewHeading) overviewHeading.textContent = currentLang === 'id' ? 'Ringkasan Project' : 'Project Overview';
+  if (toolsHeading) toolsHeading.textContent = currentLang === 'id' ? 'Tools & Teknologi' : 'Tools & Technologies';
+  if (featuresHeading) featuresHeading.textContent = currentLang === 'id' ? 'Fitur Utama' : 'Key Features';
+  if (galleryHeading) galleryHeading.textContent = currentLang === 'id' ? 'Galeri Project' : 'Project Gallery';
+  if (visitLink) visitLink.textContent = currentLang === 'id' ? 'Kunjungi Project' : 'Visit Project';
 }
 
 let detailCurrentIndex = 0;
