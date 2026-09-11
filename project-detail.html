@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Project detail - Rudi Heryansyah Rohdiana Portfolio">
+	<title>Project Detail | Rudi Heryansyah R</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+</head>
+<body>
+
+	<header class="header">
+		<a href="index.html#home" class="logo">Rudi<span> HR</span></a>
+		<nav class="navbar">
+			<a href="index.html#home" data-id="Beranda" data-en="Home">Home</a>
+			<a href="index.html#about" data-id="Tentang" data-en="About">About</a>
+			<a href="index.html#services" data-id="Layanan" data-en="Services">Services</a>
+			<a href="index.html#experience" data-id="Pengalaman" data-en="Experience">Experience</a>
+			<a href="index.html#contact" data-id="Kontak" data-en="Contact">Contact</a>
+		</nav>
+		<button id="menu-icon" class="bx bx-menu" aria-label="Buka navigasi" aria-expanded="false"></button>
+		<button id="langToggle" class="lang-toggle" type="button" aria-label="Ganti bahasa">EN</button>
+		<a href="https://wa.me/62895605976398?text=Halo%20Rudi,%20saya%20tertarik%20dengan%20portofolio%20Anda!" class="gradient-btn" target="_blank" rel="noopener noreferrer">Contact Me</a>
+	</header>
+
+	<main class="project-detail">
+		<div class="project-detail-header">
+			<a href="index.html#services" class="back-projects"><i class='bx bx-arrow-back'></i> <span data-id="Kembali ke Projects" data-en="Back to Projects">Back to Projects</span></a>
+			<span class="project-detail-category"></span>
+			<h1 class="project-detail-title"></h1>
+		</div>
+
+		<div class="project-detail-slider">
+			<div class="project-slider-track"></div>
+			<button class="slider-btn slider-prev" data-id="Gambar sebelumnya" data-en="Previous image" data-aria-id="Gambar sebelumnya" data-aria-en="Previous image">
+				<i class='bx bx-chevron-left'></i>
+			</button>
+			<button class="slider-btn slider-next" data-id="Gambar berikutnya" data-en="Next image" data-aria-id="Gambar berikutnya" data-aria-en="Next image">
+				<i class='bx bx-chevron-right'></i>
+			</button>
+			<div class="slider-dots"></div>
+		</div>
+
+		<section class="project-detail-section">
+			<h2 data-id="Ringkasan Project" data-en="Project Overview">Project Overview</h2>
+			<p class="project-detail-description"></p>
+		</section>
+
+		<section class="project-detail-section">
+			<h2 data-id="Tools &amp; Teknologi" data-en="Tools &amp; Technologies">Tools &amp; Technologies</h2>
+			<div class="project-detail-tools"></div>
+		</section>
+
+		<section class="project-detail-section">
+			<h2 data-id="Fitur Utama" data-en="Key Features">Key Features</h2>
+			<ul class="project-detail-features"></ul>
+		</section>
+
+		<section class="project-detail-section">
+			<h2 data-id="Galeri Project" data-en="Project Gallery">Project Gallery</h2>
+			<div class="project-detail-gallery"></div>
+		</section>
+
+		<a href="#" class="project-detail-link" data-id="Kunjungi Project" data-en="Visit Project">Visit Project</a>
+	</main>
+
+	<script src="script.js"></script>
+</body>
+</html>
