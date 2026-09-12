@@ -80,7 +80,7 @@ const projectText = {
     backToProjects: 'Kembali ke Project'
   },
   en: {
-    viewProject: 'View Project',
+    viewProject: 'Views Project',
     backToProjects: 'Back to Projects'
   }
 };
@@ -495,9 +495,9 @@ function renderProjectCards() {
     card.className = 'project-card animate';
     card.setAttribute('data-project-id', project.id);
 
-    const imagesHtml = project.images
-      .map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}" loading="lazy">`)
-      .join('');
+const imagesHtml = project.images.slice(0, 3)
+       .map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}" loading="lazy">`)
+       .join('');
 
     const toolsHtml = project.tools
       .map((tool) => `<span class="tool-chip">${tool}</span>`)
@@ -523,7 +523,7 @@ function renderProjectCards() {
         <p class="project-description">${description}</p>
         <div class="project-tools">${toolsHtml}</div>
         <a href="project-detail.html?project=${project.id}" class="btn project-btn">
-          <span data-id="Lihat Project" data-en="View Project">${projectText[currentLang].viewProject}</span> <i class='bx bx-arrow-right'></i>
+          <span data-id="Lihat Project" data-en="Views Project">${projectText[currentLang].viewProject}</span> <i class='bx bx-arrow-right'></i>
         </a>
       </div>
     `;
