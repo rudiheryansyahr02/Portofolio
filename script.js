@@ -87,6 +87,11 @@ const projectText = {
 
 let currentLang = localStorage.getItem('portfolioLang') || 'en';
 
+/* ===== Project Detail Slider State ===== */
+let detailCurrentIndex = 0;
+let detailTotalSlides = 0;
+let detailCleanup = null;
+
 function getLocalizedText(value) {
   if (typeof value === 'object' && value !== null) {
     return value[currentLang] || value.id || value.en || '';
@@ -215,9 +220,29 @@ const projects = [
         'Dashboard statistics',
         'Revenue monitoring',
         'Booking reports'
-      ]
+      ],
+      gallery: [
+      'images/porto1 (1).webp',
+      'images/porto1 (15).webp',
+      'images/porto1 (9).webp',
+      'images/porto1 (16).webp',
+      'images/porto1 (13).webp',
+      'images/porto1 (8).webp',
+      'images/porto1 (7).webp',
+      'images/porto1 (6).webp',
+      'images/porto1 (4).webp',
+      'images/porto1 (3).webp',
+      'images/porto1 (2).webp',
+      'images/porto1 (21).webp',
+      'images/porto1 (10).webp',
+      'images/porto1 (11).webp',
+      'images/porto1 (19).webp',
+      'images/porto1 (20).webp',
+      'images/porto1 (17).webp',
+      'images/porto1 (18).webp',
+    ],
     },
-    link: ''
+   
   },
   {
     id: 'santap',
@@ -639,6 +664,8 @@ function loadProjectDetail() {
   const project = projects.find((p) => p.id === projectId);
   if (!project) return;
 
+  const images = project.images || [];
+
   const detailTitle = document.querySelector('.project-detail-title');
   const detailCategory = document.querySelector('.project-detail-category');
   const detailDescription = document.querySelector('.project-detail-description');
@@ -670,11 +697,11 @@ function loadProjectDetail() {
     const track = detailSlider.querySelector('.project-slider-track');
     const dotsContainer = detailSlider.querySelector('.slider-dots');
     if (track) {
-      track.innerHTML = project.images.map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}">`).join('');
+      track.innerHTML = images.map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}">`).join('');
     }
     if (dotsContainer) {
       dotsContainer.innerHTML = '';
-      project.images.forEach((_, i) => {
+      images.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
         dot.setAttribute('data-aria-id', `Ke slide ${i + 1}`);
@@ -687,9 +714,12 @@ function loadProjectDetail() {
     initDetailSlider();
   }
 
-  if (detailGallery) {
-    detailGallery.innerHTML = project.images.map((img) => `<img src="${img}" alt="${project.title}" loading="lazy">`).join('');
-  }
+   if (detailGallery) {
+     const galleryImages = project.gallery && project.gallery.length ? project.gallery : images;
+     detailGallery.innerHTML = galleryImages
+       .map((img) => `<img src="${img}" alt="${project.title} - gallery image" loading="lazy" decoding="async">`)
+       .join('');
+   }
 
   if (detailLink) {
     if (project.link) {
@@ -714,16 +744,14 @@ function loadProjectDetail() {
   if (visitLink) visitLink.textContent = currentLang === 'id' ? 'Kunjungi Project' : 'Visit Project';
 }
 
-let detailCurrentIndex = 0;
-let detailTotalSlides = 0;
-
 function initDetailSlider() {
-  const track = document.querySelector('.project-detail-slider .project-slider-track');
-  const slides = track ? track.querySelectorAll('img') : [];
-  const prevBtn = document.querySelector('.project-detail-slider .slider-prev');
-  const nextBtn = document.querySelector('.project-detail-slider .slider-next');
-  const dots = document.querySelectorAll('.project-detail-slider .dot');
-  detailTotalSlides = slides.length;
+  const sliderEl = document.querySelector('.project-detail-slider');
+  const track = sliderEl ? sliderEl.querySelector('.project-slider-track') : null;
+  const prevBtn = sliderEl ? sliderEl.querySelector('.slider-prev') : null;
+  const nextBtn = sliderEl ? sliderEl.querySelector('.slider-next') : null;
+  const dots = sliderEl ? sliderEl.querySelectorAll('.dot') : [];
+  detailTotalSlides = track ? track.querySelectorAll('img').length : 0;
+  detailCurrentIndex = 0;
 
   const updateDetailSlider = () => {
     if (track) track.style.transform = `translateX(-${detailCurrentIndex * 100}%)`;
@@ -731,19 +759,49 @@ function initDetailSlider() {
   };
 
   window.goToDetailSlide = (index) => {
+    if (!detailTotalSlides) return;
     detailCurrentIndex = (index + detailTotalSlides) % detailTotalSlides;
     updateDetailSlider();
   };
 
-  if (prevBtn) prevBtn.addEventListener('click', () => window.goToDetailSlide(detailCurrentIndex - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => window.goToDetailSlide(detailCurrentIndex + 1));
+  if (detailCleanup) detailCleanup();
 
-  if (window.location.pathname.includes('project-detail.html')) {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') window.goToDetailSlide(detailCurrentIndex - 1);
-      if (e.key === 'ArrowRight') window.goToDetailSlide(detailCurrentIndex + 1);
-    });
-  }
+  const onPrev = () => window.goToDetailSlide(detailCurrentIndex - 1);
+  const onNext = () => window.goToDetailSlide(detailCurrentIndex + 1);
+  const onKeyDown = (e) => {
+    if (e.key === 'ArrowLeft') window.goToDetailSlide(detailCurrentIndex - 1);
+    if (e.key === 'ArrowRight') window.goToDetailSlide(detailCurrentIndex + 1);
+  };
+
+  if (prevBtn) prevBtn.addEventListener('click', onPrev);
+  if (nextBtn) nextBtn.addEventListener('click', onNext);
+  if (sliderEl) document.addEventListener('keydown', onKeyDown);
+
+  detailCleanup = () => {
+    if (prevBtn) prevBtn.removeEventListener('click', onPrev);
+    if (nextBtn) nextBtn.removeEventListener('click', onNext);
+    if (sliderEl) document.removeEventListener('keydown', onKeyDown);
+  };
+
+  updateDetailSlider();
+}
+
+/* ===== Back Navigation ===== */
+function initBackNavigation() {
+  const backEl = document.getElementById('backProjects');
+  if (!backEl) return;
+
+  backEl.addEventListener('click', (e) => {
+    const referrer = document.referrer || '';
+    try {
+      if (referrer && new URL(referrer).origin === window.location.origin && window.history.length > 1) {
+        e.preventDefault();
+        window.history.back();
+      }
+    } catch (err) {
+      // fallback to anchor href
+    }
+  });
 }
 
 /* ===== Init ===== */
@@ -751,3 +809,4 @@ if (!window.location.pathname.includes('project-detail.html')) {
   renderProjectCards();
 }
 loadProjectDetail();
+initBackNavigation();

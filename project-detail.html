@@ -28,21 +28,25 @@
 	</header>
 
 	<main class="project-detail">
+		<br>
+		<br>
+		<br>
+		<br>
+		
 		<div class="project-detail-header">
-			<a href="index.html#services" class="back-projects"><i class='bx bx-arrow-back'></i> <span data-id="Kembali ke Projects" data-en="Back to Projects">Back to Projects</span></a>
-			<span class="project-detail-category"></span>
+			<a href="index.html#services" id="backProjects" class="back-projects" data-aria-id="Kembali ke Projects" data-aria-en="Back to Projects" aria-label="Kembali ke Projects"><i class='bx bx-arrow-back'></i> <span data-id="Kembali ke Projects" data-en="Back to Projects">Back to Projects</span></a>
 			<h1 class="project-detail-title"></h1>
 		</div>
 
 		<div class="project-detail-slider">
 			<div class="project-slider-track"></div>
-			<button class="slider-btn slider-prev" data-aria-id="Gambar sebelumnya" data-aria-en="Previous image">
+			<button type="button" class="slider-btn slider-prev" data-aria-id="Gambar sebelumnya" data-aria-en="Previous image" aria-label="Previous image">
 				<i class='bx bx-chevron-left'></i>
 			</button>
-			<button class="slider-btn slider-next" data-aria-id="Gambar berikutnya" data-aria-en="Next image">
+			<button type="button" class="slider-btn slider-next" data-aria-id="Gambar berikutnya" data-aria-en="Next image" aria-label="Next image">
 				<i class='bx bx-chevron-right'></i>
 			</button>
-			<div class="slider-dots"></div>
+			<div class="slider-dots" role="tablist"></div>
 		</div>
 
 		<section class="project-detail-section">
@@ -64,8 +68,6 @@
 			<h2 data-id="Galeri Project" data-en="Project Gallery">Project Gallery</h2>
 			<div class="project-detail-gallery"></div>
 		</section>
-
-		<a href="#" class="project-detail-link" data-id="Kunjungi Project" data-en="Visit Project">Visit Project</a>
 	</main>
 
 	<script src="script.js"></script>
