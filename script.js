@@ -334,9 +334,9 @@ const projects = [
       en: 'The video combines the best moments of the event into an engaging visual story with dynamic editing, including smooth transitions, color grading, and audio synchronization to create an immersive atmosphere for viewers.'
     },
     images: [
-      'images/a5.svg',
-      'images/3 (1).webp',
-      'images/3 (2).webp'
+      'images/pkkmb (1).webp',
+      'images/pkkmb (2).webp',
+      'images/pkkmb (3).webp'
     ],
     tools: ['CapCut', 'Adobe Premiere', 'After Effects'],
     features: {
