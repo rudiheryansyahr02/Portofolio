@@ -371,9 +371,11 @@ const projects = [
       en: 'The design works feature a modern and distinctive touch, including promotional posters, event banners, and consistent social media content aligned with the MSIB Indobot program brand guidelines.'
     },
     images: [
-      'images/a6.svg',
-      'images/porto1 (5).webp',
-      'images/porto1 (6).webp'
+      'images/msib1.webp',
+      'images/msib2 (1).webp',
+      'images/msib2 (2).webp',
+      'images/msib2 (3).webp',
+      'images/a6.svg'
     ],
     tools: ['Canva', 'Figma', 'Adobe Photoshop'],
     features: {
