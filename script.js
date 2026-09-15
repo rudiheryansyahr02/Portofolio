@@ -153,6 +153,10 @@ const projects = [
       en: 'Fullstack Development'
     },
     title: 'Guest House As-Syifa',
+    shortDescription: {
+      id: 'Guest House As-Syifa adalah sistem booking penginapan berbasis web yang saya kembangkan untuk mempermudah reservasi kamar online dan manajemen operasional guest house.',
+      en: 'Guest House As-Syifa is a web-based accommodation booking system I developed to simplify online room reservations and guest house operations management.'
+    },
     description: {
       id: 'Guest House As-Syifa merupakan sistem booking penginapan berbasis web yang dikembangkan untuk mempermudah proses reservasi kamar secara online sekaligus membantu pengelola dalam mengelola operasional guest house. Sistem mencakup informasi kamar, ketersediaan kamar, proses booking, pembayaran melalui transfer bank, upload bukti pembayaran, verifikasi pembayaran, serta pengelolaan data customer.',
       en: 'Guest House As-Syifa is a web-based accommodation booking system developed to simplify online room reservations while helping administrators manage guest house operations. The system includes room information, room availability, booking management, bank transfer payments, payment proof uploads, payment verification, and customer data management.'
@@ -251,6 +255,10 @@ const projects = [
       en: 'Fullstack Development'
     },
     title: 'Santap.in',
+    shortDescription: {
+      id: 'Santap.in adalah website restoran interaktif yang saya kembangkan dengan desain responsif untuk menampilkan menu, kategori makanan, dan informasi produk secara mudah diakses.',
+      en: 'Santap.in is an interactive restaurant website I built with responsive design to showcase menus, food categories, and product details across devices.'
+    },
     description: {
       id: 'Santap.in merupakan website restoran interaktif yang dirancang untuk memberikan pengalaman pengguna yang lebih mudah dalam melihat informasi restoran, menu, kategori makanan, dan detail produk. Website menggunakan desain responsif agar dapat memberikan pengalaman yang nyaman pada berbagai perangkat.',
       en: 'Santap.in is an interactive restaurant website designed to provide users with an easier way to explore restaurant information, menus, food categories, and product details. The website uses a responsive design to provide a comfortable experience across different devices.'
@@ -288,6 +296,10 @@ const projects = [
       en: 'Internet of Things'
     },
     title: 'Brocass – Smart IoT Coop',
+    shortDescription: {
+      id: 'Brocass adalah sistem IoT untuk pemantauan dan kendali lingkungan kandang ayam broiler secara real-time menggunakan sensor suhu, kelembaban, dan pencahayaan.',
+      en: 'Brocass is an IoT system for real-time monitoring and control of broiler coop environment using temperature, humidity, and lighting sensors.'
+    },
     description: {
       id: 'Brocass – Smart IoT Coop merupakan sistem kandang ayam broiler berbasis Internet of Things yang dirancang untuk membantu melakukan pemantauan dan pengendalian kondisi lingkungan kandang secara real-time. Sistem memanfaatkan sensor dan aktuator untuk memantau parameter lingkungan serta membantu mengotomatisasi proses pengendalian sesuai kondisi yang terdeteksi.',
       en: 'Brocass – Smart IoT Coop is an Internet of Things-based broiler coop system designed to monitor and control environmental conditions in real time. The system uses sensors and actuators to monitor environmental parameters and support automated control based on detected conditions.'
@@ -321,36 +333,55 @@ const projects = [
   {
     id: 'pkkmb',
     category: {
-      id: 'Video Editing',
-      en: 'Video Editing'
+      id: 'Graphic Design',
+      en: 'Graphic Design'
     },
-    title: 'PKKMB 2023 – Video Highlight',
+    title: 'Team Creative PKKMB 2023',
+    shortDescription: {
+      id: 'Saya bergabung di Team Creative PKKMB 2023 sebagai desainer visual yang merancang materi publikasi, konten media sosial, poster, dan identitas visual event.',
+      en: 'I joined Team Creative PKKMB 2023 as a visual designer creating publication materials, social media content, posters, and event visual identity.'
+    },
     description: {
-      id: 'PKKMB 2023 – Video Highlight merupakan proyek editing video yang mengolah dokumentasi kegiatan PKKMB 2023 menjadi sebuah video highlight yang lebih menarik dan komunikatif. Proyek ini berfokus pada penyusunan alur visual, transisi, sinkronisasi audio, serta pengolahan visual untuk menyampaikan suasana dan momen utama kegiatan.',
-      en: 'PKKMB 2023 – Video Highlight is a video editing project that transforms documentation from the 2023 student orientation program into an engaging and communicative highlight video. The project focuses on visual storytelling, transitions, audio synchronization, and visual enhancement to present the atmosphere and key moments of the event.'
+      id: 'Saya bergabung di Team Creative PKKMB 2023 sebagai anggota tim kreatif yang merancang kebutuhan visual acara:\n\n• Mendesain materi publikasi, konten media sosial, poster, dan informasi acara\n• Membangun identitas visual konsisten untuk event berskala besar\n• Bekerja kolaboratif dalam tim: diskusi konsep, iterasi desain, penyelesaian tepat waktu\n\nPengalaman ini melatih saya menerjemahkan kebutuhan event ke konsep visual, komunikasi visual, teamwork, dan creative problem solving.',
+      en: 'I joined Team Creative PKKMB 2023 as a creative team member designing visual assets for a large-scale event:\n\n• Designed publication materials, social media content, posters, and event information\n• Built a consistent visual identity for the event\n• Collaborated in a team: concept discussions, design iterations, on-time delivery\n\nThis experience sharpened my skills in translating event needs into visual concepts, visual communication, teamwork, and creative problem solving.'
     },
     overview: {
-      id: 'Video ini menggabungkan momen-momen terbaik acara menjadi satu cerita visual yang menarik dengan editing yang dinamis, mencakup transisi halus, color grading, serta sinkronisasi audio untuk menciptakan suasana yang imersif bagi penonton.',
-      en: 'The video combines the best moments of the event into an engaging visual story with dynamic editing, including smooth transitions, color grading, and audio synchronization to create an immersive atmosphere for viewers.'
+      id: 'Peran: Anggota Team Creative\n\nKontribusi:\n• Graphic Design, Visual Design, Social Media Design\n• Publication Materials, Poster & Promotional Design\n• Information Design, Visual Assets Creation\n• Creative Collaboration & Teamwork\n\nPembelajaran: Desain event bukan sekadar estetika—visual harus menyampaikan informasi jelas, identitas konsisten, fleksibel untuk berbagai kebutuhan. Bekerja dalam tim melatih berdiskusi, menerima masukan, adaptasi ide, dan menyelesaikan pekerjaan bersama.',
+      en: 'Role: Creative Team Member\n\nContributions:\n• Graphic Design, Visual Design, Social Media Design\n• Publication Materials, Poster & Promotional Design\n• Information Design, Visual Assets Creation\n• Creative Collaboration & Teamwork\n\nLearning: Event design isn\'t just aesthetics—visuals must communicate clearly, maintain consistent identity, and adapt to varied needs. Teamwork trained me to discuss, receive feedback, adapt ideas, and deliver together.'
     },
     images: [
       'images/pkkmb (3).webp',
       'images/pkkmb (2).webp',
-      'images/pkkmb (1).webp'
+      'images/pkkmb (1).webp',
+      'images/3 (1).webp',
+      'images/3 (2).webp',
+      'images/3 (3).webp',
     ],
-    tools: ['CapCut', 'Adobe Premiere', 'After Effects'],
+    tools: ['Canva', 'Adobe Photoshop', 'Figma'],
     features: {
       id: [
-        'Transisi dinamis',
-        'Color grading',
-        'Sinkronisasi audio',
-        'Motion graphics'
+        'Graphic Design',
+        'Visual Design',
+        'Social Media Design',
+        'Publication Materials',
+        'Poster & Promotional Design',
+        'Information & Announcement Design',
+        'Visual Assets Creation',
+        'Creative Collaboration',
+        'Teamwork',
+        'Visual Communication'
       ],
       en: [
-        'Dynamic transitions',
-        'Color grading',
-        'Audio synchronization',
-        'Motion graphics'
+        'Graphic Design',
+        'Visual Design',
+        'Social Media Design',
+        'Publication Materials',
+        'Poster & Promotional Design',
+        'Information & Announcement Design',
+        'Visual Assets Creation',
+        'Creative Collaboration',
+        'Teamwork',
+        'Visual Communication'
       ]
     },
     link: ''
@@ -362,6 +393,10 @@ const projects = [
       en: 'Graphic Design'
     },
     title: 'MSIB Indobot – Digital Design',
+    shortDescription: {
+      id: 'Kumpulan karya desain digital (poster, banner, konten media sosial) yang saya buat selama program MSIB Indobot dengan fokus komposisi dan identitas visual.',
+      en: 'A collection of digital design works (posters, banners, social media content) I created during the MSIB Indobot program, focusing on composition and visual identity.'
+    },
     description: {
       id: 'MSIB Indobot – Digital Design merupakan kumpulan karya desain digital yang dibuat selama mengikuti program MSIB Indobot. Proyek ini mencakup pembuatan berbagai kebutuhan visual seperti poster, banner, dan konten media sosial dengan memperhatikan komposisi, identitas visual, serta kebutuhan komunikasi digital.',
       en: 'MSIB Indobot – Digital Design is a collection of digital design works created during the MSIB Indobot program. The project includes various visual assets such as posters, banners, and social media content, focusing on composition, visual identity, and digital communication needs.'
@@ -401,6 +436,10 @@ const projects = [
       en: 'Web Development'
     },
     title: 'Cafféra – Coffee Shop Profile',
+    shortDescription: {
+      id: 'Cafféra adalah website profil coffee shop yang saya bangun dengan layout responsif untuk menampilkan menu, galeri, dan informasi kontak secara visual menarik.',
+      en: 'Cafféra is a coffee shop profile website I built with responsive layout to showcase menu, gallery, and contact info in a visually appealing way.'
+    },
     description: {
       id: 'Cafféra – Coffee Shop Profile merupakan website profil coffee shop yang dirancang untuk menampilkan informasi bisnis secara modern dan menarik. Website menyediakan informasi menu, galeri, serta informasi kontak dengan layout responsif yang berfokus pada kenyamanan pengguna dan penyajian visual.',
       en: 'Cafféra – Coffee Shop Profile is a coffee shop profile website designed to present business information in a modern and engaging way. The website provides menu information, a gallery, and contact details through a responsive layout focused on user experience and visual presentation.'
@@ -438,6 +477,10 @@ const projects = [
       en: 'E-Commerce'
     },
     title: 'Trendora – Fashion Online Store',
+    shortDescription: {
+      id: 'Trendora adalah website e-commerce fashion yang saya kembangkan dengan katalog produk, pencarian, filter kategori, keranjang belanja, dan dashboard admin.',
+      en: 'Trendora is a fashion e-commerce website I developed with product catalog, search, category filtering, shopping cart, and admin dashboard.'
+    },
     description: {
       id: 'Trendora – Fashion Online Store merupakan website e-commerce fashion yang dirancang untuk menampilkan katalog produk secara responsif dan interaktif. Sistem menyediakan fitur seperti katalog produk, pencarian, filter kategori, keranjang belanja, serta dashboard untuk mendukung pengelolaan data toko.',
       en: 'Trendora – Fashion Online Store is a responsive and interactive fashion e-commerce website designed to showcase product catalogs. The system provides features such as product catalogs, search, category filtering, shopping cart functionality, and an admin dashboard to support store data management.'
@@ -467,7 +510,72 @@ const projects = [
       ]
     },
     link: 'https://github.com/rudiheryansyahr02'
-  }
+  },
+  {
+    id: 'syifamart',
+    category: {
+      id: 'Software Development',
+      en: 'Software Development'
+    },
+    title: 'SIM Syifamart',
+    shortDescription: {
+      id: 'SIM Syifamart merupakan project software development yang saya kembangkan melalui berbagai improvement dan pengembangan fitur berdasarkan kebutuhan operasional sistem yang terus berkembang.',
+      en: 'SIM Syifamart is a software development project that I continuously improved and developed based on evolving operational requirements.'
+    },
+    description: {
+      id: 'SIM Syifamart adalah salah satu project software development yang saya kembangkan dan lakukan improvement secara bertahap selama sistem digunakan dalam operasional. Saya tidak hanya berfokus pada pembuatan fitur baru, tetapi juga melakukan evaluasi terhadap sistem yang sudah berjalan, memperbaiki data dan proses yang belum akurat, serta menyesuaikan sistem berdasarkan kebutuhan operasional yang terus berkembang.\n\nSalah satu pengembangan yang saya lakukan adalah memperbaiki beberapa data dan proses yang sebelumnya belum berjalan secara akurat agar informasi yang ditampilkan oleh sistem dapat lebih sesuai dengan kondisi sebenarnya. Saya juga mengembangkan modul transaksi deposit untuk mendukung kebutuhan transaksi pengguna secara lebih terstruktur.\n\nSelain itu, saya mengembangkan fitur validasi dan filterisasi produk makanan dan minuman berdasarkan informasi kandungan tertentu, seperti kadar gula dan natrium. Fitur ini dibuat untuk membantu memberikan perhatian lebih terhadap produk yang dikonsumsi oleh siswa dan mendukung proses pemilihan produk yang lebih sesuai dengan kebutuhan kesehatan mereka.\n\nDalam proses pengembangan SIM Syifamart, saya juga terlibat dalam berbagai improvement lain, mulai dari modul transaksi, pengelolaan data, validasi, reporting, penyempurnaan alur sistem, hingga penyesuaian fitur berdasarkan kebutuhan yang muncul selama sistem digunakan.\n\nBagi saya, project ini menjadi pengalaman penting karena saya belajar bahwa software development tidak berhenti ketika sistem berhasil dibuat. Sistem yang sudah berjalan tetap membutuhkan maintenance, evaluasi, debugging, improvement, dan pengembangan berkelanjutan agar tetap relevan dengan kebutuhan pengguna dan operasional.',
+      en: 'SIM Syifamart is one of my software development projects where I was involved in continuously improving and developing an existing system based on real operational needs. My work was not limited to building new features, but also included evaluating existing processes, correcting inaccurate data, improving system workflows, and adapting the application as new requirements emerged.\n\nOne of the improvements I worked on was correcting several data and processes that were not yet accurate, ensuring that the information presented by the system was more consistent with actual operational conditions. I also developed a deposit transaction module to support a more structured and manageable transaction process for users.\n\nAnother development I worked on was a product validation and filtering feature based on specific nutritional information, such as sugar and sodium levels. This feature was designed to help provide greater awareness of food and beverage products consumed by students and support a more health-conscious product selection process.\n\nThroughout the development of SIM Syifamart, I also worked on various other improvements, including transaction modules, data management, validation, reporting, system workflows, and feature adjustments based on requirements discovered during the system operation.\n\nFor me, this project became an important software development experience because it taught me that development does not end when a system is launched. A running system requires continuous maintenance, debugging, evaluation, improvement, and adaptation to remain useful and aligned with real-world operational needs.'
+    },
+    overview: {
+      id: 'Peran: Software Developer\n\nKontribusi (What I Worked On):\n• System Improvement — improvement terhadap sistem yang sudah berjalan\n• Data Correction & Validation — memperbaiki data tidak akurat & meningkatkan validasi\n• Deposit Transaction Module — mengembangkan modul transaksi deposit\n• Product Health Filter — validasi/filter produk berdasarkan gula & natrium\n• Transaction Management — pengembangan & penyempurnaan proses transaksi\n• Reporting & Monitoring — pengembangan fitur reporting\n• Bug Fixing & Debugging — menangani masalah saat sistem digunakan\n• System Maintenance — maintenance & improvement berkelanjutan\n• Operational Adaptation — menyesuaikan fitur dengan kebutuhan operasional\n\nDevelopment Process:\nAnalyze → Identify Problems → Develop → Test → Improve → Maintain\n\nSaya memulai dengan memahami permasalahan sistem/kebutuhan baru, menganalisis alur existing, menentukan bagian yang diperbaiki/dikembangkan, implementasi, testing, lalu penyesuaian berdasarkan penggunaan lapangan.\n\nKey Features / Development:\n• Deposit Transaction — modul transaksi deposit untuk pengelolaan saldo\n• Product Health Filter — filter produk berdasarkan gula & natrium\n• Transaction Management — proses transaksi dari pemilihan produk hingga status\n• Order Management — pengelolaan order: pending, pembayaran, pengemasan, pengiriman, selesai\n• Reporting & Monitoring — monitoring aktivitas transaksi & operasional\n• Continuous Improvement — pengembangan berkelanjutan berdasarkan kebutuhan & masalah yang ditemukan\n\nWhat I Learned:\nProject ini mengajarkan saya bahwa software developer bukan hanya membuat fitur bekerja, tapi memahami permasalahan nyata setelah sistem digunakan. Saya belajar lebih teliti kelola data, pahami alur bisnis, cari akar masalah, debugging, dan kembangkan solusi bernilai. Pengalaman ini juga memperkuat pemahaman continuous improvement karena kebutuhan sistem evolusi seiring operasional.',
+      en: 'Role: Software Developer\n\nContributions (What I Worked On):\n• System Improvement — improving the running system\n• Data Correction & Validation — fixing inaccurate data & improving validation\n• Deposit Transaction Module — developing deposit transaction module\n• Product Health Filter — validation/filtering products by sugar & sodium\n• Transaction Management — developing & refining transaction processes\n• Reporting & Monitoring — developing reporting features\n• Bug Fixing & Debugging — handling issues found during system usage\n• System Maintenance — continuous maintenance & improvement\n• Operational Adaptation — adapting features to operational needs\n\nDevelopment Process:\nAnalyze → Identify Problems → Develop → Test → Improve → Maintain\n\nI start by understanding system problems or new user needs, analyzing existing flows, determining what to fix/develop, implementing, testing, then adjusting based on real-world usage.\n\nKey Features / Development:\n• Deposit Transaction — deposit module for balance management\n• Product Health Filter — filter products by sugar & sodium levels\n• Transaction Management — transaction flow from product selection to status\n• Order Management — order handling: pending, payment, packing, delivery, completed\n• Reporting & Monitoring — transaction & operational activity monitoring\n• Continuous Improvement — ongoing development based on discovered needs & issues\n\nWhat I Learned:\nThis project taught me that being a software developer is not only about making features work, but also about understanding real problems that appear once a system is in use. I learned to be more careful with data, understand business processes, identify root causes, debug existing systems, and develop solutions that provide real value. This experience also strengthened my understanding of continuous improvement, as system requirements evolve with operational needs.'
+    },
+    images: [
+      'images/sm1.webp',
+      'images/sm2.webp',
+      'images/sm3.webp',
+      'images/sm4.webp',
+      'images/sm5.webp',
+      'images/sm6.webp',
+      'images/sm7.webp',
+      'images/sm8.webp',
+      'images/sm9.webp',
+      'images/sm10.webp',
+      'images/sm11.webp',
+      'images/sm12.webp',
+      'images/sm13.webp',
+      'images/sm14.webp',
+      'images/sm15.webp',
+    ],
+    tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'REST API'],
+    features: {
+      id: [
+        'System Improvement',
+        'Data Correction & Validation',
+        'Deposit Transaction Module',
+        'Product Health Filter',
+        'Transaction Management',
+        'Reporting & Monitoring',
+        'Bug Fixing & Debugging',
+        'System Maintenance',
+        'Operational Adaptation',
+        'Continuous Improvement'
+      ],
+      en: [
+        'System Improvement',
+        'Data Correction & Validation',
+        'Deposit Transaction Module',
+        'Product Health Filter',
+        'Transaction Management',
+        'Reporting & Monitoring',
+        'Bug Fixing & Debugging',
+        'System Maintenance',
+        'Operational Adaptation',
+        'Continuous Improvement'
+      ]
+    },
+    link: ''
+  },
 ];
 
 applyLang(currentLang);
@@ -517,59 +625,79 @@ function renderProjectCards() {
 
   container.innerHTML = '';
 
-  projects.forEach((project, index) => {
-    const card = document.createElement('article');
-    card.className = 'project-card animate';
-    card.setAttribute('data-project-id', project.id);
+  // Group projects by category (localized)
+  const categoryGroups = {};
+  projects.forEach((project) => {
+    const catKey = getLocalizedText(project.category);
+    if (!categoryGroups[catKey]) categoryGroups[catKey] = [];
+    categoryGroups[catKey].push(project);
+  });
 
-const imagesHtml = project.images.slice(0, 3)
-       .map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}" loading="lazy">`)
-       .join('');
+  // Sort categories alphabetically
+  const sortedCategories = Object.keys(categoryGroups).sort();
 
-    const toolsHtml = project.tools
-      .map((tool) => `<span class="tool-chip">${tool}</span>`)
-      .join('');
+  sortedCategories.forEach((catName, catIdx) => {
+    // Category header
+    const groupHeader = document.createElement('div');
+    groupHeader.className = 'skill-category-group';
+    groupHeader.innerHTML = `<span class="skill-category-label">${catName}</span>`;
+    container.appendChild(groupHeader);
 
-    const category = getLocalizedText(project.category);
-    const description = getLocalizedText(project.description);
+    const groupProjects = categoryGroups[catName];
+    groupProjects.forEach((project, idx) => {
+      const card = document.createElement('article');
+      card.className = 'project-card animate';
+      card.setAttribute('data-project-id', project.id);
 
-    card.innerHTML = `
-      <div class="project-slider" data-slider-index="${index}">
-        <div class="project-slider-track">${imagesHtml}</div>
-        <button class="slider-btn slider-prev" data-aria-id="Gambar sebelumnya" data-aria-en="Previous image">
-          <i class='bx bx-chevron-left'></i>
-        </button>
-        <button class="slider-btn slider-next" data-aria-id="Gambar berikutnya" data-aria-en="Next image">
-          <i class='bx bx-chevron-right'></i>
-        </button>
-        <div class="slider-dots"></div>
-      </div>
-      <div class="project-content">
-        <span class="project-badge">${category}</span>
-        <h3 class="project-title">${project.title}</h3>
-        <p class="project-description">${description}</p>
-        <div class="project-tools">${toolsHtml}</div>
-        <a href="project-detail.html?project=${project.id}" class="btn project-btn">
-          <span data-id="Lihat Project" data-en="Views Project">${projectText[currentLang].viewProject}</span> <i class='bx bx-arrow-right'></i>
-        </a>
-      </div>
-    `;
+      const imagesHtml = project.images.slice(0, 3)
+        .map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}" loading="lazy">`)
+        .join('');
 
-    container.appendChild(card);
+      const toolsHtml = project.tools
+        .map((tool) => `<span class="tool-chip">${tool}</span>`)
+        .join('');
 
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      observer.observe(card);
-    } else {
-      card.classList.add('active');
-    }
+      const category = getLocalizedText(project.category);
+      const shortDescription = getLocalizedText(project.shortDescription);
+
+      card.innerHTML = `
+        <div class="project-slider" data-slider-index="${idx}">
+          <div class="project-slider-track">${imagesHtml}</div>
+          <button class="slider-btn slider-prev" data-aria-id="Gambar sebelumnya" data-aria-en="Previous image">
+            <i class='bx bx-chevron-left'></i>
+          </button>
+          <button class="slider-btn slider-next" data-aria-id="Gambar berikutnya" data-aria-en="Next image">
+            <i class='bx bx-chevron-right'></i>
+          </button>
+          <div class="slider-dots"></div>
+        </div>
+        <div class="project-content">
+          <span class="project-badge">${category}</span>
+          <h3 class="project-title">${project.title}</h3>
+          <p class="project-description">${shortDescription}</p>
+          <div class="project-tools">${toolsHtml}</div>
+          <a href="project-detail.html?project=${project.id}" class="btn project-btn">
+            <span data-id="Lihat Project" data-en="Views Project">${projectText[currentLang].viewProject}</span> <i class='bx bx-arrow-right'></i>
+          </a>
+        </div>
+      `;
+
+      container.appendChild(card);
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        observer.observe(card);
+      } else {
+        card.classList.add('active');
+      }
+    });
   });
 
   initSliders();
