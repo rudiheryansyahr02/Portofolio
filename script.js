@@ -309,9 +309,9 @@ const projects = [
       en: 'The system is designed to help farmers manage coops more efficiently through automated monitoring of temperature, humidity, and lighting. Sensor data is sent to Firebase for real-time monitoring via a mobile dashboard.'
     },
     images: [
-      'images/a4.svg',
-      'images/porto1 (3).webp',
-      'images/porto1 (4).webp'
+      'images/iot1.webp',
+      'images/iot2.webp',
+      'images/iot3.webp'
     ],
     tools: ['ESP32', 'Wemos D1', 'C++', 'Firebase', 'DHT22'],
     features: {
@@ -466,47 +466,6 @@ const projects = [
         'Menu showcase',
         'Gallery section',
         'Contact integration'
-      ]
-    },
-    link: 'https://github.com/rudiheryansyahr02'
-  },
-  {
-    id: 'trendora',
-    category: {
-      id: 'E-Commerce',
-      en: 'E-Commerce'
-    },
-    title: 'Trendora – Fashion Online Store',
-    shortDescription: {
-      id: 'Trendora adalah website e-commerce fashion yang saya kembangkan dengan katalog produk, pencarian, filter kategori, keranjang belanja, dan dashboard admin.',
-      en: 'Trendora is a fashion e-commerce website I developed with product catalog, search, category filtering, shopping cart, and admin dashboard.'
-    },
-    description: {
-      id: 'Trendora – Fashion Online Store merupakan website e-commerce fashion yang dirancang untuk menampilkan katalog produk secara responsif dan interaktif. Sistem menyediakan fitur seperti katalog produk, pencarian, filter kategori, keranjang belanja, serta dashboard untuk mendukung pengelolaan data toko.',
-      en: 'Trendora – Fashion Online Store is a responsive and interactive fashion e-commerce website designed to showcase product catalogs. The system provides features such as product catalogs, search, category filtering, shopping cart functionality, and an admin dashboard to support store data management.'
-    },
-    overview: {
-      id: 'Toko online ini menyediakan pengalaman belanja yang intuitif dengan fitur pencarian produk, filter kategori, dan keranjang belanja yang mudah digunakan. Dashboard admin memungkinkan pengelolaan produk, pesanan, dan data toko secara terpusat.',
-      en: 'This online store provides an intuitive shopping experience with product search, category filtering, and an easy-to-use shopping cart. The admin dashboard enables centralized management of products, orders, and store data.'
-    },
-    images: [
-      'images/a3.webp',
-      'images/porto1 (9).webp',
-      'images/porto1 (10).webp'
-    ],
-    tools: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-    features: {
-      id: [
-        'Katalog produk',
-        'Filter kategori',
-        'Keranjang belanja',
-        'Dashboard admin'
-      ],
-      en: [
-        'Product catalog',
-        'Category filtering',
-        'Shopping cart',
-        'Admin dashboard'
       ]
     },
     link: 'https://github.com/rudiheryansyahr02'
