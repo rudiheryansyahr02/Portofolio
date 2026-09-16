@@ -1372,9 +1372,9 @@ section {
 	align-self: flex-start;
 	background: var(--main-color);
 	color: #111 !important;
-	font-weight: 700;
+	font-weight: 600;
+	height: 35px;
 	padding: 0.8rem 1.6rem;
-	border-radius: 0.8rem;
 	transition: background 0.3s ease, transform 0.3s ease;
 	font-size: 1.3rem;
 	display: inline-flex;
@@ -1578,7 +1578,7 @@ section {
  	color: var(--text-color);
  	background: transparent;
  	border: 1px solid var(--main-color);
- 	border-radius: 0.5rem;
+ 	border-radius: 2rem;
  	font-size: 1.3rem;
 	font-weight: 600;
 	text-decoration: none;

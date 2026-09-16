@@ -649,6 +649,7 @@ function renderProjectCards() {
           <h3 class="project-title">${project.title}</h3>
           <p class="project-description">${shortDescription}</p>
           <div class="project-tools">${toolsHtml}</div>
+          <br>
           <a href="project-detail.html?project=${project.id}" class="btn project-btn">
             <span data-id="Lihat Project" data-en="Views Project">${projectText[currentLang].viewProject}</span> <i class='bx bx-arrow-right'></i>
           </a>
