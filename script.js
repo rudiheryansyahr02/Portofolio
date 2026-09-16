@@ -313,7 +313,21 @@ const projects = [
       'images/iot2.webp',
       'images/iot3.webp'
     ],
-    tools: ['ESP32', 'Wemos D1', 'C++', 'Firebase', 'DHT22'],
+    tools: [
+      'ESP32',
+      'Wemos D1 R2',
+      'C++',
+      'Firebase Realtime Database',
+      'DHT22',
+      'MQ-135',
+      'Water Level Sensor',
+      'Relay Module 8ch',
+      'DC Fan',
+      'Servo Motor',
+      'Heating Lamp',
+      'DC-DC Buck Converter',
+      'Arduino IDE'
+    ],
     features: {
       id: [
         'Pemantauan real-time',
