@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Project detail - Rudi Heryansyah Rohdiana Portfolio">
-	<title>Project Detail | Rudi Heryansyah R</title>
+	<meta name="description" content="Project Detail — Rudi Heryansyah Rohdiana Portfolio">
+	<title>Project Detail | Rudi Heryansyah Rohdiana</title>
 	<link rel="stylesheet" href="style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,63 +13,121 @@
 </head>
 <body>
 
-	<header class="header">
-		<a href="index.html#home" class="logo">Rudi<span> HR</span></a>
-		<nav class="navbar">
-			<a href="index.html#home" data-id="Beranda" data-en="Home">Home</a>
-			<a href="index.html#about" data-id="Tentang" data-en="About">About</a>
-			<a href="index.html#services" data-id="Layanan" data-en="Services">Services</a>
-			<a href="index.html#experience" data-id="Pengalaman" data-en="Experience">Experience</a>
-			<a href="index.html#contact" data-id="Kontak" data-en="Contact">Contact</a>
-		</nav>
-		<button id="menu-icon" class="bx bx-menu" aria-label="Buka navigasi" aria-expanded="false"></button>
+<!-- ===== SCROLL PROGRESS ===== -->
+<div id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursorOuter" aria-hidden="true"></div>
+
+<header class="header" id="header">
+	<a href="index.html#home" class="logo" aria-label="Rudi HR - Kembali ke beranda">Rudi<span>HR</span></a>
+
+	<button id="menu-icon" class="bx bx-menu" aria-label="Buka navigasi" aria-expanded="false"></button>
+
+	<nav class="navbar" id="navbar" role="navigation" aria-label="Navigasi utama">
+		<a href="index.html#home" data-id="Beranda" data-en="Home">Home</a>
+		<a href="index.html#about" data-id="Tentang" data-en="About">About</a>
+		<a href="index.html#services" data-id="Layanan" data-en="Services">Services</a>
+		<a href="index.html#projects" data-id="Proyek" data-en="Projects">Projects</a>
+		<a href="index.html#experience" data-id="Pengalaman" data-en="Experience">Experience</a>
+		<a href="index.html#contact" data-id="Kontak" data-en="Contact">Contact</a>
+	</nav>
+
+	<div class="header-actions">
 		<button id="langToggle" class="lang-toggle" type="button" aria-label="Ganti bahasa">EN</button>
-		<a href="https://wa.me/62895605976398?text=Halo%20Rudi,%20saya%20tertarik%20dengan%20portofolio%20Anda!" class="gradient-btn" target="_blank" rel="noopener noreferrer">Contact Me</a>
-	</header>
+		<a href="https://wa.me/62895605976398?text=Halo%20Rudi,%20saya%20tertarik%20dengan%20portofolio%20Anda!" class="gradient-btn" target="_blank" rel="noopener noreferrer" data-id="Hubungi Saya" data-en="Contact Me">Contact Me</a>
+	</div>
+</header>
 
-	<main class="project-detail">
-		<br>
-		<br>
-		<br>
-		<br>
-		
-		<div class="project-detail-header">
-			<a href="index.html#services" id="backProjects" class="back-projects" data-aria-id="Kembali ke Projects" data-aria-en="Back to Projects" aria-label="Kembali ke Projects"><i class='bx bx-arrow-back'></i> <span data-id="Kembali ke Projects" data-en="Back to Projects">Back to Projects</span></a>
-			<h1 class="project-detail-title"></h1>
+<main class="project-detail" style="padding-top:10rem;padding-bottom:8rem;">
+
+	<div class="project-detail-header">
+		<a href="index.html#projects" id="backProjects" class="back-projects" aria-label="Back to Projects">
+			<i class='bx bx-arrow-back'></i>
+			<span data-id="Kembali ke Proyek" data-en="Back to Projects">Back to Projects</span>
+		</a>
+		<br><br>
+		<span class="project-detail-category"></span>
+		<h1 class="project-detail-title"></h1>
+	</div>
+
+	<div class="project-detail-slider">
+		<div class="project-slider-track"></div>
+		<button type="button" class="slider-btn slider-prev" aria-label="Previous image">
+			<i class='bx bx-chevron-left'></i>
+		</button>
+		<button type="button" class="slider-btn slider-next" aria-label="Next image">
+			<i class='bx bx-chevron-right'></i>
+		</button>
+		<div class="slider-dots" role="tablist"></div>
+	</div>
+
+	<section class="project-detail-section" style="min-height:0;padding:0;height:auto;">
+		<h2 data-id="Ringkasan Project" data-en="Project Overview">Project Overview</h2>
+		<p class="project-detail-description"></p>
+	</section>
+
+	<section class="project-detail-section" style="min-height:0;padding:0;height:auto;">
+		<h2 data-id="Tools & Teknologi" data-en="Tools & Technologies">Tools &amp; Technologies</h2>
+		<div class="project-detail-tools"></div>
+	</section>
+
+	<section class="project-detail-section" style="min-height:0;padding:0;height:auto;">
+		<h2 data-id="Fitur Utama" data-en="Key Features">Key Features</h2>
+		<ul class="project-detail-features"></ul>
+	</section>
+
+	<section class="project-detail-section" style="min-height:0;padding:0;height:auto;">
+		<h2 data-id="Galeri Project" data-en="Project Gallery">Project Gallery</h2>
+		<div class="project-detail-gallery"></div>
+	</section>
+
+	<div style="margin-top:3rem;">
+		<a href="https://github.com/rudiheryansyahr02" target="_blank" rel="noopener noreferrer" class="btn btn-primary project-detail-link" style="display:none;">
+			<i class="bx bx-link-external"></i> View on GitHub
+		</a>
+	</div>
+
+</main>
+
+<!-- ===== LIGHTBOX ===== -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox" hidden>
+	<div class="lightbox-overlay" id="lightboxOverlay"></div>
+	<div class="lightbox-content">
+		<button class="lightbox-close" id="lightboxClose" aria-label="Tutup lightbox"><i class="bx bx-x"></i></button>
+		<button class="lightbox-prev" id="lightboxPrev" aria-label="Gambar sebelumnya"><i class="bx bx-chevron-left"></i></button>
+		<button class="lightbox-next" id="lightboxNext" aria-label="Gambar berikutnya"><i class="bx bx-chevron-right"></i></button>
+		<img id="lightboxImg" src="" alt="Lightbox image">
+		<div class="lightbox-counter" id="lightboxCounter" aria-live="polite">1 / 1</div>
+	</div>
+</div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button id="backToTopBtn" class="back-to-top" aria-label="Kembali ke atas">
+	<i class="bx bx-chevron-up"></i>
+</button>
+
+<!-- ===== COMMAND PALETTE ===== -->
+<div id="commandPalette" class="command-palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+	<div class="command-overlay" id="commandOverlay"></div>
+	<div class="command-content">
+		<div class="command-search">
+			<i class="bx bx-search"></i>
+			<input type="text" id="commandInput" placeholder="Search or navigate..." aria-label="Command palette search" autocomplete="off">
+			<span class="command-hint">ESC to close</span>
 		</div>
+		<ul class="command-list" id="commandList" role="listbox">
+			<li role="option" data-href="index.html#home"><i class="bx bx-home"></i> <span>Home</span></li>
+			<li role="option" data-href="index.html#about"><i class="bx bx-user"></i> <span>About Me</span></li>
+			<li role="option" data-href="index.html#projects"><i class="bx bx-code-alt"></i> <span>Projects</span></li>
+			<li role="option" data-href="index.html#experience"><i class="bx bx-briefcase"></i> <span>Experience</span></li>
+			<li role="option" data-href="index.html#contact"><i class="bx bx-envelope"></i> <span>Contact</span></li>
+			<li role="option" data-action="download-cv"><i class="bx bx-download"></i> <span>Download CV</span></li>
+		</ul>
+	</div>
+</div>
 
-		<div class="project-detail-slider">
-			<div class="project-slider-track"></div>
-			<button type="button" class="slider-btn slider-prev" data-aria-id="Gambar sebelumnya" data-aria-en="Previous image" aria-label="Previous image">
-				<i class='bx bx-chevron-left'></i>
-			</button>
-			<button type="button" class="slider-btn slider-next" data-aria-id="Gambar berikutnya" data-aria-en="Next image" aria-label="Next image">
-				<i class='bx bx-chevron-right'></i>
-			</button>
-			<div class="slider-dots" role="tablist"></div>
-		</div>
-
-		<section class="project-detail-section">
-			<h2 data-id="Ringkasan Project" data-en="Project Overview">Project Overview</h2>
-			<p class="project-detail-description"></p>
-		</section>
-
-		<section class="project-detail-section">
-			<h2 data-id="Tools & Teknologi" data-en="Tools & Technologies">Tools & Technologies</h2>
-			<div class="project-detail-tools"></div>
-		</section>
-
-		<section class="project-detail-section">
-			<h2 data-id="Fitur Utama" data-en="Key Features">Key Features</h2>
-			<ul class="project-detail-features"></ul>
-		</section>
-
-		<section class="project-detail-section">
-			<h2 data-id="Galeri Project" data-en="Project Gallery">Project Gallery</h2>
-			<div class="project-detail-gallery"></div>
-		</section>
-	</main>
-
-	<script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

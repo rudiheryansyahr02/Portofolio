@@ -1,23 +1,70 @@
+/* ===== PORTFOLIO SCRIPT — Rudi Heryansyah Rohdiana ===== */
+
+/* ===== PRELOADER ===== */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) preloader.classList.add('hidden');
+  }, 1400);
+});
+
+/* ===== SCROLL PROGRESS ===== */
+function initScrollProgress() {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  const update = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', update, { passive: true });
+}
+
+/* ===== CUSTOM CURSOR ===== */
+function initCursor() {
+  const cursor = document.getElementById('cursor');
+  const outer = document.getElementById('cursorOuter');
+  if (!cursor || !outer) return;
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let cx = 0, cy = 0, ox = 0, oy = 0;
+    document.addEventListener('mousemove', (e) => {
+      cx = e.clientX; cy = e.clientY;
+      cursor.style.left = cx + 'px';
+      cursor.style.top = cy + 'px';
+    });
+    const animateOuter = () => {
+      ox += (cx - ox) * 0.12;
+      oy += (cy - oy) * 0.12;
+      outer.style.left = ox + 'px';
+      outer.style.top = oy + 'px';
+      requestAnimationFrame(animateOuter);
+    };
+    animateOuter();
+    const hoverEls = document.querySelectorAll('a, button, .project-card, .exp-card, .filter-btn, .work-step, .contact-link, .service-box, .timeline-gallery img');
+    hoverEls.forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+  }
+}
+
+/* ===== NAVBAR ===== */
 const menuIcon = document.querySelector('#menu-icon');
 const navbar = document.querySelector('.navbar');
 const navLinks = document.querySelectorAll('.navbar a');
-const readMoreBtn = document.querySelector('#readMoreBtn');
-const moreText = document.querySelector('#more');
-const dots = document.querySelector('#dots');
-const contactForm = document.querySelector('#contactForm');
-const statusMessage = document.querySelector('#status');
-const langToggle = document.querySelector('#langToggle');
+const header = document.querySelector('.header');
 
-const closeMenu = () => {
+function initNavigation() {
   if (!menuIcon || !navbar) return;
-  navbar.classList.remove('active');
-  menuIcon.classList.remove('bx-x');
-  menuIcon.classList.add('bx-menu');
-  menuIcon.setAttribute('aria-expanded', 'false');
-  menuIcon.setAttribute('aria-label', 'Buka navigasi');
-};
 
-if (menuIcon && navbar) {
+  const closeMenu = () => {
+    navbar.classList.remove('active');
+    menuIcon.classList.remove('bx-x');
+    menuIcon.classList.add('bx-menu');
+    menuIcon.setAttribute('aria-expanded', 'false');
+    menuIcon.setAttribute('aria-label', 'Buka navigasi');
+  };
+
   menuIcon.addEventListener('click', () => {
     const isOpen = navbar.classList.toggle('active');
     menuIcon.classList.toggle('bx-x', isOpen);
@@ -26,71 +73,620 @@ if (menuIcon && navbar) {
     menuIcon.setAttribute('aria-label', isOpen ? 'Tutup navigasi' : 'Buka navigasi');
   });
 
-  navLinks.forEach((link) => link.addEventListener('click', closeMenu));
-}
+  navLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-if (readMoreBtn && moreText && dots) {
-  readMoreBtn.addEventListener('click', () => {
-    const isExpanded = readMoreBtn.getAttribute('aria-expanded') === 'true';
-    moreText.hidden = isExpanded;
-    dots.hidden = !isExpanded;
-    readMoreBtn.textContent = isExpanded
-      ? readMoreLabels[currentLang].more
-      : readMoreLabels[currentLang].less;
-    readMoreBtn.setAttribute('aria-expanded', String(!isExpanded));
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!navbar.contains(e.target) && !menuIcon.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
   });
 }
 
-const animateElements = document.querySelectorAll('.animate');
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  animateElements.forEach((element) => observer.observe(element));
-} else {
-  animateElements.forEach((element) => element.classList.add('active'));
+/* ===== NAVBAR SCROLL BEHAVIOR ===== */
+function initNavbarScroll() {
+  if (!header) return;
+  const onScroll = () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-/* ===== Sistem Bahasa (ID / EN) ===== */
+/* ===== ACTIVE NAV LINK (IntersectionObserver) ===== */
+function initActiveNav() {
+  const sections = document.querySelectorAll('section[id], div[id="home"]');
+  const links = document.querySelectorAll('.navbar a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        links.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+}
+
+/* ===== SCROLL ANIMATIONS (IntersectionObserver) ===== */
+function initScrollReveal() {
+  const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+  const animEls = document.querySelectorAll('.animate');
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    animEls.forEach(el => animObserver.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+    animEls.forEach(el => el.classList.add('active'));
+  }
+}
+
+/* ===== COUNTER ANIMATION ===== */
+function initCounters() {
+  const counters = document.querySelectorAll('.stat-number[data-count]');
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const duration = 1800;
+      const start = performance.now();
+      const animate = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(animate);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(animate);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(el => observer.observe(el));
+}
+
+/* ===== BACK TO TOP ===== */
+function initBackToTop() {
+  const btn = document.getElementById('backToTopBtn');
+  const footerBtn = document.getElementById('backToTop');
+
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  btn.addEventListener('click', scrollTop);
+  if (footerBtn) footerBtn.addEventListener('click', scrollTop);
+}
+
+/* ===== TYPING EFFECT ===== */
+function initTypingEffect() {
+  const el = document.getElementById('typingText');
+  if (!el) return;
+
+  const words = ['Fullstack Developer', 'Web Developer', 'IoT Enthusiast', 'Problem Solver', 'Creative Developer'];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const cursor = document.createElement('span');
+  cursor.className = 'typing-cursor';
+  el.parentNode.insertBefore(cursor, el.nextSibling);
+
+  const type = () => {
+    const current = words[wordIndex];
+    if (isDeleting) {
+      el.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      el.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let delay = isDeleting ? 60 : 100;
+    if (!isDeleting && charIndex === current.length) {
+      delay = 2200;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      delay = 400;
+    }
+    setTimeout(type, delay);
+  };
+
+  setTimeout(type, 800);
+}
+
+/* ===== HERO PARTICLES ===== */
+function initHeroParticles() {
+  const canvas = document.getElementById('heroParticles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animId;
+
+  const resize = () => {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  };
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.alpha = Math.random() * 0.4 + 0.1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(249,115,22,${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  const count = Math.min(40, Math.floor(canvas.width * canvas.height / 20000));
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+
+  const animate = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    animId = requestAnimationFrame(animate);
+  };
+  animate();
+}
+
+/* ===== READ MORE ===== */
+function initReadMore() {
+  const btn = document.querySelector('#readMoreBtn');
+  const moreText = document.querySelector('#more');
+  const dots = document.querySelector('#dots');
+  if (!btn || !moreText || !dots) return;
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    moreText.hidden = isExpanded;
+    dots.hidden = !isExpanded;
+    btn.textContent = isExpanded ? readMoreLabels[currentLang].more : readMoreLabels[currentLang].less;
+    btn.setAttribute('aria-expanded', String(!isExpanded));
+  });
+}
+
+/* ===== PROJECT FILTER ===== */
+function initProjectFilter() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const filter = btn.dataset.filter;
+      const cards = document.querySelectorAll('.project-grid .project-card');
+      cards.forEach(card => {
+        const cat = card.dataset.category || '';
+        const show = filter === 'all' || cat === filter;
+        card.classList.toggle('hidden', !show);
+        if (show) {
+          card.style.animation = 'none';
+          card.offsetHeight;
+          card.style.animation = '';
+        }
+      });
+    });
+  });
+}
+
+/* ===== LIGHTBOX ===== */
+let lightboxImages = [];
+let lightboxIndex = 0;
+
+function openLightbox(images, index) {
+  lightboxImages = images;
+  lightboxIndex = index;
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  const counter = document.getElementById('lightboxCounter');
+  if (!lb || !img) return;
+  img.src = lightboxImages[lightboxIndex];
+  img.alt = `Image ${lightboxIndex + 1}`;
+  if (counter) counter.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+  lb.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  if (!lb) return;
+  lb.hidden = true;
+  document.body.style.overflow = '';
+}
+
+function lightboxGo(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
+  const img = document.getElementById('lightboxImg');
+  const counter = document.getElementById('lightboxCounter');
+  if (img) { img.src = lightboxImages[lightboxIndex]; }
+  if (counter) counter.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+}
+
+function initLightbox() {
+  const lb = document.getElementById('lightbox');
+  if (!lb) return;
+  document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightboxOverlay')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev')?.addEventListener('click', () => lightboxGo(-1));
+  document.getElementById('lightboxNext')?.addEventListener('click', () => lightboxGo(1));
+}
+
+/* ===== PROJECT MODAL ===== */
+function openProjectModal(project) {
+  const modal = document.getElementById('projectModal');
+  const body = document.getElementById('modalBody');
+  if (!modal || !body) return;
+
+  const images = project.images || [];
+  const category = getLocalizedText(project.category);
+  const description = getLocalizedText(project.description);
+  const overview = getLocalizedText(project.overview);
+  const features = project.features[currentLang] || project.features.en || [];
+
+  const toolsHtml = project.tools.map(t => `<span class="tool-chip">${t}</span>`).join('');
+  const featuresHtml = features.map(f => `<li class="modal-feature-item">${f}</li>`).join('');
+
+  const galleryImages = project.gallery && project.gallery.length ? project.gallery : images;
+  const galleryHtml = galleryImages
+    .map((img, i) => `<img src="${img}" alt="${project.title} screenshot ${i + 1}" loading="lazy" class="modal-gallery-img" data-index="${i}">`)
+    .join('');
+
+  const linkHtml = project.link
+    ? `<div class="modal-links"><a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class='bx bx-link-external'></i> View on GitHub</a></div>`
+    : '';
+
+  body.innerHTML = `
+    <div class="modal-header">
+      <span class="modal-category">${category}</span>
+      <h2 class="modal-title">${project.title}</h2>
+      <p class="modal-desc">${description}</p>
+    </div>
+    ${overview ? `
+    <div class="modal-section">
+      <h4>Project Overview</h4>
+      <p>${overview}</p>
+    </div>` : ''}
+    <div class="modal-section">
+      <h4>Technologies Used</h4>
+      <div class="modal-tools">${toolsHtml}</div>
+    </div>
+    ${features.length ? `
+    <div class="modal-section">
+      <h4>Key Features</h4>
+      <ul class="modal-features">${featuresHtml}</ul>
+    </div>` : ''}
+    ${galleryImages.length ? `
+    <div class="modal-section">
+      <h4>Gallery</h4>
+      <div class="modal-gallery">${galleryHtml}</div>
+    </div>` : ''}
+    ${linkHtml}
+  `;
+
+  // Gallery lightbox in modal
+  body.querySelectorAll('.modal-gallery-img').forEach((img, idx) => {
+    img.addEventListener('click', () => openLightbox(galleryImages, idx));
+  });
+
+  modal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  const firstFocusable = modal.querySelector('button, a, [tabindex="0"]');
+  if (firstFocusable) firstFocusable.focus();
+}
+
+function closeProjectModal() {
+  const modal = document.getElementById('projectModal');
+  if (!modal) return;
+  modal.hidden = true;
+  document.body.style.overflow = '';
+}
+
+function initProjectModal() {
+  const modal = document.getElementById('projectModal');
+  if (!modal) return;
+  document.getElementById('modalClose')?.addEventListener('click', closeProjectModal);
+  document.getElementById('modalOverlay')?.addEventListener('click', closeProjectModal);
+}
+
+/* ===== COMMAND PALETTE ===== */
+function initCommandPalette() {
+  const palette = document.getElementById('commandPalette');
+  const input = document.getElementById('commandInput');
+  const list = document.getElementById('commandList');
+  if (!palette || !input || !list) return;
+
+  const open = () => {
+    palette.hidden = false;
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => { input.focus(); }, 50);
+  };
+  const close = () => {
+    palette.hidden = true;
+    document.body.style.overflow = '';
+    input.value = '';
+    list.querySelectorAll('li').forEach(li => li.classList.remove('hidden'));
+  };
+
+  // Ctrl/Cmd + K
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      palette.hidden ? open() : close();
+    }
+    if (e.key === 'Escape' && !palette.hidden) close();
+  });
+
+  document.getElementById('commandOverlay')?.addEventListener('click', close);
+
+  // Filter
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase();
+    list.querySelectorAll('li').forEach(li => {
+      li.classList.toggle('hidden', !li.textContent.toLowerCase().includes(q));
+    });
+  });
+
+  // Execute
+  list.querySelectorAll('li').forEach(li => {
+    li.addEventListener('click', () => {
+      const href = li.dataset.href;
+      const action = li.dataset.action;
+      const external = li.dataset.external;
+      if (action === 'download-cv') {
+        const a = document.createElement('a');
+        a.href = 'LAPORAN_Rudi_Heryansyah_Rohdiana.pdf';
+        a.download = '';
+        a.click();
+      } else if (href && external) {
+        window.open(href, '_blank', 'noopener');
+      } else if (href && href.startsWith('#')) {
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+      close();
+    });
+    // Keyboard navigation in list
+    li.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') li.click();
+    });
+  });
+
+  // Keyboard arrow navigation
+  input.addEventListener('keydown', (e) => {
+    const items = [...list.querySelectorAll('li:not(.hidden)')];
+    const active = list.querySelector('li.selected');
+    let idx = items.indexOf(active);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (active) active.classList.remove('selected');
+      idx = (idx + 1) % items.length;
+      items[idx]?.classList.add('selected');
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (active) active.classList.remove('selected');
+      idx = (idx - 1 + items.length) % items.length;
+      items[idx]?.classList.add('selected');
+    } else if (e.key === 'Enter') {
+      if (active) active.click();
+    }
+  });
+}
+
+/* ===== GLOBAL KEYBOARD ===== */
+function initGlobalKeyboard() {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeProjectModal();
+      closeLightbox();
+    }
+    if (!document.getElementById('lightbox')?.hidden) {
+      if (e.key === 'ArrowLeft') lightboxGo(-1);
+      if (e.key === 'ArrowRight') lightboxGo(1);
+    }
+  });
+}
+
+/* ===== CONTACT FORM ===== */
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  const statusEl = document.querySelector('#status');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = form.from_name?.value?.trim() || '';
+    const email = form.from_email?.value?.trim() || '';
+    const subject = form.subject?.value?.trim() || '';
+    const message = form.message?.value?.trim() || '';
+
+    // Basic validation
+    let valid = true;
+    [form.from_name, form.from_email, form.subject, form.message].forEach(field => {
+      if (field && !field.value.trim()) {
+        field.classList.add('error');
+        valid = false;
+      } else if (field) {
+        field.classList.remove('error');
+      }
+    });
+
+    if (!valid) {
+      if (statusEl) {
+        statusEl.textContent = statusText[currentLang].empty;
+        statusEl.className = 'status error';
+      }
+      return;
+    }
+
+    if (message.length < 10) {
+      if (statusEl) {
+        statusEl.textContent = currentLang === 'id' ? 'Pesan terlalu pendek (min 10 karakter).' : 'Message too short (min 10 characters).';
+        statusEl.className = 'status error';
+      }
+      return;
+    }
+
+    const waNumber = '62895605976398';
+    const text = `Halo Rudi, saya ingin menghubungi Anda.\n\n*Data Diri*\nNama: ${name}\nEmail: ${email}${subject ? `\nSubjek: ${subject}` : ''}\n\n*Pesan:*\n${message}`;
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+
+    if (statusEl) {
+      statusEl.textContent = statusText[currentLang].redirect;
+      statusEl.className = 'status success';
+    }
+    window.open(waUrl, '_blank', 'noopener');
+  });
+
+  // Remove error on input
+  form.querySelectorAll('input, textarea').forEach(field => {
+    field.addEventListener('input', () => field.classList.remove('error'));
+  });
+}
+
+/* ===== TIMELINE GALLERY LIGHTBOX ===== */
+function initTimelineLightbox() {
+  document.querySelectorAll('.timeline-gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      const gallery = img.closest('.timeline-gallery');
+      const imgs = [...gallery.querySelectorAll('img')].map(i => i.src);
+      const idx = imgs.indexOf(img.src);
+      openLightbox(imgs, idx);
+    });
+  });
+}
+
+/* ===== SLIDERS ===== */
+function initSliders() {
+  const sliders = document.querySelectorAll('.project-slider');
+  sliders.forEach((slider) => {
+    const track = slider.querySelector('.project-slider-track');
+    const slides = track?.querySelectorAll('img');
+    if (!slides?.length) return;
+    const prevBtn = slider.querySelector('.slider-prev');
+    const nextBtn = slider.querySelector('.slider-next');
+    const dotsContainer = slider.querySelector('.slider-dots');
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoplayInterval;
+
+    const updateSlider = () => {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dotsContainer?.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    };
+
+    const goTo = (index) => {
+      currentIndex = (index + totalSlides) % totalSlides;
+      updateSlider();
+    };
+
+    if (dotsContainer) {
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    prevBtn?.addEventListener('click', () => goTo(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => goTo(currentIndex + 1));
+
+    // Touch
+    let touchStartX = 0;
+    slider.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    slider.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) diff > 0 ? goTo(currentIndex + 1) : goTo(currentIndex - 1);
+    });
+
+    const startAutoplay = () => { autoplayInterval = setInterval(() => goTo(currentIndex + 1), 5000); };
+    const stopAutoplay = () => clearInterval(autoplayInterval);
+
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+    startAutoplay();
+  });
+}
+
+/* ===== LANGUAGE SYSTEM ===== */
 const readMoreLabels = {
   id: { more: 'Baca Selengkapnya', less: 'Sembunyikan' },
   en: { more: 'Read More', less: 'Read Less' }
 };
-
 const statusText = {
-  id: {
-    empty: 'Mohon lengkapi nama, email, dan pesan.',
-    redirect: 'Mengarahkan ke WhatsApp...'
-  },
-  en: {
-    empty: 'Please fill in your name, email, and message.',
-    redirect: 'Redirecting to WhatsApp...'
-  }
+  id: { empty: 'Mohon lengkapi nama, email, dan pesan.', redirect: 'Mengarahkan ke WhatsApp...' },
+  en: { empty: 'Please fill in your name, email, and message.', redirect: 'Redirecting to WhatsApp...' }
 };
-
 const projectText = {
-  id: {
-    viewProject: 'Lihat Project',
-    backToProjects: 'Kembali ke Project'
-  },
-  en: {
-    viewProject: 'Views Project',
-    backToProjects: 'Back to Projects'
-  }
+  id: { viewProject: 'Lihat Project', backToProjects: 'Kembali ke Project' },
+  en: { viewProject: 'View Project', backToProjects: 'Back to Projects' }
 };
-
 let currentLang = localStorage.getItem('portfolioLang') || 'en';
-
-/* ===== Project Detail Slider State ===== */
-let detailCurrentIndex = 0;
-let detailTotalSlides = 0;
-let detailCleanup = null;
+const langToggle = document.querySelector('#langToggle');
 
 function getLocalizedText(value) {
   if (typeof value === 'object' && value !== null) {
@@ -103,25 +699,20 @@ function applyLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
 
-  document.querySelectorAll('[data-id]').forEach((el) => {
+  document.querySelectorAll('[data-id]').forEach(el => {
     const langText = el.getAttribute('data-' + lang);
     if (langText) {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.value = langText;
-      } else {
-        el.textContent = langText;
-      }
+      if (el.tagName === 'INPUT' && el.type === 'submit') el.value = langText;
+      else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = langText;
+      else el.textContent = langText;
     }
     const ariaLang = el.getAttribute('data-aria-' + lang);
     if (ariaLang) el.setAttribute('aria-label', ariaLang);
   });
 
-  document.querySelectorAll('[data-ph-id]').forEach((el) => {
-    el.setAttribute('placeholder', el.getAttribute('data-ph-' + lang));
-  });
-
-  document.querySelectorAll('[data-aria-id]').forEach((el) => {
-    el.setAttribute('aria-label', el.getAttribute('data-aria-' + lang));
+  document.querySelectorAll('[data-ph-id]').forEach(el => {
+    const ph = el.getAttribute('data-ph-' + lang);
+    if (ph) el.setAttribute('placeholder', ph);
   });
 
   if (langToggle) langToggle.textContent = lang === 'id' ? 'EN' : 'ID';
@@ -139,633 +730,336 @@ function refreshProjectContent() {
 }
 
 if (langToggle) {
-  langToggle.addEventListener('click', () => {
-    applyLang(currentLang === 'id' ? 'en' : 'id');
-  });
+  langToggle.addEventListener('click', () => applyLang(currentLang === 'id' ? 'en' : 'id'));
 }
 
-/* ===== Project Data ===== */
+/* ===== PROJECT DATA ===== */
 const projects = [
   {
     id: 'guesthouse',
-    category: {
-      id: 'Fullstack Development',
-      en: 'Fullstack Development'
-    },
+    category: { id: 'Fullstack Development', en: 'Fullstack Development' },
     title: 'Guest House As-Syifa',
     shortDescription: {
-      id: 'Guest House As-Syifa adalah sistem booking penginapan berbasis web yang saya kembangkan untuk mempermudah reservasi kamar online dan manajemen operasional guest house.',
-      en: 'Guest House As-Syifa is a web-based accommodation booking system I developed to simplify online room reservations and guest house operations management.'
+      id: 'Sistem booking penginapan berbasis web untuk mempermudah reservasi kamar online dan manajemen operasional guest house.',
+      en: 'A web-based accommodation booking system to simplify online room reservations and guest house operations management.'
     },
     description: {
       id: 'Guest House As-Syifa merupakan sistem booking penginapan berbasis web yang dikembangkan untuk mempermudah proses reservasi kamar secara online sekaligus membantu pengelola dalam mengelola operasional guest house. Sistem mencakup informasi kamar, ketersediaan kamar, proses booking, pembayaran melalui transfer bank, upload bukti pembayaran, verifikasi pembayaran, serta pengelolaan data customer.',
       en: 'Guest House As-Syifa is a web-based accommodation booking system developed to simplify online room reservations while helping administrators manage guest house operations. The system includes room information, room availability, booking management, bank transfer payments, payment proof uploads, payment verification, and customer data management.'
     },
     overview: {
-      id: 'Pada sisi admin, sistem menyediakan dashboard untuk mengelola kamar, lokasi, fasilitas, foto kamar, harga periode, menu sarapan, data booking, pembayaran, serta laporan transaksi. Sistem juga dilengkapi dengan fitur monitoring pendapatan dan rekap data booking untuk membantu proses pengelolaan operasional.',
-      en: 'On the administrative side, the system provides a dashboard for managing rooms, locations, facilities, room photos, seasonal pricing, breakfast options, bookings, payments, and transaction reports. The system also includes revenue monitoring and booking summaries to support day-to-day operational management.'
+      id: 'Pada sisi admin, sistem menyediakan dashboard untuk mengelola kamar, lokasi, fasilitas, foto kamar, harga periode, menu sarapan, data booking, pembayaran, serta laporan transaksi. Sistem juga dilengkapi dengan fitur monitoring pendapatan dan rekap data booking.',
+      en: 'On the admin side, the system provides a dashboard for managing rooms, locations, facilities, room photos, seasonal pricing, breakfast options, bookings, payments, and transaction reports, including revenue monitoring and booking summaries.'
     },
     images: [
-      'images/porto1 (1).webp',
-      'images/porto1 (15).webp',
-      'images/porto1 (9).webp',
-      'images/porto1 (16).webp',
-      'images/porto1 (13).webp',
-      'images/porto1 (8).webp',
-      'images/porto1 (7).webp',
-      'images/porto1 (6).webp',
-      'images/porto1 (4).webp',
-      'images/porto1 (3).webp',
-      'images/porto1 (2).webp',
-      'images/porto1 (21).webp',
-      'images/porto1 (10).webp',
-      'images/porto1 (11).webp',
-      'images/porto1 (19).webp',
-      'images/porto1 (20).webp',
-      'images/porto1 (17).webp',
-      'images/porto1 (18).webp',
+      'images/porto1 (1).webp','images/porto1 (15).webp','images/porto1 (9).webp',
+      'images/porto1 (16).webp','images/porto1 (13).webp','images/porto1 (8).webp',
+      'images/porto1 (7).webp','images/porto1 (6).webp','images/porto1 (4).webp',
+      'images/porto1 (3).webp','images/porto1 (2).webp','images/porto1 (21).webp',
+      'images/porto1 (10).webp','images/porto1 (11).webp','images/porto1 (19).webp',
+      'images/porto1 (20).webp','images/porto1 (17).webp','images/porto1 (18).webp',
     ],
     tools: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Google OAuth', 'PhpSpreadsheet'],
     features: {
-      id: [
-        'Booking kamar secara online',
-        'Kalender ketersediaan kamar',
-        'Detail kamar & galeri foto',
-        'Manajemen customer',
-        'Login Google OAuth',
-        'Layanan sarapan/tambahan',
-        'Ringkasan booking',
-        'Pembayaran melalui transfer bank',
-        'Upload bukti pembayaran',
-        'Verifikasi pembayaran',
-        'Manajemen status booking',
-        'Manajemen kamar',
-        'Manajemen fasilitas',
-        'Manajemen sarapan',
-        'Statistik dashboard',
-        'Monitoring pendapatan',
-        'Laporan booking'
-      ],
-      en: [
-        'Online room booking',
-        'Room availability calendar',
-        'Room details & photo gallery',
-        'Customer management',
-        'Google OAuth login',
-        'Breakfast/additional services',
-        'Booking summary',
-        'Bank transfer payment',
-        'Payment proof upload',
-        'Payment verification',
-        'Booking status management',
-        'Room management',
-        'Facility management',
-        'Breakfast management',
-        'Dashboard statistics',
-        'Revenue monitoring',
-        'Booking reports'
-      ],
+      id: ['Booking kamar online','Kalender ketersediaan','Detail kamar & galeri','Manajemen customer','Login Google OAuth','Layanan sarapan','Pembayaran transfer bank','Upload bukti bayar','Verifikasi pembayaran','Manajemen status booking','Dashboard admin','Monitoring pendapatan','Laporan booking'],
+      en: ['Online room booking','Availability calendar','Room details & gallery','Customer management','Google OAuth login','Breakfast services','Bank transfer payment','Payment proof upload','Payment verification','Booking status management','Admin dashboard','Revenue monitoring','Booking reports'],
       gallery: [
-      'images/porto1 (1).webp',
-      'images/porto1 (15).webp',
-      'images/porto1 (9).webp',
-      'images/porto1 (16).webp',
-      'images/porto1 (13).webp',
-      'images/porto1 (8).webp',
-      'images/porto1 (7).webp',
-      'images/porto1 (6).webp',
-      'images/porto1 (4).webp',
-      'images/porto1 (3).webp',
-      'images/porto1 (2).webp',
-      'images/porto1 (21).webp',
-      'images/porto1 (10).webp',
-      'images/porto1 (11).webp',
-      'images/porto1 (19).webp',
-      'images/porto1 (20).webp',
-      'images/porto1 (17).webp',
-      'images/porto1 (18).webp',
-    ],
-    },
-   
+        'images/porto1 (1).webp','images/porto1 (15).webp','images/porto1 (9).webp',
+        'images/porto1 (16).webp','images/porto1 (13).webp','images/porto1 (8).webp',
+        'images/porto1 (7).webp','images/porto1 (6).webp','images/porto1 (4).webp',
+        'images/porto1 (3).webp','images/porto1 (2).webp','images/porto1 (21).webp',
+      ]
+    }
   },
   {
-    id: 'santap',
-    category: {
-      id: 'Fullstack Development',
-      en: 'Fullstack Development'
-    },
-    title: 'Santap.in',
+    id: 'foodcourt',
+    category: { id: 'Fullstack Development', en: 'Fullstack Development' },
+    title: 'SIM Foodcourt',
     shortDescription: {
-      id: 'Santap.in adalah website restoran interaktif yang saya kembangkan dengan desain responsif untuk menampilkan menu, kategori makanan, dan informasi produk secara mudah diakses.',
-      en: 'Santap.in is an interactive restaurant website I built with responsive design to showcase menus, food categories, and product details across devices.'
+      id: 'Sistem informasi manajemen foodcourt berbasis web untuk mengelola menu, transaksi, laporan, dan operasional kantin secara digital.',
+      en: 'A web-based foodcourt management information system to handle menu, transactions, reports, and canteen operations digitally.'
     },
     description: {
-      id: 'Santap.in merupakan website restoran interaktif yang dirancang untuk memberikan pengalaman pengguna yang lebih mudah dalam melihat informasi restoran, menu, kategori makanan, dan detail produk. Website menggunakan desain responsif agar dapat memberikan pengalaman yang nyaman pada berbagai perangkat.',
-      en: 'Santap.in is an interactive restaurant website designed to provide users with an easier way to explore restaurant information, menus, food categories, and product details. The website uses a responsive design to provide a comfortable experience across different devices.'
+      id: 'SIM Foodcourt adalah sistem informasi manajemen berbasis web yang dikembangkan untuk mendukung operasional foodcourt secara digital. Sistem mencakup manajemen menu, transaksi penjualan, pengelolaan data tenant, laporan keuangan, dan monitoring aktivitas foodcourt secara real-time.',
+      en: 'SIM Foodcourt is a web-based management information system developed to support digital foodcourt operations. The system includes menu management, sales transactions, tenant data management, financial reports, and real-time foodcourt activity monitoring.'
     },
     overview: {
-      id: 'Project ini berfokus pada penyajian informasi restoran secara modern dan terstruktur dengan menggabungkan frontend yang responsif dengan sistem backend yang mendukung pengelolaan data. Antarmuka dirancang agar pengguna dapat menemukan informasi menu dengan cepat dan mudah.',
-      en: 'The project focuses on presenting restaurant information in a modern and structured way by combining a responsive frontend with a backend system that supports data management. The interface is designed to help users discover menu information quickly and easily.'
+      id: 'Peran: Fullstack Developer\n\nSistem ini dibangun untuk mempermudah pengelolaan foodcourt secara terpusat. Dari manajemen menu dan transaksi harian hingga pelaporan keuangan, semuanya terintegrasi dalam satu platform web yang mudah digunakan.',
+      en: 'Role: Fullstack Developer\n\nThis system was built to simplify centralized foodcourt management. From menu management and daily transactions to financial reporting, everything is integrated in one easy-to-use web platform.'
     },
     images: [
-      'images/a2.webp',
-      'images/porto1 (1).webp',
-      'images/porto1 (2).webp'
+      'images/fc.webp','images/fc (1).webp','images/fc (2).webp',
+      'images/fc (3).webp','images/fc (4).webp','images/fc (5).webp',
+      'images/fc (6).webp','images/fc (7).webp'
     ],
-    tools: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'REST API'],
     features: {
-      id: [
-        'Desain website responsif',
-        'Tampilan menu interaktif',
-        'Sistem informasi restoran',
-        'Integrasi database'
-      ],
-      en: [
-        'Responsive website design',
-        'Interactive menu display',
-        'Restaurant information system',
-        'Database integration'
-      ]
-    },
-    link: 'https://github.com/rudiheryansyahr02'
-  },
-  {
-    id: 'brocass',
-    category: {
-      id: 'Internet of Things',
-      en: 'Internet of Things'
-    },
-    title: 'Brocass – Smart IoT Coop',
-    shortDescription: {
-      id: 'Brocass adalah sistem IoT untuk pemantauan dan kendali lingkungan kandang ayam broiler secara real-time menggunakan sensor suhu, kelembaban, dan pencahayaan.',
-      en: 'Brocass is an IoT system for real-time monitoring and control of broiler coop environment using temperature, humidity, and lighting sensors.'
-    },
-    description: {
-      id: 'Brocass – Smart IoT Coop merupakan sistem kandang ayam broiler berbasis Internet of Things yang dirancang untuk membantu melakukan pemantauan dan pengendalian kondisi lingkungan kandang secara real-time. Sistem memanfaatkan sensor dan aktuator untuk memantau parameter lingkungan serta membantu mengotomatisasi proses pengendalian sesuai kondisi yang terdeteksi.',
-      en: 'Brocass – Smart IoT Coop is an Internet of Things-based broiler coop system designed to monitor and control environmental conditions in real time. The system uses sensors and actuators to monitor environmental parameters and support automated control based on detected conditions.'
-    },
-    overview: {
-      id: 'Sistem ini dirancang untuk membantu peternak mengelola kandang dengan lebih efisien melalui pemantauan suhu, kelembaban, dan pencahayaan secara otomatis. Data sensor dikirim ke Firebase untuk monitoring real-time melalui dashboard mobile.',
-      en: 'The system is designed to help farmers manage coops more efficiently through automated monitoring of temperature, humidity, and lighting. Sensor data is sent to Firebase for real-time monitoring via a mobile dashboard.'
-    },
-    images: [
-      'images/iot1.webp',
-      'images/iot2.webp',
-      'images/iot3.webp'
-    ],
-    tools: [
-      'ESP32',
-      'Wemos D1 R2',
-      'C++',
-      'Firebase Realtime Database',
-      'DHT22',
-      'MQ-135',
-      'Water Level Sensor',
-      'Relay Module 8ch',
-      'DC Fan',
-      'Servo Motor',
-      'Heating Lamp',
-      'DC-DC Buck Converter',
-      'Arduino IDE'
-    ],
-    features: {
-      id: [
-        'Pemantauan real-time',
-        'Kontrol lingkungan otomatis',
-        'Pencatatan data sensor',
-        'Dashboard mobile'
-      ],
-      en: [
-        'Real-time monitoring',
-        'Automated environmental control',
-        'Sensor data logging',
-        'Mobile dashboard'
-      ]
-    },
-    link: 'https://github.com/rudiheryansyahr02'
-  },
-  {
-    id: 'pkkmb',
-    category: {
-      id: 'Graphic Design',
-      en: 'Graphic Design'
-    },
-    title: 'Team Creative PKKMB 2023',
-    shortDescription: {
-      id: 'Saya bergabung di Team Creative PKKMB 2023 sebagai desainer visual yang merancang materi publikasi, konten media sosial, poster, dan identitas visual event.',
-      en: 'I joined Team Creative PKKMB 2023 as a visual designer creating publication materials, social media content, posters, and event visual identity.'
-    },
-    description: {
-      id: 'Saya bergabung di Team Creative PKKMB 2023 sebagai anggota tim kreatif yang merancang kebutuhan visual acara:\n\n• Mendesain materi publikasi, konten media sosial, poster, dan informasi acara\n• Membangun identitas visual konsisten untuk event berskala besar\n• Bekerja kolaboratif dalam tim: diskusi konsep, iterasi desain, penyelesaian tepat waktu\n\nPengalaman ini melatih saya menerjemahkan kebutuhan event ke konsep visual, komunikasi visual, teamwork, dan creative problem solving.',
-      en: 'I joined Team Creative PKKMB 2023 as a creative team member designing visual assets for a large-scale event:\n\n• Designed publication materials, social media content, posters, and event information\n• Built a consistent visual identity for the event\n• Collaborated in a team: concept discussions, design iterations, on-time delivery\n\nThis experience sharpened my skills in translating event needs into visual concepts, visual communication, teamwork, and creative problem solving.'
-    },
-    overview: {
-      id: 'Peran: Anggota Team Creative\n\nKontribusi:\n• Graphic Design, Visual Design, Social Media Design\n• Publication Materials, Poster & Promotional Design\n• Information Design, Visual Assets Creation\n• Creative Collaboration & Teamwork\n\nPembelajaran: Desain event bukan sekadar estetika—visual harus menyampaikan informasi jelas, identitas konsisten, fleksibel untuk berbagai kebutuhan. Bekerja dalam tim melatih berdiskusi, menerima masukan, adaptasi ide, dan menyelesaikan pekerjaan bersama.',
-      en: 'Role: Creative Team Member\n\nContributions:\n• Graphic Design, Visual Design, Social Media Design\n• Publication Materials, Poster & Promotional Design\n• Information Design, Visual Assets Creation\n• Creative Collaboration & Teamwork\n\nLearning: Event design isn\'t just aesthetics—visuals must communicate clearly, maintain consistent identity, and adapt to varied needs. Teamwork trained me to discuss, receive feedback, adapt ideas, and deliver together.'
-    },
-    images: [
-      'images/pkkmb (3).webp',
-      'images/pkkmb (2).webp',
-      'images/pkkmb (1).webp',
-      'images/3 (1).webp',
-      'images/3 (2).webp',
-      'images/3 (3).webp',
-    ],
-    tools: ['Canva', 'Adobe Photoshop', 'Figma'],
-    features: {
-      id: [
-        'Graphic Design',
-        'Visual Design',
-        'Social Media Design',
-        'Publication Materials',
-        'Poster & Promotional Design',
-        'Information & Announcement Design',
-        'Visual Assets Creation',
-        'Creative Collaboration',
-        'Teamwork',
-        'Visual Communication'
-      ],
-      en: [
-        'Graphic Design',
-        'Visual Design',
-        'Social Media Design',
-        'Publication Materials',
-        'Poster & Promotional Design',
-        'Information & Announcement Design',
-        'Visual Assets Creation',
-        'Creative Collaboration',
-        'Teamwork',
-        'Visual Communication'
-      ]
+      id: ['Manajemen menu & kategori','Transaksi penjualan','Manajemen tenant','Laporan keuangan','Dashboard monitoring','Manajemen pengguna','Print invoice','Rekap data harian'],
+      en: ['Menu & category management','Sales transactions','Tenant management','Financial reports','Monitoring dashboard','User management','Print invoice','Daily data recap']
     },
     link: ''
   },
   {
-    id: 'msib',
-    category: {
-      id: 'Graphic Design',
-      en: 'Graphic Design'
-    },
-    title: 'MSIB Indobot – Digital Design',
+    id: 'syifamart',
+    category: { id: 'Web Development', en: 'Web Development' },
+    title: 'SIM Syifamart',
     shortDescription: {
-      id: 'Kumpulan karya desain digital (poster, banner, konten media sosial) yang saya buat selama program MSIB Indobot dengan fokus komposisi dan identitas visual.',
-      en: 'A collection of digital design works (posters, banners, social media content) I created during the MSIB Indobot program, focusing on composition and visual identity.'
+      id: 'Project web development dengan improvement berkelanjutan — deposit transaction, product health filter, dan optimasi sistem operasional yang terus berkembang.',
+      en: 'A web development project with continuous improvement — deposit transactions, product health filter, and ongoing operational system optimization.'
     },
     description: {
-      id: 'MSIB Indobot – Digital Design merupakan kumpulan karya desain digital yang dibuat selama mengikuti program MSIB Indobot. Proyek ini mencakup pembuatan berbagai kebutuhan visual seperti poster, banner, dan konten media sosial dengan memperhatikan komposisi, identitas visual, serta kebutuhan komunikasi digital.',
-      en: 'MSIB Indobot – Digital Design is a collection of digital design works created during the MSIB Indobot program. The project includes various visual assets such as posters, banners, and social media content, focusing on composition, visual identity, and digital communication needs.'
+      id: 'SIM Syifamart adalah project web development yang saya kembangkan dan lakukan improvement secara bertahap. Saya tidak hanya membangun fitur baru, tetapi juga mengevaluasi sistem yang sudah berjalan, memperbaiki data, serta menyesuaikan sistem berdasarkan kebutuhan operasional yang terus berkembang.',
+      en: 'SIM Syifamart is a web development project where I continuously improved and developed an existing system based on real operational needs. My work included building new features, evaluating existing processes, correcting data, and adapting the application as new requirements emerged.'
     },
     overview: {
-      id: 'Karya-karya desain ini dibuat dengan sentuhan modern dan berkarakter, mencakup desain poster untuk promosi, banner untuk kebutuhan acara, serta konten media sosial yang konsisten dengan brand guidelines program MSIB Indobot.',
-      en: 'The design works feature a modern and distinctive touch, including promotional posters, event banners, and consistent social media content aligned with the MSIB Indobot program brand guidelines.'
+      id: 'Peran: Software Developer\n\nKontribusi:\n• System Improvement\n• Data Correction & Validation\n• Deposit Transaction Module\n• Product Health Filter (gula & natrium)\n• Transaction Management\n• Reporting & Monitoring\n• Bug Fixing & Debugging\n• Continuous Improvement\n\nProses: Analyze → Identify → Develop → Test → Improve → Maintain',
+      en: 'Role: Software Developer\n\nContributions:\n• System Improvement\n• Data Correction & Validation\n• Deposit Transaction Module\n• Product Health Filter (sugar & sodium)\n• Transaction Management\n• Reporting & Monitoring\n• Bug Fixing & Debugging\n• Continuous Improvement\n\nProcess: Analyze → Identify → Develop → Test → Improve → Maintain'
     },
     images: [
-      'images/msib1.webp',
-      'images/msib2 (1).webp',
-      'images/msib2 (2).webp',
-      'images/msib2 (3).webp',
-      'images/a6.svg'
+      'images/sm1.webp','images/sm2.webp','images/sm3.webp','images/sm4.webp',
+      'images/sm5.webp','images/sm6.webp','images/sm7.webp','images/sm8.webp',
+      'images/sm9.webp','images/sm10.webp','images/sm11.webp','images/sm12.webp',
+      'images/sm13.webp','images/sm14.webp','images/sm15.webp',
     ],
-    tools: ['Canva', 'Figma', 'Adobe Photoshop'],
+    tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'REST API'],
     features: {
-      id: [
-        'Desain poster',
-        'Konten media sosial',
-        'Identitas brand',
-        'Aset siap cetak'
-      ],
-      en: [
-        'Poster design',
-        'Social media content',
-        'Brand identity',
-        'Print-ready assets'
-      ]
+      id: ['System Improvement','Data Correction & Validation','Deposit Transaction Module','Product Health Filter','Transaction Management','Reporting & Monitoring','Bug Fixing & Debugging','System Maintenance','Continuous Improvement'],
+      en: ['System Improvement','Data Correction & Validation','Deposit Transaction Module','Product Health Filter','Transaction Management','Reporting & Monitoring','Bug Fixing & Debugging','System Maintenance','Continuous Improvement']
+    },
+    link: ''
+  },
+  {
+    id: 'santap',
+    category: { id: 'Fullstack Development', en: 'Fullstack Development' },
+    title: 'Santap.in',
+    shortDescription: {
+      id: 'Website restoran interaktif dengan desain responsif untuk menampilkan menu, kategori makanan, dan informasi produk.',
+      en: 'An interactive restaurant website with responsive design to showcase menus, food categories, and product details.'
+    },
+    description: {
+      id: 'Santap.in merupakan website restoran interaktif yang dirancang untuk memberikan pengalaman pengguna yang mudah dalam melihat informasi restoran, menu, kategori makanan, dan detail produk. Website menggunakan desain responsif untuk kenyamanan di berbagai perangkat.',
+      en: 'Santap.in is an interactive restaurant website designed to provide users with an easy way to explore restaurant information, menus, food categories, and product details, with a responsive design for comfort across devices.'
+    },
+    overview: {
+      id: 'Project ini menggabungkan frontend responsif dengan sistem backend yang mendukung pengelolaan data. Antarmuka dirancang agar pengguna dapat menemukan informasi menu dengan cepat dan mudah.',
+      en: 'This project combines a responsive frontend with a backend system supporting data management. The interface is designed to help users quickly and easily find menu information.'
+    },
+    images: ['images/a2.webp','images/porto1 (1).webp','images/porto1 (2).webp'],
+    tools: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    features: {
+      id: ['Desain website responsif','Tampilan menu interaktif','Sistem informasi restoran','Integrasi database'],
+      en: ['Responsive website design','Interactive menu display','Restaurant information system','Database integration']
     },
     link: 'https://github.com/rudiheryansyahr02'
   },
   {
     id: 'caffera',
-    category: {
-      id: 'Web Development',
-      en: 'Web Development'
-    },
+    category: { id: 'Web Development', en: 'Web Development' },
     title: 'Cafféra – Coffee Shop Profile',
     shortDescription: {
-      id: 'Cafféra adalah website profil coffee shop yang saya bangun dengan layout responsif untuk menampilkan menu, galeri, dan informasi kontak secara visual menarik.',
-      en: 'Cafféra is a coffee shop profile website I built with responsive layout to showcase menu, gallery, and contact info in a visually appealing way.'
+      id: 'Website profil coffee shop dengan layout responsif untuk menampilkan menu, galeri, dan informasi kontak secara visual menarik.',
+      en: 'A coffee shop profile website with responsive layout to showcase menu, gallery, and contact info in a visually appealing way.'
     },
     description: {
-      id: 'Cafféra – Coffee Shop Profile merupakan website profil coffee shop yang dirancang untuk menampilkan informasi bisnis secara modern dan menarik. Website menyediakan informasi menu, galeri, serta informasi kontak dengan layout responsif yang berfokus pada kenyamanan pengguna dan penyajian visual.',
-      en: 'Cafféra – Coffee Shop Profile is a coffee shop profile website designed to present business information in a modern and engaging way. The website provides menu information, a gallery, and contact details through a responsive layout focused on user experience and visual presentation.'
+      id: 'Cafféra adalah website profil coffee shop yang dirancang untuk menampilkan informasi bisnis secara modern dan menarik. Website menyediakan informasi menu, galeri, serta informasi kontak dengan layout responsif yang berfokus pada kenyamanan pengguna.',
+      en: 'Cafféra is a coffee shop profile website designed to present business information in a modern and engaging way, with menu information, a gallery, and contact details through a responsive layout focused on user experience.'
     },
     overview: {
-      id: 'Website ini dibangun dengan fokus pada presentasi visual yang elegan dan pengalaman pengguna yang nyaman. Layout responsif memastikan tampilan optimal di berbagai perangkat, mulai dari desktop hingga mobile.',
-      en: 'The website is built with a focus on elegant visual presentation and comfortable user experience. The responsive layout ensures optimal display across various devices, from desktop to mobile.'
+      id: 'Website ini dibangun dengan fokus pada presentasi visual yang elegan dan pengalaman pengguna yang nyaman. Layout responsif memastikan tampilan optimal di berbagai perangkat, dari desktop hingga mobile.',
+      en: 'Built with a focus on elegant visual presentation and comfortable user experience. The responsive layout ensures optimal display across various devices, from desktop to mobile.'
     },
-    images: [
-      'images/a1.webp',
-      'images/porto1 (7).webp',
-      'images/porto1 (8).webp'
-    ],
+    images: ['images/a1.webp','images/porto1 (7).webp','images/porto1 (8).webp'],
     tools: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
     features: {
-      id: [
-        'Layout responsif',
-        'Showcase menu',
-        'Bagian galeri',
-        'Integrasi kontak'
-      ],
-      en: [
-        'Responsive layout',
-        'Menu showcase',
-        'Gallery section',
-        'Contact integration'
-      ]
+      id: ['Layout responsif','Showcase menu','Bagian galeri','Integrasi kontak'],
+      en: ['Responsive layout','Menu showcase','Gallery section','Contact integration']
     },
     link: 'https://github.com/rudiheryansyahr02'
   },
   {
-    id: 'syifamart',
-    category: {
-      id: 'Web Development',
-      en: 'Web Development'
-    },
-    title: 'SIM Syifamart',
+    id: 'brocass',
+    category: { id: 'Internet of Things', en: 'Internet of Things' },
+    title: 'Brocass – Smart IoT Coop',
     shortDescription: {
-      id: 'SIM Syifamart merupakan project web development yang saya kembangkan melalui berbagai improvement dan pengembangan fitur berdasarkan kebutuhan operasional sistem yang terus berkembang.',
-      en: 'SIM Syifamart is a web development project that I continuously improved and developed based on evolving operational requirements.'
+      id: 'Sistem IoT real-time untuk pemantauan dan kendali lingkungan kandang ayam broiler menggunakan sensor suhu, kelembaban, dan pencahayaan.',
+      en: 'A real-time IoT system for monitoring and controlling broiler coop environment using temperature, humidity, and lighting sensors.'
     },
     description: {
-      id: 'SIM Syifamart adalah salah satu project web development yang saya kembangkan dan lakukan improvement secara bertahap selama sistem digunakan dalam operasional. Saya tidak hanya berfokus pada pembuatan fitur baru, tetapi juga melakukan evaluasi terhadap sistem yang sudah berjalan, memperbaiki data dan proses yang belum akurat, serta menyesuaikan sistem berdasarkan kebutuhan operasional yang terus berkembang.\n\nSalah satu pengembangan yang saya lakukan adalah memperbaiki beberapa data dan proses yang sebelumnya belum berjalan secara akurat agar informasi yang ditampilkan oleh sistem dapat lebih sesuai dengan kondisi sebenarnya. Saya juga mengembangkan modul transaksi deposit untuk mendukung kebutuhan transaksi pengguna secara lebih terstruktur.\n\nSelain itu, saya mengembangkan fitur validasi dan filterisasi produk makanan dan minuman berdasarkan informasi kandungan tertentu, seperti kadar gula dan natrium. Fitur ini dibuat untuk membantu memberikan perhatian lebih terhadap produk yang dikonsumsi oleh siswa dan mendukung proses pemilihan produk yang lebih sesuai dengan kebutuhan kesehatan mereka.\n\nDalam proses pengembangan SIM Syifamart, saya juga terlibat dalam berbagai improvement lain, mulai dari modul transaksi, pengelolaan data, validasi, reporting, penyempurnaan alur sistem, hingga penyesuaian fitur berdasarkan kebutuhan yang muncul selama sistem digunakan.\n\nBagi saya, project ini menjadi pengalaman penting karena saya belajar bahwa web development tidak berhenti ketika sistem berhasil dibuat. Sistem yang sudah berjalan tetap membutuhkan maintenance, evaluasi, debugging, improvement, dan pengembangan berkelanjutan agar tetap relevan dengan kebutuhan pengguna dan operasional.',
-      en: 'SIM Syifamart is one of my web development projects where I was involved in continuously improving and developing an existing system based on real operational needs. My work was not limited to building new features, but also included evaluating existing processes, correcting inaccurate data, improving system workflows, and adapting the application as new requirements emerged.\n\nOne of the improvements I worked on was correcting several data and processes that were not yet accurate, ensuring that the information presented by the system was more consistent with actual operational conditions. I also developed a deposit transaction module to support a more structured and manageable transaction process for users.\n\nAnother development I worked on was a product validation and filtering feature based on specific nutritional information, such as sugar and sodium levels. This feature was designed to help provide greater awareness of food and beverage products consumed by students and support a more health-conscious product selection process.\n\nThroughout the development of SIM Syifamart, I also worked on various other improvements, including transaction modules, data management, validation, reporting, system workflows, and feature adjustments based on requirements discovered during the system operation.\n\nFor me, this project became an important web development experience because it taught me that development does not end when a system is launched. A running system requires continuous maintenance, debugging, evaluation, improvement, and adaptation to remain useful and aligned with real-world operational needs.'
+      id: 'Brocass – Smart IoT Coop adalah sistem kandang ayam broiler berbasis IoT untuk memantau dan mengendalikan kondisi lingkungan secara real-time. Sistem memanfaatkan sensor dan aktuator untuk memantau parameter lingkungan serta mengotomatisasi pengendalian.',
+      en: 'Brocass – Smart IoT Coop is an IoT-based broiler coop system designed to monitor and control environmental conditions in real time using sensors and actuators.'
     },
     overview: {
-      id: 'Peran: Software Developer\n\nKontribusi (What I Worked On):\n• System Improvement — improvement terhadap sistem yang sudah berjalan\n• Data Correction & Validation — memperbaiki data tidak akurat & meningkatkan validasi\n• Deposit Transaction Module — mengembangkan modul transaksi deposit\n• Product Health Filter — validasi/filter produk berdasarkan gula & natrium\n• Transaction Management — pengembangan & penyempurnaan proses transaksi\n• Reporting & Monitoring — pengembangan fitur reporting\n• Bug Fixing & Debugging — menangani masalah saat sistem digunakan\n• System Maintenance — maintenance & improvement berkelanjutan\n• Operational Adaptation — menyesuaikan fitur dengan kebutuhan operasional\n\nDevelopment Process:\nAnalyze → Identify Problems → Develop → Test → Improve → Maintain\n\nSaya memulai dengan memahami permasalahan sistem/kebutuhan baru, menganalisis alur existing, menentukan bagian yang diperbaiki/dikembangkan, implementasi, testing, lalu penyesuaian berdasarkan penggunaan lapangan.\n\nKey Features / Development:\n• Deposit Transaction — modul transaksi deposit untuk pengelolaan saldo\n• Product Health Filter — filter produk berdasarkan gula & natrium\n• Transaction Management — proses transaksi dari pemilihan produk hingga status\n• Order Management — pengelolaan order: pending, pembayaran, pengemasan, pengiriman, selesai\n• Reporting & Monitoring — monitoring aktivitas transaksi & operasional\n• Continuous Improvement — pengembangan berkelanjutan berdasarkan kebutuhan & masalah yang ditemukan\n\nWhat I Learned:\nProject ini mengajarkan saya bahwa software developer bukan hanya membuat fitur bekerja, tapi memahami permasalahan nyata setelah sistem digunakan. Saya belajar lebih teliti kelola data, pahami alur bisnis, cari akar masalah, debugging, dan kembangkan solusi bernilai. Pengalaman ini juga memperkuat pemahaman continuous improvement karena kebutuhan sistem evolusi seiring operasional.',
-      en: 'Role: Software Developer\n\nContributions (What I Worked On):\n• System Improvement — improving the running system\n• Data Correction & Validation — fixing inaccurate data & improving validation\n• Deposit Transaction Module — developing deposit transaction module\n• Product Health Filter — validation/filtering products by sugar & sodium\n• Transaction Management — developing & refining transaction processes\n• Reporting & Monitoring — developing reporting features\n• Bug Fixing & Debugging — handling issues found during system usage\n• System Maintenance — continuous maintenance & improvement\n• Operational Adaptation — adapting features to operational needs\n\nDevelopment Process:\nAnalyze → Identify Problems → Develop → Test → Improve → Maintain\n\nI start by understanding system problems or new user needs, analyzing existing flows, determining what to fix/develop, implementing, testing, then adjusting based on real-world usage.\n\nKey Features / Development:\n• Deposit Transaction — deposit module for balance management\n• Product Health Filter — filter products by sugar & sodium levels\n• Transaction Management — transaction flow from product selection to status\n• Order Management — order handling: pending, payment, packing, delivery, completed\n• Reporting & Monitoring — transaction & operational activity monitoring\n• Continuous Improvement — ongoing development based on discovered needs & issues\n\nWhat I Learned:\nThis project taught me that being a software developer is not only about making features work, but also about understanding real problems that appear once a system is in use. I learned to be more careful with data, understand business processes, identify root causes, debug existing systems, and develop solutions that provide real value. This experience also strengthened my understanding of continuous improvement, as system requirements evolve with operational needs.'
+      id: 'Sistem ini membantu peternak mengelola kandang lebih efisien melalui pemantauan suhu, kelembaban, dan pencahayaan secara otomatis. Data sensor dikirim ke Firebase untuk monitoring real-time melalui dashboard mobile.',
+      en: 'This system helps farmers manage coops more efficiently through automated monitoring of temperature, humidity, and lighting. Sensor data is sent to Firebase for real-time monitoring via a mobile dashboard.'
     },
-    images: [
-      'images/sm1.webp',
-      'images/sm2.webp',
-      'images/sm3.webp',
-      'images/sm4.webp',
-      'images/sm5.webp',
-      'images/sm6.webp',
-      'images/sm7.webp',
-      'images/sm8.webp',
-      'images/sm9.webp',
-      'images/sm10.webp',
-      'images/sm11.webp',
-      'images/sm12.webp',
-      'images/sm13.webp',
-      'images/sm14.webp',
-      'images/sm15.webp',
-    ],
-    tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'REST API'],
+    images: ['images/iot1.webp','images/iot2.webp','images/iot3.webp'],
+    tools: ['ESP32','Wemos D1 R2','C++','Firebase Realtime Database','DHT22','MQ-135','Water Level Sensor','Relay Module 8ch','DC Fan','Servo Motor','Heating Lamp','Arduino IDE'],
     features: {
-      id: [
-        'System Improvement',
-        'Data Correction & Validation',
-        'Deposit Transaction Module',
-        'Product Health Filter',
-        'Transaction Management',
-        'Reporting & Monitoring',
-        'Bug Fixing & Debugging',
-        'System Maintenance',
-        'Operational Adaptation',
-        'Continuous Improvement'
-      ],
-      en: [
-        'System Improvement',
-        'Data Correction & Validation',
-        'Deposit Transaction Module',
-        'Product Health Filter',
-        'Transaction Management',
-        'Reporting & Monitoring',
-        'Bug Fixing & Debugging',
-        'System Maintenance',
-        'Operational Adaptation',
-        'Continuous Improvement'
-      ]
+      id: ['Pemantauan real-time','Kontrol lingkungan otomatis','Pencatatan data sensor','Dashboard mobile'],
+      en: ['Real-time monitoring','Automated environmental control','Sensor data logging','Mobile dashboard']
+    },
+    link: 'https://github.com/rudiheryansyahr02'
+  },
+  {
+    id: 'pkkmb',
+    category: { id: 'Graphic Design', en: 'Graphic Design' },
+    title: 'Team Creative PKKMB 2023',
+    shortDescription: {
+      id: 'Bergabung sebagai desainer visual yang merancang materi publikasi, konten media sosial, poster, dan identitas visual event PKKMB 2023.',
+      en: 'Joined as a visual designer creating publication materials, social media content, posters, and event visual identity for PKKMB 2023.'
+    },
+    description: {
+      id: 'Bergabung di Team Creative PKKMB 2023 sebagai anggota tim kreatif yang merancang kebutuhan visual acara berskala besar: publikasi, konten media sosial, poster, identitas visual, serta bekerja kolaboratif dalam tim.',
+      en: 'Joined Team Creative PKKMB 2023 as a creative team member designing visual assets for a large-scale event: publications, social media content, posters, visual identity, and collaborative teamwork.'
+    },
+    overview: {
+      id: 'Peran: Anggota Team Creative\n\nKontribusi:\n• Graphic Design, Visual Design, Social Media Design\n• Publication Materials, Poster & Promotional Design\n• Information Design, Visual Assets Creation\n• Creative Collaboration & Teamwork',
+      en: 'Role: Creative Team Member\n\nContributions:\n• Graphic Design, Visual Design, Social Media Design\n• Publication Materials, Poster & Promotional Design\n• Information Design, Visual Assets Creation\n• Creative Collaboration & Teamwork'
+    },
+    images: ['images/pkkmb (3).webp','images/pkkmb (2).webp','images/pkkmb (1).webp','images/3 (1).webp','images/3 (2).webp','images/3 (3).webp'],
+    tools: ['Canva', 'Adobe Photoshop', 'Figma'],
+    features: {
+      id: ['Graphic Design','Visual Design','Social Media Design','Publication Materials','Poster & Promotional Design','Visual Assets Creation','Creative Collaboration','Teamwork'],
+      en: ['Graphic Design','Visual Design','Social Media Design','Publication Materials','Poster & Promotional Design','Visual Assets Creation','Creative Collaboration','Teamwork']
     },
     link: ''
   },
+  {
+    id: 'msib',
+    category: { id: 'Graphic Design', en: 'Graphic Design' },
+    title: 'MSIB Indobot – Digital Design',
+    shortDescription: {
+      id: 'Koleksi karya desain digital (poster, banner, konten media sosial) selama program MSIB Indobot dengan fokus komposisi dan identitas visual.',
+      en: 'A collection of digital design works (posters, banners, social media content) during the MSIB Indobot program, focusing on composition and visual identity.'
+    },
+    description: {
+      id: 'MSIB Indobot – Digital Design adalah kumpulan karya desain digital yang dibuat selama program MSIB Indobot. Mencakup poster, banner, dan konten media sosial dengan memperhatikan komposisi, identitas visual, dan kebutuhan komunikasi digital.',
+      en: 'MSIB Indobot – Digital Design is a collection of digital design works created during the MSIB Indobot program, including posters, banners, and social media content, focusing on composition, visual identity, and digital communication.'
+    },
+    overview: {
+      id: 'Karya-karya ini dibuat dengan sentuhan modern dan berkarakter, mencakup desain poster promosi, banner acara, dan konten media sosial yang konsisten dengan brand guidelines program MSIB Indobot.',
+      en: 'The works feature a modern and distinctive touch, including promotional posters, event banners, and social media content aligned with the MSIB Indobot program brand guidelines.'
+    },
+    images: ['images/msib1.webp','images/msib2 (1).webp','images/msib2 (2).webp','images/msib2 (3).webp'],
+    tools: ['Canva', 'Figma', 'Adobe Photoshop'],
+    features: {
+      id: ['Desain poster','Konten media sosial','Identitas brand','Aset siap cetak'],
+      en: ['Poster design','Social media content','Brand identity','Print-ready assets']
+    },
+    link: 'https://github.com/rudiheryansyahr02'
+  }
 ];
 
-applyLang(currentLang);
-
-/* ===== Form Contact -> WhatsApp ===== */
-if (contactForm && statusMessage) {
-  const waNumber = '62895605976398';
-
-  contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const data = new FormData(contactForm);
-    const name = (data.get('from_name') || '').toString().trim();
-    const email = (data.get('from_email') || '').toString().trim();
-    const phone = (data.get('phone') || '').toString().trim();
-    const subject = (data.get('subject') || '').toString().trim();
-    const message = (data.get('message') || '').toString().trim();
-
-    if (!name || !email || !message) {
-      statusMessage.textContent = statusText[currentLang].empty;
-      statusMessage.className = 'status error';
-      return;
-    }
-
-    const text =
-      `Halo Rudi, saya ingin menghubungi Anda.\n\n` +
-      `*Data Diri*\n` +
-      `Nama: ${name}\n` +
-      `Email: ${email}\n` +
-      (phone ? `No. Telepon: ${phone}\n` : '') +
-      (subject ? `Subjek: ${subject}\n` : '') +
-      `\n*Pesan:*\n${message}`;
-
-    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
-
-    statusMessage.textContent = statusText[currentLang].redirect;
-    statusMessage.className = 'status success';
-    window.open(waUrl, '_blank', 'noopener');
-  });
-}
-
-
-/* ===== Render Project Cards ===== */
+/* ===== RENDER PROJECT CARDS ===== */
 function renderProjectCards() {
-  const container = document.querySelector('#hardSkillsContainer');
+  const container = document.querySelector('#projectGrid') || document.querySelector('#hardSkillsContainer');
   if (!container) return;
 
   container.innerHTML = '';
 
-  // Group projects by category (localized)
-  const categoryGroups = {};
-  projects.forEach((project) => {
-    const catKey = getLocalizedText(project.category);
-    if (!categoryGroups[catKey]) categoryGroups[catKey] = [];
-    categoryGroups[catKey].push(project);
-  });
+  // Check if we're on services section (hardSkillsContainer)
+  const isServicesMode = container.id === 'hardSkillsContainer';
 
-  // Sort categories alphabetically
-  const sortedCategories = Object.keys(categoryGroups).sort();
-
-  sortedCategories.forEach((catName, catIdx) => {
-    // Category header
-    const groupHeader = document.createElement('div');
-    groupHeader.className = 'skill-category-group';
-    groupHeader.innerHTML = `<span class="skill-category-label">${catName}</span>`;
-    container.appendChild(groupHeader);
-
-    const groupProjects = categoryGroups[catName];
-    groupProjects.forEach((project, idx) => {
-      const card = document.createElement('article');
-      card.className = 'project-card animate';
-      card.setAttribute('data-project-id', project.id);
-
-      const imagesHtml = project.images.slice(0, 3)
-        .map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}" loading="lazy">`)
-        .join('');
-
-      const toolsHtml = project.tools
-        .map((tool) => `<span class="tool-chip">${tool}</span>`)
-        .join('');
-
-      const category = getLocalizedText(project.category);
-      const shortDescription = getLocalizedText(project.shortDescription);
-
-      card.innerHTML = `
-        <div class="project-slider" data-slider-index="${idx}">
-          <div class="project-slider-track">${imagesHtml}</div>
-          <button class="slider-btn slider-prev" data-aria-id="Gambar sebelumnya" data-aria-en="Previous image">
-            <i class='bx bx-chevron-left'></i>
-          </button>
-          <button class="slider-btn slider-next" data-aria-id="Gambar berikutnya" data-aria-en="Next image">
-            <i class='bx bx-chevron-right'></i>
-          </button>
-          <div class="slider-dots"></div>
-        </div>
-        <div class="project-content">
-          <span class="project-badge">${category}</span>
-          <h3 class="project-title">${project.title}</h3>
-          <p class="project-description">${shortDescription}</p>
-          <div class="project-tools">${toolsHtml}</div>
-          <br>
-          <a href="project-detail.html?project=${project.id}" class="btn project-btn">
-            <span data-id="Lihat Project" data-en="Views Project">${projectText[currentLang].viewProject}</span> <i class='bx bx-arrow-right'></i>
-          </a>
-        </div>
-      `;
-
-      container.appendChild(card);
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('active');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
-        observer.observe(card);
-      } else {
-        card.classList.add('active');
-      }
+  if (isServicesMode) {
+    // Group by category
+    const groups = {};
+    projects.forEach(p => {
+      const cat = getLocalizedText(p.category);
+      if (!groups[cat]) groups[cat] = [];
+      groups[cat].push(p);
     });
-  });
+    Object.keys(groups).sort().forEach((catName) => {
+      const header = document.createElement('div');
+      header.className = 'skill-category-group';
+      header.innerHTML = `<span class="skill-category-label">${catName}</span>`;
+      container.appendChild(header);
+      groups[catName].forEach((project, idx) => {
+        container.appendChild(createProjectCard(project, idx, true));
+      });
+    });
+  } else {
+    // Projects section — flat grid with filter support
+    projects.forEach((project, idx) => {
+      const card = createProjectCard(project, idx, false);
+      card.dataset.category = getLocalizedText(project.category);
+      container.appendChild(card);
+    });
+  }
 
   initSliders();
+  initProjectFilter();
 }
 
-/* ===== Slider Logic ===== */
-function initSliders() {
-  const sliders = document.querySelectorAll('.project-slider');
-  sliders.forEach((slider) => {
-    const track = slider.querySelector('.project-slider-track');
-    const slides = track.querySelectorAll('img');
-    const prevBtn = slider.querySelector('.slider-prev');
-    const nextBtn = slider.querySelector('.slider-next');
-    const dotsContainer = slider.querySelector('.slider-dots');
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    let autoplayInterval;
+function createProjectCard(project, idx, compact) {
+  const card = document.createElement('article');
+  card.className = 'project-card animate';
+  card.setAttribute('data-project-id', project.id);
 
-    const updateSlider = () => {
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      const dots = dotsContainer.querySelectorAll('.dot');
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
+  const images = project.images.slice(0, 3);
+  const imagesHtml = images.map((img, i) => `<img src="${img}" alt="${project.title} - screenshot ${i + 1}" loading="lazy">`).join('');
+  const toolsHtml = project.tools.slice(0, 5).map(t => `<span class="tool-chip">${t}</span>`).join('');
+  const category = getLocalizedText(project.category);
+  const shortDesc = getLocalizedText(project.shortDescription);
+
+  card.innerHTML = `
+    <div class="project-slider" data-slider-index="${idx}">
+      <div class="project-slider-track">${imagesHtml}</div>
+      <button class="slider-btn slider-prev" aria-label="Previous image"><i class='bx bx-chevron-left'></i></button>
+      <button class="slider-btn slider-next" aria-label="Next image"><i class='bx bx-chevron-right'></i></button>
+      <div class="slider-dots"></div>
+    </div>
+    <div class="project-content">
+      <span class="project-badge">${category}</span>
+      <h3 class="project-title">${project.title}</h3>
+      <p class="project-description">${shortDesc}</p>
+      <div class="project-tools">${toolsHtml}</div>
+      <div style="margin-top:auto;padding-top:1.2rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
+        <button class="btn project-btn open-modal-btn" data-project-id="${project.id}">
+          <span data-id="Lihat Detail" data-en="View Details">${projectText[currentLang].viewProject}</span> <i class='bx bx-info-circle'></i>
+        </button>
+        <a href="project-detail.html?project=${project.id}" class="btn btn-ghost" style="padding:0.7rem 1.4rem;font-size:1.3rem;height:auto;border-radius:3rem;">
+          <span data-id="Detail" data-en="Full Page">Full Page</span> <i class='bx bx-arrow-right'></i>
+        </a>
+      </div>
+    </div>
+  `;
+
+  // Observe for animation
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
       });
-    };
+    }, { threshold: 0.1 });
+    observer.observe(card);
+  } else {
+    card.classList.add('active');
+  }
 
-    const goTo = (index) => {
-      currentIndex = (index + totalSlides) % totalSlides;
-      updateSlider();
-    };
-
-    const next = () => goTo(currentIndex + 1);
-    const prev = () => goTo(currentIndex - 1);
-
-    // Create dots
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement('button');
-      dot.className = 'dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('data-aria-id', `Ke slide ${i + 1}`);
-      dot.setAttribute('data-aria-en', `Go to slide ${i + 1}`);
-      dot.setAttribute('aria-label', `${currentLang === 'id' ? 'Ke slide' : 'Go to slide'} ${i + 1}`);
-      dot.addEventListener('click', () => goTo(i));
-      dotsContainer.appendChild(dot);
-    }
-
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-
-    // Touch swipe support
-    let touchStartX = 0;
-    let touchEndX = 0;
-    slider.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    slider.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        diff > 0 ? next() : prev();
-      }
-    });
-
-    // Keyboard navigation
-    slider.setAttribute('tabindex', '0');
-    slider.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
-    });
-
-    // Autoplay
-    const startAutoplay = () => {
-      autoplayInterval = setInterval(next, 5000);
-    };
-    const stopAutoplay = () => {
-      clearInterval(autoplayInterval);
-    };
-
-    slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
-    slider.addEventListener('touchstart', stopAutoplay, { passive: true });
-    slider.addEventListener('touchend', startAutoplay);
-
-    startAutoplay();
+  // Modal button
+  card.querySelector('.open-modal-btn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const p = projects.find(pr => pr.id === project.id);
+    if (p) openProjectModal(p);
   });
+
+  return card;
 }
 
-/* ===== Project Detail Page Logic ===== */
+/* ===== PROJECT DETAIL PAGE ===== */
+let detailCurrentIndex = 0;
+let detailTotalSlides = 0;
+let detailCleanup = null;
+
 function loadProjectDetail() {
   const params = new URLSearchParams(window.location.search);
   const projectId = params.get('project');
   if (!projectId) return;
 
-  const project = projects.find((p) => p.id === projectId);
+  const project = projects.find(p => p.id === projectId);
   if (!project) return;
 
   const images = project.images || [];
@@ -778,81 +1072,59 @@ function loadProjectDetail() {
   const detailSlider = document.querySelector('.project-detail-slider');
   const detailGallery = document.querySelector('.project-detail-gallery');
   const detailLink = document.querySelector('.project-detail-link');
-  const backProjects = document.querySelector('.back-projects span');
+  const backProjectsSpan = document.querySelector('.back-projects span');
 
   if (detailTitle) detailTitle.textContent = project.title;
   if (detailCategory) detailCategory.textContent = getLocalizedText(project.category);
   if (detailDescription) detailDescription.textContent = getLocalizedText(project.description);
-
-  if (backProjects) {
-    backProjects.textContent = projectText[currentLang].backToProjects;
-  }
+  if (backProjectsSpan) backProjectsSpan.textContent = projectText[currentLang].backToProjects;
 
   if (detailTools) {
-    detailTools.innerHTML = project.tools.map((tool) => `<span class="tool-chip">${tool}</span>`).join('');
+    detailTools.innerHTML = project.tools.map(t => `<span class="tool-chip">${t}</span>`).join('');
   }
-
   if (detailFeatures) {
     const features = project.features[currentLang] || [];
-    detailFeatures.innerHTML = features.map((f) => `<li>${f}</li>`).join('');
+    detailFeatures.innerHTML = features.map(f => `<li>${f}</li>`).join('');
   }
-
   if (detailSlider) {
     const track = detailSlider.querySelector('.project-slider-track');
     const dotsContainer = detailSlider.querySelector('.slider-dots');
-    if (track) {
-      track.innerHTML = images.map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}">`).join('');
-    }
+    if (track) track.innerHTML = images.map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}">`).join('');
     if (dotsContainer) {
       dotsContainer.innerHTML = '';
       images.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('data-aria-id', `Ke slide ${i + 1}`);
-        dot.setAttribute('data-aria-en', `Go to slide ${i + 1}`);
-        dot.setAttribute('aria-label', `${currentLang === 'id' ? 'Ke slide' : 'Go to slide'} ${i + 1}`);
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
         dot.addEventListener('click', () => goToDetailSlide(i));
         dotsContainer.appendChild(dot);
       });
     }
     initDetailSlider();
   }
-
-   if (detailGallery) {
-     const galleryImages = project.gallery && project.gallery.length ? project.gallery : images;
-     detailGallery.innerHTML = galleryImages
-       .map((img) => `<img src="${img}" alt="${project.title} - gallery image" loading="lazy" decoding="async">`)
-       .join('');
-   }
-
+  if (detailGallery) {
+    const galleryImgs = (project.features?.gallery) || images;
+    detailGallery.innerHTML = galleryImgs.map((img, i) => `<img src="${img}" alt="${project.title} gallery ${i + 1}" loading="lazy" decoding="async">`).join('');
+    // Lightbox for gallery
+    detailGallery.querySelectorAll('img').forEach((img, idx) => {
+      img.addEventListener('click', () => openLightbox(galleryImgs, idx));
+    });
+  }
   if (detailLink) {
     if (project.link) {
       detailLink.href = project.link;
-      detailLink.style.display = 'inline-block';
+      detailLink.style.display = 'inline-flex';
     } else {
       detailLink.style.display = 'none';
     }
   }
-
-  // Update section headings
-  const overviewHeading = document.querySelector('.project-detail-section h2[data-id="Ringkasan Project"]');
-  const toolsHeading = document.querySelector('.project-detail-section h2[data-id="Tools & Teknologi"]');
-  const featuresHeading = document.querySelector('.project-detail-section h2[data-id="Fitur Utama"]');
-  const galleryHeading = document.querySelector('.project-detail-section h2[data-id="Galeri Project"]');
-  const visitLink = document.querySelector('.project-detail-link');
-
-  if (overviewHeading) overviewHeading.textContent = currentLang === 'id' ? 'Ringkasan Project' : 'Project Overview';
-  if (toolsHeading) toolsHeading.textContent = currentLang === 'id' ? 'Tools & Teknologi' : 'Tools & Technologies';
-  if (featuresHeading) featuresHeading.textContent = currentLang === 'id' ? 'Fitur Utama' : 'Key Features';
-  if (galleryHeading) galleryHeading.textContent = currentLang === 'id' ? 'Galeri Project' : 'Project Gallery';
-  if (visitLink) visitLink.textContent = currentLang === 'id' ? 'Kunjungi Project' : 'Visit Project';
 }
 
 function initDetailSlider() {
   const sliderEl = document.querySelector('.project-detail-slider');
-  const track = sliderEl ? sliderEl.querySelector('.project-slider-track') : null;
-  const prevBtn = sliderEl ? sliderEl.querySelector('.slider-prev') : null;
-  const nextBtn = sliderEl ? sliderEl.querySelector('.slider-next') : null;
+  const track = sliderEl?.querySelector('.project-slider-track');
+  const prevBtn = sliderEl?.querySelector('.slider-prev');
+  const nextBtn = sliderEl?.querySelector('.slider-next');
   const dots = sliderEl ? sliderEl.querySelectorAll('.dot') : [];
   detailTotalSlides = track ? track.querySelectorAll('img').length : 0;
   detailCurrentIndex = 0;
@@ -869,32 +1141,32 @@ function initDetailSlider() {
   };
 
   if (detailCleanup) detailCleanup();
-
   const onPrev = () => window.goToDetailSlide(detailCurrentIndex - 1);
   const onNext = () => window.goToDetailSlide(detailCurrentIndex + 1);
   const onKeyDown = (e) => {
-    if (e.key === 'ArrowLeft') window.goToDetailSlide(detailCurrentIndex - 1);
-    if (e.key === 'ArrowRight') window.goToDetailSlide(detailCurrentIndex + 1);
+    if (document.getElementById('lightbox')?.hidden !== false) {
+      if (e.key === 'ArrowLeft') window.goToDetailSlide(detailCurrentIndex - 1);
+      if (e.key === 'ArrowRight') window.goToDetailSlide(detailCurrentIndex + 1);
+    }
   };
 
   if (prevBtn) prevBtn.addEventListener('click', onPrev);
   if (nextBtn) nextBtn.addEventListener('click', onNext);
-  if (sliderEl) document.addEventListener('keydown', onKeyDown);
+  document.addEventListener('keydown', onKeyDown);
 
   detailCleanup = () => {
     if (prevBtn) prevBtn.removeEventListener('click', onPrev);
     if (nextBtn) nextBtn.removeEventListener('click', onNext);
-    if (sliderEl) document.removeEventListener('keydown', onKeyDown);
+    document.removeEventListener('keydown', onKeyDown);
   };
 
   updateDetailSlider();
 }
 
-/* ===== Back Navigation ===== */
+/* ===== BACK NAVIGATION ===== */
 function initBackNavigation() {
   const backEl = document.getElementById('backProjects');
   if (!backEl) return;
-
   backEl.addEventListener('click', (e) => {
     const referrer = document.referrer || '';
     try {
@@ -902,15 +1174,34 @@ function initBackNavigation() {
         e.preventDefault();
         window.history.back();
       }
-    } catch (err) {
-      // fallback to anchor href
-    }
+    } catch (_) { /* fallback to anchor */ }
   });
 }
 
-/* ===== Init ===== */
+/* ===== INIT ALL ===== */
+applyLang(currentLang);
+initScrollProgress();
+initNavigation();
+initNavbarScroll();
+initActiveNav();
+initScrollReveal();
+initCounters();
+initBackToTop();
+initLightbox();
+initProjectModal();
+initCommandPalette();
+initGlobalKeyboard();
+initContactForm();
+initTimelineLightbox();
+initReadMore();
+
 if (!window.location.pathname.includes('project-detail.html')) {
   renderProjectCards();
+  initTypingEffect();
+  initHeroParticles();
+  // Defer cursor to avoid layout thrash
+  requestAnimationFrame(initCursor);
+} else {
+  loadProjectDetail();
+  initBackNavigation();
 }
-loadProjectDetail();
-initBackNavigation();
