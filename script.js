@@ -701,40 +701,35 @@ const projects = [
       en: 'On the admin side, the system provides a dashboard for managing rooms, locations, facilities, room photos, seasonal pricing, breakfast options, bookings, payments, and transaction reports, including revenue monitoring and booking summaries.'
     },
     images: [
-      'images/gh1.webp'
+      'images/gh1.webp','images/porto1 (1).webp','images/porto1 (7).webp'
     ],
     tools: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Google OAuth', 'PhpSpreadsheet'],
     features: {
       id: ['Booking kamar online','Kalender ketersediaan','Detail kamar & galeri','Manajemen customer','Login Google OAuth','Layanan sarapan','Pembayaran transfer bank','Upload bukti bayar','Verifikasi pembayaran','Manajemen status booking','Dashboard admin','Monitoring pendapatan','Laporan booking'],
       en: ['Online room booking','Availability calendar','Room details & gallery','Customer management','Google OAuth login','Breakfast services','Bank transfer payment','Payment proof upload','Payment verification','Booking status management','Admin dashboard','Revenue monitoring','Booking reports'],
       gallery: [
-        'images/porto1 (1).webp','images/porto1 (15).webp','images/porto1 (9).webp',
-        'images/porto1 (16).webp','images/porto1 (13).webp','images/porto1 (8).webp',
-        'images/porto1 (7).webp','images/porto1 (6).webp','images/porto1 (4).webp',
-        'images/porto1 (3).webp','images/porto1 (2).webp','images/porto1 (21).webp',
+        'images/gh1.webp','images/porto1 (1).webp','images/porto1 (7).webp'
       ]
     }
   },
   {
     id: 'foodcourt',
-    category: { id: 'Fullstack Development', en: 'Fullstack Development' },
-    title: 'SIM Foodcourt',
+    category: { id: 'Web Development', en: 'Web Development' },
+    title: 'Foodcourt Multi-Tenant System',
     shortDescription: {
       id: 'Sistem informasi manajemen foodcourt berbasis web untuk mengelola menu, transaksi, laporan, dan operasional kantin secara digital.',
       en: 'A web-based foodcourt management information system to handle menu, transactions, reports, and canteen operations digitally.'
     },
     description: {
-      id: 'SIM Foodcourt adalah sistem informasi manajemen berbasis web yang dikembangkan untuk mendukung operasional foodcourt secara digital. Sistem mencakup manajemen menu, transaksi penjualan, pengelolaan data tenant, laporan keuangan, dan monitoring aktivitas foodcourt secara real-time.',
-      en: 'SIM Foodcourt is a web-based management information system developed to support digital foodcourt operations. The system includes menu management, sales transactions, tenant data management, financial reports, and real-time foodcourt activity monitoring.'
+      id: 'Foodcourt Multi-Tenant System adalah sistem informasi manajemen berbasis web yang dikembangkan untuk mendukung operasional foodcourt secara digital. Sistem mencakup manajemen menu, transaksi penjualan, pengelolaan data tenant, laporan keuangan, dan monitoring aktivitas foodcourt secara real-time.',
+      en: 'Foodcourt Multi-Tenant System is a web-based management information system developed to support digital foodcourt operations. The system includes menu management, sales transactions, tenant data management, financial reports, and real-time foodcourt activity monitoring.'
     },
     overview: {
       id: 'Peran: Fullstack Developer\n\nSistem ini dibangun untuk mempermudah pengelolaan foodcourt secara terpusat. Dari manajemen menu dan transaksi harian hingga pelaporan keuangan, semuanya terintegrasi dalam satu platform web yang mudah digunakan.',
       en: 'Role: Fullstack Developer\n\nThis system was built to simplify centralized foodcourt management. From menu management and daily transactions to financial reporting, everything is integrated in one easy-to-use web platform.'
     },
     images: [
-      'images/fc.webp','images/fc (1).webp','images/fc (2).webp',
-      'images/fc (3).webp','images/fc (4).webp','images/fc (5).webp',
-      'images/fc (6).webp','images/fc (7).webp'
+      'images/fc.webp','images/fc (1).webp','images/fc (2).webp'
     ],
     tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'REST API'],
     features: {
@@ -746,24 +741,21 @@ const projects = [
   {
     id: 'syifamart',
     category: { id: 'Web Development', en: 'Web Development' },
-    title: 'SIM Syifamart',
+    title: 'Syifamart Retail System',
     shortDescription: {
       id: 'Project web development dengan improvement berkelanjutan — deposit transaction, product health filter, dan optimasi sistem operasional yang terus berkembang.',
       en: 'A web development project with continuous improvement — deposit transactions, product health filter, and ongoing operational system optimization.'
     },
     description: {
-      id: 'SIM Syifamart adalah project web development yang saya kembangkan dan lakukan improvement secara bertahap. Saya tidak hanya membangun fitur baru, tetapi juga mengevaluasi sistem yang sudah berjalan, memperbaiki data, serta menyesuaikan sistem berdasarkan kebutuhan operasional yang terus berkembang.',
-      en: 'SIM Syifamart is a web development project where I continuously improved and developed an existing system based on real operational needs. My work included building new features, evaluating existing processes, correcting data, and adapting the application as new requirements emerged.'
+      id: 'Syifamart Retail System adalah project web development yang saya kembangkan dan lakukan improvement secara bertahap. Saya tidak hanya membangun fitur baru, tetapi juga mengevaluasi sistem yang sudah berjalan, memperbaiki data, serta menyesuaikan sistem berdasarkan kebutuhan operasional yang terus berkembang.',
+      en: 'Syifamart Retail System is a web development project where I continuously improved and developed an existing system based on real operational needs. My work included building new features, evaluating existing processes, correcting data, and adapting the application as new requirements emerged.'
     },
     overview: {
       id: 'Peran: Software Developer\n\nKontribusi:\n• System Improvement\n• Data Correction & Validation\n• Deposit Transaction Module\n• Product Health Filter (gula & natrium)\n• Transaction Management\n• Reporting & Monitoring\n• Bug Fixing & Debugging\n• Continuous Improvement\n\nProses: Analyze → Identify → Develop → Test → Improve → Maintain',
       en: 'Role: Software Developer\n\nContributions:\n• System Improvement\n• Data Correction & Validation\n• Deposit Transaction Module\n• Product Health Filter (sugar & sodium)\n• Transaction Management\n• Reporting & Monitoring\n• Bug Fixing & Debugging\n• Continuous Improvement\n\nProcess: Analyze → Identify → Develop → Test → Improve → Maintain'
     },
     images: [
-      'images/sm1.webp','images/sm2.webp','images/sm3.webp','images/sm4.webp',
-      'images/sm5.webp','images/sm6.webp','images/sm7.webp','images/sm8.webp',
-      'images/sm9.webp','images/sm10.webp','images/sm11.webp','images/sm12.webp',
-      'images/sm13.webp','images/sm14.webp','images/sm15.webp',
+      'images/sm.webp','images/sm (1).webp','images/sm (2).webp'
     ],
     tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'REST API'],
     features: {
@@ -773,50 +765,50 @@ const projects = [
     link: ''
   },
   {
-    id: 'santap',
+    id: 'dashboard',
     category: { id: 'Fullstack Development', en: 'Fullstack Development' },
-    title: 'Santap.in',
+    title: 'Qatrindo Dashboard System',
     shortDescription: {
-      id: 'Website restoran interaktif dengan desain responsif untuk menampilkan menu, kategori makanan, dan informasi produk.',
-      en: 'An interactive restaurant website with responsive design to showcase menus, food categories, and product details.'
+      id: 'Dashboard internal multi-unit Qatrindo untuk monitoring operasional dan keuangan lintas unit usaha (foodcourt, syifamart, konveksi, toko bangunan, guest house).',
+      en: 'An internal multi-unit Qatrindo dashboard for operational and financial monitoring across business units (foodcourt, syifamart, konveksi, building supply, guest house).'
     },
     description: {
-      id: 'Santap.in merupakan website restoran interaktif yang dirancang untuk memberikan pengalaman pengguna yang mudah dalam melihat informasi restoran, menu, kategori makanan, dan detail produk. Website menggunakan desain responsif untuk kenyamanan di berbagai perangkat.',
-      en: 'Santap.in is an interactive restaurant website designed to provide users with an easy way to explore restaurant information, menus, food categories, and product details, with a responsive design for comfort across devices.'
+      id: 'Qatrindo Dashboard System adalah aplikasi web internal berbasis PHP native MVC yang digunakan untuk memonitor operasional dan keuangan beberapa unit usaha Qatrindo sekaligus. Sistem terhubung ke 8 basis data (dashboard, absensi, foodcourt, konveksi, syifamart, guest house, toko bangunan, FadiPay) dan menampilkan total pendapatan per unit per tanggal, perbandingan pendapatan antarperiode lintas unit, rekap target pencapaian, piutang, serta kas biro (jurnal harian).',
+      en: 'Qatrindo Dashboard System is an internal web application built with native PHP MVC to monitor operations and finances across multiple Qatrindo business units at once. It connects to 8 databases (dashboard, absensi, foodcourt, konveksi, syifamart, guest house, toko bangunan, FadiPay) and displays total revenue per unit per date, cross-unit revenue comparison, achievement target recap, receivables, and office cash (daily journal).'
     },
     overview: {
-      id: 'Project ini menggabungkan frontend responsif dengan sistem backend yang mendukung pengelolaan data. Antarmuka dirancang agar pengguna dapat menemukan informasi menu dengan cepat dan mudah.',
-      en: 'This project combines a responsive frontend with a backend system supporting data management. The interface is designed to help users quickly and easily find menu information.'
+      id: 'Peran: Fullstack Developer\n\nModul utama:\n• Dashboard monitoring total pendapatan 5 unit per tanggal\n• Master Target Pencapaian per unit (grafik Highcharts + status Tercapai/On Progress)\n• Perbandingan pendapatan antarperiode lintas unit (Highcharts)\n• Piutang per unit\n• Kas Biro / Jurnal Harian (import & export Excel/PDF)\n• Master Akun & Master Unit (soft delete)\n• Risalah Rapat (multi-PIC, export PDF/Excel)\n• SOP & Kebijakan (upload PDF, verifikasi pembayaran)\n\nTeknologi: PHP native MVC, MySQL 8, Bootstrap, jQuery + DataTables, Chart.js/Highcharts, Composer (mPDF, PhpSpreadsheet, Dompdf), auth via tabel admins/master_pegawai (bcrypt), deployment Docker + Ansible + Jenkins.',
+      en: 'Role: Fullstack Developer\n\nMain modules:\n• Dashboard monitoring total revenue of 5 units per date\n• Achievement target per unit (Highcharts chart + Tercapai/On Progress status)\n• Cross-period revenue comparison (Highcharts)\n• Receivables per unit\n• Office Cash / Daily Journal (import & export Excel/PDF)\n• Master Account & Master Unit (soft delete)\n• Meeting Minutes (multi-PIC, PDF/Excel export)\n• SOP & Policies (PDF upload, payment verification)\n\nTech: native PHP MVC, MySQL 8, Bootstrap, jQuery + DataTables, Chart.js/Highcharts, Composer (mPDF, PhpSpreadsheet, Dompdf), auth via admins/master_pegawai tables (bcrypt), deployment Docker + Ansible + Jenkins.'
     },
-    images: ['images/a2.webp','images/porto1 (1).webp','images/porto1 (2).webp'],
-    tools: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    images: ['images/db (1).webp','images/db (3).webp','images/db (2).webp', 'images/db (4).webp'],
+    tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'jQuery', 'DataTables', 'Highcharts', 'Composer', 'Docker', 'Ansible'],
     features: {
-      id: ['Desain website responsif','Tampilan menu interaktif','Sistem informasi restoran','Integrasi database'],
-      en: ['Responsive website design','Interactive menu display','Restaurant information system','Database integration']
+      id: ['Dashboard monitoring multi-unit','Target pencapaian per unit','Perbandingan pendapatan antarperiode','Kas biro / jurnal harian (import & export)','Master akun & unit','Risalah rapat (multi-PIC)','SOP & kebijakan (upload PDF)','Piutang per unit','Grafik Highcharts/Chart.js','Auth bcrypt + session','Deployment Docker + Ansible'],
+      en: ['Multi-unit monitoring dashboard','Achievement target per unit','Cross-period revenue comparison','Office cash / daily journal (import & export)','Master account & unit','Meeting minutes (multi-PIC)','SOP & policies (PDF upload)','Receivables per unit','Highcharts/Chart.js charts','Bcrypt auth + session','Docker + Ansible deployment']
     },
     link: 'https://github.com/rudiheryansyahr02'
   },
   {
-    id: 'caffera',
-    category: { id: 'Web Development', en: 'Web Development' },
-    title: 'Cafféra – Coffee Shop Profile',
+    id: 'absen',
+    category: { id: 'Fullstack Development', en: 'Fullstack Development' },
+    title: 'Face Attendance System',
     shortDescription: {
-      id: 'Website profil coffee shop dengan layout responsif untuk menampilkan menu, galeri, dan informasi kontak secara visual menarik.',
-      en: 'A coffee shop profile website with responsive layout to showcase menu, gallery, and contact info in a visually appealing way.'
+      id: 'Sistem absensi karyawan berbasis foto dan GPS untuk memantau kehadiran, lembur, dan pengajuan izin/cuti secara real-time.',
+      en: 'An employee attendance system based on photo and GPS for real-time monitoring of attendance, overtime, and leave requests.'
     },
     description: {
-      id: 'Cafféra adalah website profil coffee shop yang dirancang untuk menampilkan informasi bisnis secara modern dan menarik. Website menyediakan informasi menu, galeri, serta informasi kontak dengan layout responsif yang berfokus pada kenyamanan pengguna.',
-      en: 'Cafféra is a coffee shop profile website designed to present business information in a modern and engaging way, with menu information, a gallery, and contact details through a responsive layout focused on user experience.'
+      id: 'Face Attendance System (SIM Absensi Qatrindo) adalah aplikasi web internal berbasis PHP native MVC untuk pencatatan kehadiran karyawan. Absensi dilakukan dengan foto (base64) dan koordinat GPS yang divalidasi terhadap lokasi kerja (Haversine) dalam radius tertentu, lalu disimpan beserta status (tepat waktu/telat) dan shift yang berlaku. Sistem juga mencakup absensi kegiatan (sholat fardu + bukti), lembur dengan approval, pengajuan izin/cuti 2 tingkat (PJ → HRD), jadwal shift, dan rekap per pegawai/tanggal.',
+      en: 'Face Attendance System (SIM Qatrindo Presensi) is an internal web application built with native PHP MVC for employee attendance recording. Attendance is captured with a photo (base64) and GPS coordinates validated against the work location (Haversine) within a defined radius, then stored with status (on time/late) and the applicable shift. The system also covers activity attendance (daily prayers + proof), overtime with approval, 2-level leave requests (supervisor → HR), shift scheduling, and per-employee/date recap.'
     },
     overview: {
-      id: 'Website ini dibangun dengan fokus pada presentasi visual yang elegan dan pengalaman pengguna yang nyaman. Layout responsif memastikan tampilan optimal di berbagai perangkat, dari desktop hingga mobile.',
-      en: 'Built with a focus on elegant visual presentation and comfortable user experience. The responsive layout ensures optimal display across various devices, from desktop to mobile.'
+      id: 'Peran: Fullstack Developer\n\nModul utama:\n• Absensi masuk & pulang (foto + GPS + validasi lokasi Haversine)\n• Absensi kegiatan (sholat fardu + bukti foto)\n• Lembur (pengajuan + approval via Telegram)\n• Pengajuan izin/cuti (2 tingkat: PJ → HRD)\n• Jadwal shift (impor/ekspor Excel)\n• Master: pegawai, lokasi, shift, absensi, pengajuan, perusahaan, atasan langsung\n• Rekap absensi per pegawai/tanggal + dashboard monitoring\n• Sinkronisasi dua arah dengan HRD (hrd_investasi)\n\nIntegrasi: file center (unggah foto via cURL), Telegram Bot API (approval inline keyboard), database hrd_investasi. Teknologi: PHP native MVC, MySQL 8 + MySQL 5.7, Bootstrap, jQuery, SweetAlert2, deployment Docker + Ansible + Nginx.',
+      en: 'Role: Fullstack Developer\n\nMain modules:\n• Clock-in & clock-out (photo + GPS + Haversine location validation)\n• Activity attendance (daily prayers + photo proof)\n• Overtime (request + approval via Telegram)\n• Leave requests (2 levels: supervisor → HR)\n• Shift scheduling (Excel import/export)\n• Master: employee, location, shift, attendance, request, company, direct supervisor\n• Attendance recap per employee/date + monitoring dashboard\n• Two-way sync with HRD (hrd_investasi)\n\nIntegrations: file center (photo upload via cURL), Telegram Bot API (inline-keyboard approval), hrd_investasi database. Tech: native PHP MVC, MySQL 8 + MySQL 5.7, Bootstrap, jQuery, SweetAlert2, deployment Docker + Ansible + Nginx.'
     },
-    images: ['images/a1.webp','images/porto1 (7).webp','images/porto1 (8).webp'],
-    tools: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+    images: ['images/absen (2).webp','images/absen (1).webp','images/absen (3).webp','images/absen (4).webp'],
+    tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'jQuery', 'SweetAlert2', 'Telegram Bot API', 'cURL', 'Docker', 'Ansible'],
     features: {
-      id: ['Layout responsif','Showcase menu','Bagian galeri','Integrasi kontak'],
-      en: ['Responsive layout','Menu showcase','Gallery section','Contact integration']
+      id: ['Absensi masuk & pulang (foto + GPS)','Validasi lokasi Haversine + radius','Shift reguler & shift','Absensi kegiatan (sholat fardu + bukti)','Lembur + approval Telegram','Pengajuan izin/cuti 2 tingkat','Jadwal shift (impor/ekspor Excel)','Rekap per pegawai/tanggal','Sinkronisasi HRD','Notifikasi Telegram','Dashboard monitoring'],
+      en: ['Clock-in & clock-out (photo + GPS)','Haversine location validation + radius','Regular & shift schedules','Activity attendance (prayers + proof)','Overtime + Telegram approval','2-level leave requests','Shift scheduling (Excel import/export)','Per-employee/date recap','HRD sync','Telegram notifications','Monitoring dashboard']
     },
     link: 'https://github.com/rudiheryansyahr02'
   },
