@@ -1,5 +1,5 @@
 /* Boxicons subset - only used icons (46). Generated for Rudi portfolio. */
-@font-face{font-family:boxicons;font-weight:400;font-style:normal;font-display:swap;src:url('boxicons-subset.woff2') format('woff2')}
+@font-face{font-family:boxicons;font-weight:400;font-style:normal;font-display:swap;src:url('boxicons-subset.woff2?v=2') format('woff2')}
 .bx{font-family:boxicons!important;font-weight:400;font-style:normal;font-variant:normal;line-height:1;text-rendering:auto;display:inline-block;text-transform:none;speak:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 .bx-arrow-back:before{content:"\e9b4"}
 .bx-book-open:before{content:"\e9ef"}
