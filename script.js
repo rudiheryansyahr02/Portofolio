@@ -947,7 +947,7 @@ function createProjectCard(project, idx, compact) {
           <span data-id="Lihat Detail" data-en="View Details">${projectText[currentLang].viewProject}</span> <i class='bx bx-info-circle'></i>
         </button>
         <a href="project-detail.html?project=${project.id}" class="btn btn-ghost" style="padding:0.7rem 1.4rem;font-size:1.3rem;height:auto;border-radius:3rem;">
-          <span data-id="Detail" data-en="Full Page">Full Page</span> <i class='bx bx-arrow-right'></i>
+          <span data-id="Detail" data-en="Full Page">Full Page</span> <i class='bx bx-right-arrow'></i>
         </a>
       </div>
     </div>

@@ -183,8 +183,8 @@ span.orange, h1 span:last-child, h2 span, .hero-name span,
   right: 0;
   padding: 1.8rem 6%;
   background: rgba(8, 8, 8, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
   display: flex;
   justify-content: space-between;
