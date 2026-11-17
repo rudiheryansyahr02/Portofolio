@@ -751,8 +751,8 @@ const projects = [
       en: 'Syifamart Retail System is a web development project where I continuously improved and developed an existing system based on real operational needs. My work included building new features, evaluating existing processes, correcting data, and adapting the application as new requirements emerged.'
     },
     overview: {
-      id: 'Peran: Software Developer\n\nKontribusi:\n• System Improvement\n• Data Correction & Validation\n• Deposit Transaction Module\n• Product Health Filter (gula & natrium)\n• Transaction Management\n• Reporting & Monitoring\n• Bug Fixing & Debugging\n• Continuous Improvement\n\nProses: Analyze → Identify → Develop → Test → Improve → Maintain',
-      en: 'Role: Software Developer\n\nContributions:\n• System Improvement\n• Data Correction & Validation\n• Deposit Transaction Module\n• Product Health Filter (sugar & sodium)\n• Transaction Management\n• Reporting & Monitoring\n• Bug Fixing & Debugging\n• Continuous Improvement\n\nProcess: Analyze → Identify → Develop → Test → Improve → Maintain'
+      id: 'Peran: Web Developer\n\nKontribusi:\n• System Improvement\n• Data Correction & Validation\n• Deposit Transaction Module\n• Product Health Filter (gula & natrium)\n• Transaction Management\n• Reporting & Monitoring\n• Bug Fixing & Debugging\n• Continuous Improvement\n\nProses: Analyze → Identify → Develop → Test → Improve → Maintain',
+      en: 'Role: Web Developer\n\nContributions:\n• System Improvement\n• Data Correction & Validation\n• Deposit Transaction Module\n• Product Health Filter (sugar & sodium)\n• Transaction Management\n• Reporting & Monitoring\n• Bug Fixing & Debugging\n• Continuous Improvement\n\nProcess: Analyze → Identify → Develop → Test → Improve → Maintain'
     },
     images: [
       'images/sm.webp','images/sm (1).webp','images/sm (2).webp'
@@ -786,11 +786,11 @@ const projects = [
       id: ['Dashboard monitoring multi-unit','Target pencapaian per unit','Perbandingan pendapatan antarperiode','Kas biro / jurnal harian (import & export)','Master akun & unit','Risalah rapat (multi-PIC)','SOP & kebijakan (upload PDF)','Piutang per unit','Grafik Highcharts/Chart.js','Auth bcrypt + session','Deployment Docker + Ansible'],
       en: ['Multi-unit monitoring dashboard','Achievement target per unit','Cross-period revenue comparison','Office cash / daily journal (import & export)','Master account & unit','Meeting minutes (multi-PIC)','SOP & policies (PDF upload)','Receivables per unit','Highcharts/Chart.js charts','Bcrypt auth + session','Docker + Ansible deployment']
     },
-    link: 'https://github.com/rudiheryansyahr02'
+    link: ''
   },
   {
     id: 'absen',
-    category: { id: 'Fullstack Development', en: 'Fullstack Development' },
+    category: { id: 'Web Development', en: 'Web Development' },
     title: 'Face Attendance System',
     shortDescription: {
       id: 'Sistem absensi karyawan berbasis foto dan GPS untuk memantau kehadiran, lembur, dan pengajuan izin/cuti secara real-time.',
@@ -801,8 +801,8 @@ const projects = [
       en: 'Face Attendance System (SIM Qatrindo Presensi) is an internal web application built with native PHP MVC for employee attendance recording. Attendance is captured with a photo (base64) and GPS coordinates validated against the work location (Haversine) within a defined radius, then stored with status (on time/late) and the applicable shift. The system also covers activity attendance (daily prayers + proof), overtime with approval, 2-level leave requests (supervisor → HR), shift scheduling, and per-employee/date recap.'
     },
     overview: {
-      id: 'Peran: Fullstack Developer\n\nModul utama:\n• Absensi masuk & pulang (foto + GPS + validasi lokasi Haversine)\n• Absensi kegiatan (sholat fardu + bukti foto)\n• Lembur (pengajuan + approval via Telegram)\n• Pengajuan izin/cuti (2 tingkat: PJ → HRD)\n• Jadwal shift (impor/ekspor Excel)\n• Master: pegawai, lokasi, shift, absensi, pengajuan, perusahaan, atasan langsung\n• Rekap absensi per pegawai/tanggal + dashboard monitoring\n• Sinkronisasi dua arah dengan HRD (hrd_investasi)\n\nIntegrasi: file center (unggah foto via cURL), Telegram Bot API (approval inline keyboard), database hrd_investasi. Teknologi: PHP native MVC, MySQL 8 + MySQL 5.7, Bootstrap, jQuery, SweetAlert2, deployment Docker + Ansible + Nginx.',
-      en: 'Role: Fullstack Developer\n\nMain modules:\n• Clock-in & clock-out (photo + GPS + Haversine location validation)\n• Activity attendance (daily prayers + photo proof)\n• Overtime (request + approval via Telegram)\n• Leave requests (2 levels: supervisor → HR)\n• Shift scheduling (Excel import/export)\n• Master: employee, location, shift, attendance, request, company, direct supervisor\n• Attendance recap per employee/date + monitoring dashboard\n• Two-way sync with HRD (hrd_investasi)\n\nIntegrations: file center (photo upload via cURL), Telegram Bot API (inline-keyboard approval), hrd_investasi database. Tech: native PHP MVC, MySQL 8 + MySQL 5.7, Bootstrap, jQuery, SweetAlert2, deployment Docker + Ansible + Nginx.'
+      id: 'Peran: Web Developer\n\nModul utama:\n• Absensi masuk & pulang (foto + GPS + validasi lokasi Haversine)\n• Absensi kegiatan (sholat fardu + bukti foto)\n• Lembur (pengajuan + approval via Telegram)\n• Pengajuan izin/cuti (2 tingkat: PJ → HRD)\n• Jadwal shift (impor/ekspor Excel)\n• Master: pegawai, lokasi, shift, absensi, pengajuan, perusahaan, atasan langsung\n• Rekap absensi per pegawai/tanggal + dashboard monitoring\n• Sinkronisasi dua arah dengan HRD (hrd_investasi)\n\nIntegrasi: file center (unggah foto via cURL), Telegram Bot API (approval inline keyboard), database hrd_investasi. Teknologi: PHP native MVC, MySQL 8 + MySQL 5.7, Bootstrap, jQuery, SweetAlert2, deployment Docker + Ansible + Nginx.',
+      en: 'Role: Web Developer\n\nMain modules:\n• Clock-in & clock-out (photo + GPS + Haversine location validation)\n• Activity attendance (daily prayers + photo proof)\n• Overtime (request + approval via Telegram)\n• Leave requests (2 levels: supervisor → HR)\n• Shift scheduling (Excel import/export)\n• Master: employee, location, shift, attendance, request, company, direct supervisor\n• Attendance recap per employee/date + monitoring dashboard\n• Two-way sync with HRD (hrd_investasi)\n\nIntegrations: file center (photo upload via cURL), Telegram Bot API (inline-keyboard approval), hrd_investasi database. Tech: native PHP MVC, MySQL 8 + MySQL 5.7, Bootstrap, jQuery, SweetAlert2, deployment Docker + Ansible + Nginx.'
     },
     images: ['images/absen (2).webp','images/absen (1).webp','images/absen (3).webp','images/absen (4).webp'],
     tools: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'jQuery', 'SweetAlert2', 'Telegram Bot API', 'cURL', 'Docker', 'Ansible'],
@@ -810,7 +810,7 @@ const projects = [
       id: ['Absensi masuk & pulang (foto + GPS)','Validasi lokasi Haversine + radius','Shift reguler & shift','Absensi kegiatan (sholat fardu + bukti)','Lembur + approval Telegram','Pengajuan izin/cuti 2 tingkat','Jadwal shift (impor/ekspor Excel)','Rekap per pegawai/tanggal','Sinkronisasi HRD','Notifikasi Telegram','Dashboard monitoring'],
       en: ['Clock-in & clock-out (photo + GPS)','Haversine location validation + radius','Regular & shift schedules','Activity attendance (prayers + proof)','Overtime + Telegram approval','2-level leave requests','Shift scheduling (Excel import/export)','Per-employee/date recap','HRD sync','Telegram notifications','Monitoring dashboard']
     },
-    link: 'https://github.com/rudiheryansyahr02'
+    link: ''
   },
   {
     id: 'brocass',
@@ -834,7 +834,7 @@ const projects = [
       id: ['Pemantauan real-time','Kontrol lingkungan otomatis','Pencatatan data sensor','Dashboard mobile'],
       en: ['Real-time monitoring','Automated environmental control','Sensor data logging','Mobile dashboard']
     },
-    link: 'https://github.com/rudiheryansyahr02'
+    link: ''
   },
   {
     id: 'pkkmb',
@@ -882,7 +882,7 @@ const projects = [
       id: ['Desain poster','Konten media sosial','Identitas brand','Aset siap cetak'],
       en: ['Poster design','Social media content','Brand identity','Print-ready assets']
     },
-    link: 'https://github.com/rudiheryansyahr02'
+    link: ''
   }
 ];
 
