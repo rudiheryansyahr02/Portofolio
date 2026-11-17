@@ -841,22 +841,22 @@ const projects = [
     category: { id: 'Graphic Design', en: 'Graphic Design' },
     title: 'Team Creative PKKMB 2023',
     shortDescription: {
-      id: 'Bergabung sebagai desainer visual yang merancang materi publikasi, konten media sosial, poster, dan identitas visual event PKKMB 2023.',
-      en: 'Joined as a visual designer creating publication materials, social media content, posters, and event visual identity for PKKMB 2023.'
+      id: 'Bergabung di divisi kreatif PKKMB 2023 Universitas Harkat Negeri: merancang publikasi, konten media sosial, poster, banner, dan identitas visual acara berskala besar.',
+      en: 'Joined the creative division of PKKMB 2023 at Universitas Harkat Negeri: designing publications, social media content, posters, banners, and visual identity for a large-scale event.'
     },
     description: {
-      id: 'Bergabung di Team Creative PKKMB 2023 sebagai anggota tim kreatif yang merancang kebutuhan visual acara berskala besar: publikasi, konten media sosial, poster, identitas visual, serta bekerja kolaboratif dalam tim.',
-      en: 'Joined Team Creative PKKMB 2023 as a creative team member designing visual assets for a large-scale event: publications, social media content, posters, visual identity, and collaborative teamwork.'
+      id: 'Team Creative PKKMB 2023 adalah pengalaman saya sebagai anggota divisi kreatif dalam panitia Pengenalan Kehidupan Kampus Mahasiswa Baru (PKKMB) 2023 di Universitas Harkat Negeri. Saya merancang kebutuhan visual acara berskala besar: materi publikasi, konten media sosial, poster, banner, dan identitas visual event, dengan fokus pada komunikasi informasi melalui visual yang menarik dan konsisten dengan tema acara.',
+      en: 'Team Creative PKKMB 2023 was my experience as a member of the creative division in the committee of Pengenalan Kehidupan Kampus Mahasiswa Baru (PKKMB) 2023 at Universitas Harkat Negeri. I designed visual assets for a large-scale event: publication materials, social media content, posters, banners, and event visual identity, focusing on communicating information through engaging visuals consistent with the event theme.'
     },
     overview: {
-      id: 'Peran: Anggota Team Creative\n\nKontribusi:\n• Graphic Design, Visual Design, Social Media Design\n• Publication Materials, Poster & Promotional Design\n• Information Design, Visual Assets Creation\n• Creative Collaboration & Teamwork',
-      en: 'Role: Creative Team Member\n\nContributions:\n• Graphic Design, Visual Design, Social Media Design\n• Publication Materials, Poster & Promotional Design\n• Information Design, Visual Assets Creation\n• Creative Collaboration & Teamwork'
+      id: 'Peran: Anggota Team Creative (Divisi Kreatif)\nWaktu: Agustus 2023\n\nKontribusi:\n• Graphic Design & Visual Design untuk kebutuhan acara\n• Social Media Design (konten Instagram/feed & story)\n• Poster & Banner (promosi acara, rundown, informasi)\n• Publication Materials (brosur, pamflet, materi cetak)\n• Identitas visual event (konsistensi tema & brand acara)\n• Creative Collaboration & Teamwork dengan divisi lain\n\nPengalaman ini melatih kreativitas, kerja sama tim, dan kemampuan menyampaikan informasi melalui visual.',
+      en: 'Role: Creative Team Member (Creative Division)\nPeriod: August 2023\n\nContributions:\n• Graphic Design & Visual Design for event needs\n• Social Media Design (Instagram feed & story content)\n• Poster & Banner (event promotion, rundown, information)\n• Publication Materials (brochures, flyers, print assets)\n• Event visual identity (theme & brand consistency)\n• Creative Collaboration & Teamwork with other divisions\n\nThis experience trained creativity, teamwork, and the ability to communicate through visuals.'
     },
-    images: ['images/pkkmb (3).webp','images/pkkmb (2).webp','images/pkkmb (1).webp','images/3 (1).webp','images/3 (2).webp','images/3 (3).webp'],
+    images: ['images/pkkmb.webp','images/pkkmb (3).webp','images/pkkmb (2).webp','images/pkkmb (1).webp','images/3 (1).webp','images/3 (2).webp','images/3 (3).webp'],
     tools: ['Canva', 'Adobe Photoshop', 'Figma'],
     features: {
-      id: ['Graphic Design','Visual Design','Social Media Design','Publication Materials','Poster & Promotional Design','Visual Assets Creation','Creative Collaboration','Teamwork'],
-      en: ['Graphic Design','Visual Design','Social Media Design','Publication Materials','Poster & Promotional Design','Visual Assets Creation','Creative Collaboration','Teamwork']
+      id: ['Graphic Design','Visual Design','Social Media Design','Publication Materials','Poster & Banner Design','Identitas Visual Event','Creative Collaboration','Teamwork'],
+      en: ['Graphic Design','Visual Design','Social Media Design','Publication Materials','Poster & Banner Design','Event Visual Identity','Creative Collaboration','Teamwork']
     },
     link: ''
   },
