@@ -1018,7 +1018,11 @@ function loadProjectDetail() {
   if (detailSlider) {
     const track = detailSlider.querySelector('.project-slider-track');
     const dotsContainer = detailSlider.querySelector('.slider-dots');
-    if (track) track.innerHTML = images.map((img, i) => `<img src="${img}" alt="${project.title} - Image ${i + 1}">`).join('');
+    if (track) track.innerHTML = images.map((img, i) => {
+      const loading = i === 0 ? 'eager' : 'lazy';
+      const fetchprio = i === 0 ? ' fetchpriority="high"' : '';
+      return `<img src="${img}" alt="${project.title} - Image ${i + 1}" loading="${loading}" decoding="async"${fetchprio}>`;
+    }).join('');
     if (dotsContainer) {
       dotsContainer.innerHTML = '';
       images.forEach((_, i) => {
