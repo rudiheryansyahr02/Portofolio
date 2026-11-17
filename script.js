@@ -621,62 +621,6 @@ function initTimelineLightbox() {
   });
 }
 
-/* ===== SLIDERS ===== */
-function initSliders() {
-  const sliders = document.querySelectorAll('.project-slider');
-  sliders.forEach((slider) => {
-    const track = slider.querySelector('.project-slider-track');
-    const slides = track?.querySelectorAll('img');
-    if (!slides?.length) return;
-    const prevBtn = slider.querySelector('.slider-prev');
-    const nextBtn = slider.querySelector('.slider-next');
-    const dotsContainer = slider.querySelector('.slider-dots');
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    let autoplayInterval;
-
-    const updateSlider = () => {
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      dotsContainer?.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-      });
-    };
-
-    const goTo = (index) => {
-      currentIndex = (index + totalSlides) % totalSlides;
-      updateSlider();
-    };
-
-    if (dotsContainer) {
-      for (let i = 0; i < totalSlides; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-        dot.addEventListener('click', () => goTo(i));
-        dotsContainer.appendChild(dot);
-      }
-    }
-
-    prevBtn?.addEventListener('click', () => goTo(currentIndex - 1));
-    nextBtn?.addEventListener('click', () => goTo(currentIndex + 1));
-
-    // Touch
-    let touchStartX = 0;
-    slider.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-    slider.addEventListener('touchend', (e) => {
-      const diff = touchStartX - e.changedTouches[0].screenX;
-      if (Math.abs(diff) > 50) diff > 0 ? goTo(currentIndex + 1) : goTo(currentIndex - 1);
-    });
-
-    const startAutoplay = () => { autoplayInterval = setInterval(() => goTo(currentIndex + 1), 5000); };
-    const stopAutoplay = () => clearInterval(autoplayInterval);
-
-    slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
-    startAutoplay();
-  });
-}
-
 /* ===== LANGUAGE SYSTEM ===== */
 const readMoreLabels = {
   id: { more: 'Baca Selengkapnya', less: 'Sembunyikan' },
@@ -757,12 +701,7 @@ const projects = [
       en: 'On the admin side, the system provides a dashboard for managing rooms, locations, facilities, room photos, seasonal pricing, breakfast options, bookings, payments, and transaction reports, including revenue monitoring and booking summaries.'
     },
     images: [
-      'images/porto1 (1).webp','images/porto1 (15).webp','images/porto1 (9).webp',
-      'images/porto1 (16).webp','images/porto1 (13).webp','images/porto1 (8).webp',
-      'images/porto1 (7).webp','images/porto1 (6).webp','images/porto1 (4).webp',
-      'images/porto1 (3).webp','images/porto1 (2).webp','images/porto1 (21).webp',
-      'images/porto1 (10).webp','images/porto1 (11).webp','images/porto1 (19).webp',
-      'images/porto1 (20).webp','images/porto1 (17).webp','images/porto1 (18).webp',
+      'images/gh1.webp'
     ],
     tools: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Google OAuth', 'PhpSpreadsheet'],
     features: {
@@ -991,7 +930,6 @@ function renderProjectCards() {
     });
   }
 
-  initSliders();
   initProjectFilter();
 }
 
@@ -1000,19 +938,13 @@ function createProjectCard(project, idx, compact) {
   card.className = 'project-card animate';
   card.setAttribute('data-project-id', project.id);
 
-  const images = project.images.slice(0, 3);
-  const imagesHtml = images.map((img, i) => `<img src="${img}" alt="${project.title} - screenshot ${i + 1}" loading="lazy">`).join('');
+  const firstImage = project.images && project.images.length ? project.images[0] : '';
   const toolsHtml = project.tools.slice(0, 5).map(t => `<span class="tool-chip">${t}</span>`).join('');
   const category = getLocalizedText(project.category);
   const shortDesc = getLocalizedText(project.shortDescription);
 
   card.innerHTML = `
-    <div class="project-slider" data-slider-index="${idx}">
-      <div class="project-slider-track">${imagesHtml}</div>
-      <button class="slider-btn slider-prev" aria-label="Previous image"><i class='bx bx-chevron-left'></i></button>
-      <button class="slider-btn slider-next" aria-label="Next image"><i class='bx bx-chevron-right'></i></button>
-      <div class="slider-dots"></div>
-    </div>
+    ${firstImage ? `<div class="project-card-media"><img src="${firstImage}" alt="${project.title}" loading="lazy" decoding="async"></div>` : ''}
     <div class="project-content">
       <span class="project-badge">${category}</span>
       <h3 class="project-title">${project.title}</h3>
