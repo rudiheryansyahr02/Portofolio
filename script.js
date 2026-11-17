@@ -1,12 +1,17 @@
 /* ===== PORTFOLIO SCRIPT — Rudi Heryansyah Rohdiana ===== */
 
 /* ===== PRELOADER ===== */
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) preloader.classList.add('hidden');
-  }, 1400);
-});
+// Sembunyikan secepat mungkin: saat load, atau fallback 2.5 detik (tanpa jeda buatan).
+const hidePreloader = () => {
+  const preloader = document.getElementById('preloader');
+  if (preloader) preloader.classList.add('hidden');
+};
+if (document.readyState === 'complete') {
+  hidePreloader();
+} else {
+  window.addEventListener('load', hidePreloader);
+}
+setTimeout(hidePreloader, 2500);
 
 /* ===== SCROLL PROGRESS ===== */
 function initScrollProgress() {

@@ -1689,3 +1689,17 @@ section {
   .about-stats { grid-template-columns: 1fr; }
   .btn-group { flex-wrap: wrap; justify-content: center; }
 }
+
+/* ===== REDUCED MOTION (Tier 1) ===== */
+/* Bagi pengguna yang mengaktifkan mode kurangi animasi, matikan semua animasi/transisi. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .marquee-track, .hero-orb, .availability-dot, .typing-cursor, .preloader-progress { animation: none !important; }
+}
