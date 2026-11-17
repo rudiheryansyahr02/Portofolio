@@ -817,22 +817,22 @@ const projects = [
     category: { id: 'Internet of Things', en: 'Internet of Things' },
     title: 'Brocass – Smart IoT Coop',
     shortDescription: {
-      id: 'Sistem IoT real-time untuk pemantauan dan kendali lingkungan kandang ayam broiler menggunakan sensor suhu, kelembaban, dan pencahayaan.',
-      en: 'A real-time IoT system for monitoring and controlling broiler coop environment using temperature, humidity, and lighting sensors.'
+      id: 'Sistem kandang ayam broiler pintar berbasis IoT untuk pemantauan dan pengendalian lingkungan (suhu, kelembaban, kualitas udara, ketinggian air) secara real-time dengan laporan PDF lokal.',
+      en: 'A smart broiler coop IoT system for real-time monitoring and control of the environment (temperature, humidity, air quality, water level) with local PDF reports.'
     },
     description: {
-      id: 'Brocass – Smart IoT Coop adalah sistem kandang ayam broiler berbasis IoT untuk memantau dan mengendalikan kondisi lingkungan secara real-time. Sistem memanfaatkan sensor dan aktuator untuk memantau parameter lingkungan serta mengotomatisasi pengendalian.',
-      en: 'Brocass – Smart IoT Coop is an IoT-based broiler coop system designed to monitor and control environmental conditions in real time using sensors and actuators.'
+      id: 'Brocass – Smart IoT Coop adalah sistem kandang ayam broiler berbasis IoT yang dirancang untuk memantau dan mengendalikan kondisi lingkungan kandang secara real-time. Sistem memanfaatkan ESP32 dengan sensor DHT22 (suhu & kelembaban), MQ-135 (kualitas udara/gas), dan sensor ketinggian air, serta aktuator relay 8 kanal (kipas DC, motor servo, lampu pemanas) untuk otomatisasi pengendalian. Data sensor dikirim ke Firebase Realtime Database untuk monitoring melalui dashboard mobile, dan sistem juga menghasilkan laporan PDF lokal untuk dokumentasi kondisi kandang.',
+      en: 'Brocass – Smart IoT Coop is an IoT-based broiler coop system designed to monitor and control the coop environment in real time. It uses an ESP32 with a DHT22 sensor (temperature & humidity), an MQ-135 sensor (air quality/gas), and a water-level sensor, plus an 8-channel relay (DC fan, servo motor, heating lamp) for automated control. Sensor data is sent to Firebase Realtime Database for monitoring via a mobile dashboard, and the system also generates local PDF reports for coop condition documentation.'
     },
     overview: {
-      id: 'Sistem ini membantu peternak mengelola kandang lebih efisien melalui pemantauan suhu, kelembaban, dan pencahayaan secara otomatis. Data sensor dikirim ke Firebase untuk monitoring real-time melalui dashboard mobile.',
-      en: 'This system helps farmers manage coops more efficiently through automated monitoring of temperature, humidity, and lighting. Sensor data is sent to Firebase for real-time monitoring via a mobile dashboard.'
+      id: 'Peran: IoT Developer\n\nKontribusi:\n• Desain & implementasi perangkat keras (ESP32, sensor DHT22/MQ-135/water level, relay 8ch, kipas DC, motor servo, lampu pemanas)\n• Pemrograman firmware (C++ via Arduino IDE) untuk pembacaan sensor & kontrol aktuator\n• Integrasi Firebase Realtime Database untuk monitoring real-time\n• Dashboard mobile untuk pemantauan jarak jauh\n• Otomatisasi pengendalian lingkungan (kipas/heater/servo berdasarkan suhu & kelembaban)\n• Pencatatan data sensor (logging)\n• Pembuatan laporan PDF lokal untuk dokumentasi kondisi kandang',
+      en: 'Role: IoT Developer\n\nContributions:\n• Hardware design & implementation (ESP32, DHT22/MQ-135/water-level sensors, 8ch relay, DC fan, servo motor, heating lamp)\n• Firmware programming (C++ via Arduino IDE) for sensor reading & actuator control\n• Firebase Realtime Database integration for real-time monitoring\n• Mobile dashboard for remote monitoring\n• Automated environmental control (fan/heater/servo based on temperature & humidity)\n• Sensor data logging\n• Local PDF report generation for coop condition documentation'
     },
-    images: ['images/iot1.webp','images/iot2.webp','images/iot3.webp'],
-    tools: ['ESP32','Wemos D1 R2','C++','Firebase Realtime Database','DHT22','MQ-135','Water Level Sensor','Relay Module 8ch','DC Fan','Servo Motor','Heating Lamp','Arduino IDE'],
+    images: ['images/iot.webp','images/iot1.webp','images/iot2.webp','images/iot3.webp'],
+    tools: ['ESP32', 'C++', 'Firebase Realtime Database', 'DHT22', 'MQ-135', 'Water Level Sensor', 'Relay Module 8ch', 'DC Fan', 'Servo Motor', 'Heating Lamp', 'Arduino IDE'],
     features: {
-      id: ['Pemantauan real-time','Kontrol lingkungan otomatis','Pencatatan data sensor','Dashboard mobile'],
-      en: ['Real-time monitoring','Automated environmental control','Sensor data logging','Mobile dashboard']
+      id: ['Pemantauan real-time (suhu, kelembaban, kualitas udara, ketinggian air)','Kontrol lingkungan otomatis (kipas, heater, servo)','Pencatatan data sensor (logging)','Dashboard mobile (Firebase)','Laporan PDF lokal','Integrasi Firebase Realtime Database'],
+      en: ['Real-time monitoring (temperature, humidity, air quality, water level)','Automated environmental control (fan, heater, servo)','Sensor data logging','Mobile dashboard (Firebase)','Local PDF reports','Firebase Realtime Database integration']
     },
     link: ''
   },
