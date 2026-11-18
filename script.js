@@ -876,7 +876,7 @@ const projects = [
       id: 'Karya-karya ini dibuat dengan sentuhan modern dan berkarakter, mencakup desain poster promosi, banner acara, dan konten media sosial yang konsisten dengan brand guidelines program MSIB Indobot.',
       en: 'The works feature a modern and distinctive touch, including promotional posters, event banners, and social media content aligned with the MSIB Indobot program brand guidelines.'
     },
-    images: ['images/msib1.webp','images/msib2 (1).webp','images/msib2 (2).webp','images/msib2 (3).webp'],
+    images: ['images/msib.webp','images/msib1.webp','images/msib2 (1).webp','images/msib2 (2).webp','images/msib2 (3).webp'],
     tools: ['Canva', 'Figma', 'Adobe Photoshop'],
     features: {
       id: ['Desain poster','Konten media sosial','Identitas brand','Aset siap cetak'],
